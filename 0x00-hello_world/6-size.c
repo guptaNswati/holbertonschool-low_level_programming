@@ -1,8 +1,10 @@
 #include <stdio.h>
 
-/*
- * Prints the size of various data types based on compling and running computer
- */
+/**
+ * main - Prints the size of various data types based on compling and running computer
+ * Return: 0
+**/
+
 int main(void)
 {
 	printf("Size of a char: %ld byte(s)\n",sizeof(char));
