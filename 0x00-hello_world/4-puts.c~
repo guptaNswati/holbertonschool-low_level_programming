@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+/*
+ * Printing string using puts 
+ */
+int main(void)
+{
+  
+
+}
