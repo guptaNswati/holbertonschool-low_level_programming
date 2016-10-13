@@ -8,17 +8,16 @@
 int main(void)
 {
         char l_letter = 'a';
-	do
+
+	while (l_letter <= 'z')
 	{
-		if (l_letter == 'e' || l_letter == 'q')
+		if (!(l_letter == 'e' || l_letter == 'q'))
 		{
-			continue;
+			putchar(l_letter);
 		}
 
-		putchar(l_letter);
 		l_letter++;
-
-	} while (l_letter <= 'z');
+	}
 
         putchar('\n');
 
