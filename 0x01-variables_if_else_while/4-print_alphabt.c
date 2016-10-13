@@ -1,25 +1,24 @@
 #include <stdio.h>
 
 /**
- * main - Prints alphabets in lowercas, except q and e
- * Return: 0
- **/
+* main - Prints alphabets in lowercas, except q and e
+* Return: 0
+**/
 
 int main(void)
 {
-        char l_letter = 97;
-
-	while (l_letter <= 122)
-        {
-		if (l_letter == 101 || l_letter == 113) 
+        char l_letter = 'a';
+	do
+	{
+		if (l_letter == 'e' || l_letter == 'q')
 		{
 			continue;
 		}
 
 		putchar(l_letter);
-		
 		l_letter++;
-	}
+
+	} while (l_letter <= 'z');
 
         putchar('\n');
 

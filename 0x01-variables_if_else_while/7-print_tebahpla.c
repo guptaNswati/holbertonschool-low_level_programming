@@ -1,7 +1,9 @@
+#include <stdio.h>
+
 /**
- * main - Prints alphabets in lowercas in reverse order
- * Return: 0
- **/
+* main - Prints alphabets in lowercas in reverse order
+* Return: 0
+**/
 
 int main(void)
 {

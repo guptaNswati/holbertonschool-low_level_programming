@@ -2,10 +2,11 @@
 #include <time.h>
 #include <stdio.h>
 
-/** 
- * main - Print a random number and tells if its negative or positive
- * Return: 0
+/**
+* main - Print a random number and tells if its negative or positive
+* Return: 0
 **/
+
 int main(void)
 {
 	int n;
@@ -21,8 +22,8 @@ int main(void)
 	{
 		printf("%d is zero\n", n);
 	}
-	
-	printf("%d is negative\n", n);
+
+        printf("%d is negative\n", n);
 
 	return (0);
 }
