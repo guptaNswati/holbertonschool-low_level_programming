@@ -11,7 +11,7 @@ int main(void)
 
 	while (num <= 57)
         {
-                putchar(num);
+		putchar(num);
 
 		if (num != 57)
 		{
@@ -19,9 +19,8 @@ int main(void)
 			putchar(' ');
 		}
 		num++;
-        }
-
+	}
         putchar('\n');
 
-        return (0);
+	return (0);
 }
