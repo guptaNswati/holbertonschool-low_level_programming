@@ -7,10 +7,10 @@
 
 int main(void)
 {
-        int num1, num2;
+	int num1, num2;
 
-        for (num1 = 48; num1 <= 57; num1++)
-        {
+	for (num1 = 48; num1 <= 57; num1++)
+	{
 		for (num2 = 48; num2 <= 57; num2++)
 		{
 			putchar(num1);
@@ -23,8 +23,7 @@ int main(void)
 			}
 		}
 	}
+	putchar('\n');
 
-        putchar('\n');
-
-        return (0);
+	return (0);
 }
