@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 /**
- * main - Prints numbers from 0 to 99
- * Return: 0
- **/
+* main - Prints numbers from 0 to 99
+* Return: 0
+**/
 
 int main(void)
 {
@@ -15,9 +15,14 @@ int main(void)
 		{
 			putchar(num1);
 			putchar(num2);
-			putchar(',');
+
+			if (!(num1 == 57 && num2 == 57))
+			{
+				putchar(',');
+				putchar(' ');
+			}
 		}
-        }
+	}
 
         putchar('\n');
 
