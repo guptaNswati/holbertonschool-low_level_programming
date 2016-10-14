@@ -7,16 +7,15 @@
 
 int main(void)
 {
-        char l_letter = 122;
+	char l_letter = 122;
 
-        while (l_letter >= 97)
-        {
-                putchar(l_letter);
+	while (l_letter >= 97)
+	{
+		putchar(l_letter);
+		l_letter--;
+	}
 
-                l_letter--;
-        }
+	putchar('\n');
 
-        putchar('\n');
-
-        return (0);
+	return (0);
 }

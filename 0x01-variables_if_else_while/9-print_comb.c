@@ -7,10 +7,10 @@
 
 int main(void)
 {
-        int num = 48;
+	int num = 48;
 
 	while (num <= 57)
-        {
+	{
 		putchar(num);
 
 		if (num != 57)
@@ -20,7 +20,7 @@ int main(void)
 		}
 		num++;
 	}
-        putchar('\n');
+	putchar('\n');
 
 	return (0);
 }
