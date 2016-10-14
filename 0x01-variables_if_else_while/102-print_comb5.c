@@ -15,7 +15,16 @@ int main(void)
 		{
 			for (num3 = num1; num3 <= 57; num3++)
 			{
-				for (num4 = num2 + 1; num4 <= 57; num4++)
+				if (num3 == num1)
+				{
+					num4 = num2 + 1;
+				}
+				else
+				{
+					num4 = 48;
+				}
+
+				for (num4 = num4; num4 <= 57; num4++)
 				{
 					putchar(num1);
 					putchar(num2);
