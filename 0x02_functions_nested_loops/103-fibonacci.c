@@ -1,44 +1,45 @@
 #include <stdio.h>
+#include "holberton.h"
 
-/* add() declaration */
-int add(int num1, int num2);
+/* function declartion for add_fib() */
+long add_fib(long num1, long num2);
 
 /**
-* main - Finds and prints the sum of even-valued fibonacci terms 
-* less than 4 million
-* Return: 0
+* Finds and prints the sum of the even-valued terms
+* Return: nothing
 **/
 
-int main ()
+int main(void)
 {
-	int num1, num2, sum, fib_num, skip_count;
-	num1 = 1;
-	num2, sum = 2;
-       
-	printf("%d, %d, \n",num1, num2);
-	while (num2 <= 144)
+	long num1 = 1;
+	long num2 = 2;
+	long limit = 4000000;
+	long fib_num = 0;
+	long sum = 2;
+	int skip_count;
+	
+	while (fib_num <= limit)
 	{
-		/*skip_count = 0;
-		while(skip_count <= 2)
-		{ */
-		       fib_num = add(num1, num2);
-		       printf("fib_num is %d\n", fib_num);
-		       num1 = num2;
-		       num2 = fib_num;
+		skip_count = 0;
 		
-		       /*   skip_count++;
-			    }*/
-		       /*	sum = sum + fib_num;
-				printf("sum at loop pass %d\n", sum); */
+		while (skip_count <= 2)
+		{
+			fib_num = add_fib(num1, num2);
+			num1 = num2;
+			num2 = fib_num; 
+			skip_count++;
+		}
+		sum+=fib_num;
+		
 	}
-/*	printf("%d", sum); */
+	printf("%ld\n ",sum);
 	return (0);
 }
 
-/* function returns the sum of two numbers */
-int add(int num1, int num2)
+/* function returns the sum of two fib numbers */
+long add_fib(long num1, long num2)
 {
-	int sum;
+	long sum;
 	
 	sum = num1 + num2;
 
