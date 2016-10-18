@@ -1,0 +1,23 @@
+#include <time.h>
+#include <stdio.h>
+#include "holberton.h"
+
+/**
+* prints every minute of the day of Jack Bauer, starting from 00:00 to 23:59
+* Returns 1439 mins
+**/
+
+void jack_bauer(void)
+{
+	time_t start_time, end_time;
+	start_time = 00:00;
+	end_time = 23:59;
+
+	while(start_time <= end_time)
+	{
+		strftime (buffer, 256," %I:%M %p \n", start_time);
+		start_time++;
+	}
+}
+
+	
