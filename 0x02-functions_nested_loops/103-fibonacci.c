@@ -7,14 +7,16 @@
 
 int main(void)
 {
-	long num1 = 1;
-	long num2 = 2;
-	long limit = 4000000;
-	long fib_num = 0;
-	long sum = 2;
+	long num1, num2, limit, fib_num, sum;
+
+	num1 = 1;
+	num2, sum = 2;
+	limit = 4000000;
+	fib_num = 0;
+
 	int skip_count;
 
-	while (fib_num <= limit)
+	while (fib_num < limit)
 	{
 		skip_count = 0;
 
@@ -25,10 +27,7 @@ int main(void)
 			num2 = fib_num;
 			skip_count++;
 		}
-		if (fib_num % 2 == 0)
-		{
-			sum += fib_num;
-		}
+		sum += fib_num;
 	}
 	printf("%ld\n ", sum);
 	return (0);
