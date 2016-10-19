@@ -8,10 +8,12 @@
 
 void print_times_table(int n)
 {
-	int num, count, product;
-
-	if (n >= 0 && n <= 15)
+	if (n < 0 || n > 15)
+		;
+	else
 	{
+		int num, count, product;
+
 		count = 0;
 		while (count <= n)
 		{

@@ -1,11 +1,8 @@
 #include <stdio.h>
 
-/* function declartion for add_fib() */
-long add_fib(long num1, long num2);
-
 /**
-* Finds and prints the sum of the even-valued terms
-* Return: nothing
+* main - Finds and prints the sum of the even-valued terms
+* Return: 0
 **/
 
 int main(void)
@@ -23,28 +20,16 @@ int main(void)
 
 		while (skip_count <= 2)
 		{
-			fib_num = add_fib(num1, num2);
+			fib_num = num1 + num2;
 			num1 = num2;
 			num2 = fib_num;
 			skip_count++;
 		}
-		sum += fib_num;
+		if (fib_num % 2 == 0)
+		{
+			sum += fib_num;
+		}
 	}
 	printf("%ld\n ", sum);
 	return (0);
-}
-
-/**
-* add_fib - function returns the sum of two fib numbers
-* @num1: first term
-* @num2: second term
-* Return: sum of first and second term
-**/
-long add_fib(long num1, long num2)
-{
-	long sum;
-
-	sum = num1 + num2;
-
-	return (sum);
 }

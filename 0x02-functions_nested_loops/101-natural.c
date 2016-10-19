@@ -8,32 +8,19 @@
 
 int main(void)
 {
-	int num_3 = 3;
-	int num_5 = 5;
-	int num_15 = 15;
-	int limit = 1024;
-	int sum_3, sum_5, sum_15 = 0;
-	int result;
+int num, limit, result;
+limit = 1024;
+num = 5;
+result = 3;
+while (num < limit)
+{
+if (num % 3 == 0 || num % 5 == 0)
+{
+result += num;
+}
+num++;
+}
 
-	while (num_3 < limit)
-	{
-		sum_3 += num_3;
-		num_3 += 3;
-	}
-
-	while (num_5 < limit)
-	{
-		sum_5 += num_5;
-		num_5 += 5;
-	}
-
-	while (num_15 < limit)
-	{
-		sum_15 += num_15;
-		num_15 += 15;
-	}
-
-	result = (sum_3 + sum_5) - sum_15;
 
 	printf("%d\n", result);
 	return (0);
