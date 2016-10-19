@@ -7,18 +7,22 @@
 
 int main(void)
 {
-	long num1 = 1;
-	long num2 = 2;
-	long fib_num;
-	int count = 3;
+	long num1, num2, fib_num;
 
-	printf("%ld, %ld, ", num1, num2);
-	while (count <= 50)
+	num1 = 0;
+	num2 = 1;
+	fib_num = 0;
+
+	int count;
+
+	count = 0;
+	while (count < 50)
 	{
 		fib_num = num1 + num2;
-		if (count < 50)
+		printf("%ld", fib_num);
+		if (count != 49)
 		{
-			printf("%ld, ", fib_num);
+			printf(", ");
 		}
 		num1 = num2;
 		num2 = fib_num;
