@@ -15,7 +15,7 @@ int main(void)
 
 	int count;
 
-	count = 0;
+	count = 2;
 	while (count < 50)
 	{
 		fib_num = num1 + num2;
