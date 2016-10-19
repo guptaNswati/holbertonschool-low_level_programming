@@ -1,8 +1,7 @@
-#include <stdio.h>
 #include "holberton.h"
 
 /**
-* a function that prints the 9 times table, starting with 0.
+* times_table - function that prints the 9 times table, starting with 0.
 * Return: nothing
 **/
 
@@ -11,14 +10,14 @@ void times_table(void)
 	int num, count, digit_1, digit_2, product;
 
 	count = 0;
-	
+
 	while (count <= 9)
 	{
 		num = 0;
 		while (num <= 9)
 		{
-			product = count * num;
-			
+			product = count * num
+
 			if (product > 9)
 			{
 				digit_2 = product % 10;
@@ -29,17 +28,15 @@ void times_table(void)
 			else
 			{
 				_putchar(product + '0');
-			}	 
-			
+			}
 			if (num < 9)
 			{
 				_putchar(',');
 				_putchar(' ');
 			}
-			
 			num++;
-		} 
+		}
 		_putchar('\n');
 		count++;
-	} 
+	}
 }

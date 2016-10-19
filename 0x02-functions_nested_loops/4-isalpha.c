@@ -1,8 +1,9 @@
-#include <stdio.h>
 #include "holberton.h"
 
 /**
-* Checks for alphabetic characters, irrespective of uppercase and lowercase
+*_isalpha - Checks for alphabetic characters,
+* @c: int to be checked
+* Description: irrespective of uppercase and lowercase
 * Return: 1, on success
 **/
 
