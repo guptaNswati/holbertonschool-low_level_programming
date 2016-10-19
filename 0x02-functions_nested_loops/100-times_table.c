@@ -11,7 +11,6 @@ void print_times_table(int n)
 	int num, count, product;
 
 	count = 0;
-
 	if (n >= 0 && n <= 15)
 	{
 		while (count <= n)
@@ -23,7 +22,7 @@ void print_times_table(int n)
 				if (product / 100 == 0 && num != 0)
 				{
 					_putchar(' ');
-					if (product % 100 /10 == 0)
+					if (product % 100 / 10 == 0)
 					{
 						_putchar(' ');
 					}
