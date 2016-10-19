@@ -8,13 +8,12 @@
 int main(void)
 {
 	long num1, num2, fib_num;
+	int count;
 
 	num1 = 0;
 	num2 = 1;
-
-	int count;
-
 	count = 0;
+
 	while (count < 50)
 	{
 		fib_num = num1 + num2;
