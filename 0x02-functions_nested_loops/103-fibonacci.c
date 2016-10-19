@@ -9,8 +9,8 @@ int main(void)
 {
 	long num1, num2, limit, fib_num, sum;
 
-	num1 = 1;
-	num2, sum = 2;
+	num1, sum = 0;
+	num2 = 1;
 	limit = 4000000;
 	fib_num = 0;
 
@@ -18,16 +18,13 @@ int main(void)
 
 	while (fib_num < limit)
 	{
-		skip_count = 0;
-
-		while (skip_count <= 2)
+		fib_num = num1 + num2;
+		if (fib_num % 2 == 0)
 		{
-			fib_num = num1 + num2;
-			num1 = num2;
-			num2 = fib_num;
-			skip_count++;
+			sum += fib_num;
 		}
-		sum += fib_num;
+		num1 = num2;
+		num2 = fib_num;
 	}
 	printf("%ld\n ", sum);
 	return (0);
