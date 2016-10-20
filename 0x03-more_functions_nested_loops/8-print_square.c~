@@ -1,0 +1,30 @@
+#include "holberton.h"
+
+/**
+* print_square - draws a sqaure in the terminal.
+* @size: size of square
+* Return: nothing
+**/
+
+void print_square(int size)
+{
+	if (size > 0)
+	{
+		int count;
+
+		count = 0;
+
+		while (count < size)
+		{
+			while (count < size)
+			{
+				_putchar('#');
+				count++;
+			}
+			_putchar('\n');
+			count++;
+		}
+	}
+	else
+		_putchar('\n');
+}

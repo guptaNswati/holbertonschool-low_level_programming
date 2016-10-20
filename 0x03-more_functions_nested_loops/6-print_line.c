@@ -2,7 +2,7 @@
 
 /**
 * print_line - draws a straight line in the terminal.
-* @n length of line
+* @n: length of line
 * Return: nothing
 **/
 
