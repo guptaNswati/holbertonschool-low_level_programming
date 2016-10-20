@@ -1,5 +1,5 @@
 #include <stdio.h>
-/*#define BIGNUMBER 612852475143 */
+#include <stdlib.h>
 
 /**
 * main - finds and prints the largest prime factor of the number 612852475143
@@ -8,18 +8,18 @@
 
 int main(void)
 {
-	int num1, test_num;
+	long int num1, test_num;
 
-	test_num = 13;
 	num1 = 2;
+	test_num = 612852475143;
 
 	while (test_num > num1)
 	{
 		if (test_num % num1 == 0)
 		{
 			test_num = test_num / num1;
-			printf("test num is %d \n", test_num);
-			printf("factor is %d \n", num1);
+			printf("test num is %ld\n", test_num);
+			printf("factor is %ld\n", num1);
 			num1 = 2;
 		}
 		else
@@ -27,6 +27,6 @@ int main(void)
 			num1++;
 		}
 	}
-	printf("factor is %d \n", num1);
+	printf("factor is %ld\n", num1);
 	return (0);
 }
