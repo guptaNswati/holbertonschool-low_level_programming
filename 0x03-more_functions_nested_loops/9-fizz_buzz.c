@@ -18,19 +18,24 @@ int main(void)
 		{
 			if (num1 % 3 == 0 && num1 % 15 != 0)
 			{
-				printf("Fizz ");
+				printf("Fizz");
 			}
 			else if (num1 % 5 == 0 && num1 % 15 != 0)
 			{
-				printf("Buzz ");
+				printf("Buzz");
 			}
 			else if (num1 % 15 == 0)
 			{
-				printf("FizzBuzz ");
+				printf("FizzBuzz");
 			}
 		}
 		else
-			printf("%d ", num1);
+			printf("%d", num1);
+
+		if (num1 < 100)
+		{
+			printf(" ");
+		}
 	}
 		printf("\n");
 		return (0);

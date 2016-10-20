@@ -24,6 +24,6 @@ int main(void)
 			num1++;
 		}
 	}
-	printf("factor is %ld\n", num1);
+	printf("%ld\n", num1);
 	return (0);
 }
