@@ -7,15 +7,15 @@
  */
 int main(void)
 {
-	print_number(98);
+	print_number(980000000);
 	_putchar('\n');
 	print_number(402);
 	_putchar('\n');
-	print_number(-2147483649);
+	print_number(-2147483648);
 	_putchar('\n');
 	print_number(-9);
 	_putchar('\n');
-	print_number(-98);
+	print_number(-9008);
 	_putchar('\n');
 	return (0);
 }
