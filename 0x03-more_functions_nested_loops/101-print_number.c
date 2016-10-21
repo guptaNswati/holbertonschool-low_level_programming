@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "holberton.h"
 
 /**
@@ -20,15 +19,26 @@ void print_number(int n)
 	}
 	else
 	{
+		int duplicate;
+
 		if (n < -9)
 		{
 			_putchar('-');
 			n = n * -1;
 		}
+		duplicate = 0;
+
 		while (n != 0)
 		{
-			_putchar(n % 10 + '0');
+			duplicate = duplicate * 10;
+			duplicate = duplicate + n % 10;
 			n = n / 10;
 		}
+		while (duplicate != 0)
+		{
+			_putchar(duplicate % 10 + '0');
+			duplicate = duplicate / 10;
+		}
+
 	}
 }
