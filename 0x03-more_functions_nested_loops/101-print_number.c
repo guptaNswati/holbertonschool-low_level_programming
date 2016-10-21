@@ -8,22 +8,23 @@
 
 void print_number(int n)
 {
-	if (n < 0)
+	long casted_n, duplicate;
+
+	casted_n = n;
+	duplicate = 0;
+
+	if (casted_n < 0)
 	{
 		_putchar('-');
-		n = n * -1;
+		casted_n = casted_n * -1;
 	}
-	if (n > 9)
+	if (casted_n > 9)
 	{
-		int duplicate;
-
-		duplicate = 0;
-
-		while (n != 0)
+		while (casted_n != 0)
 		{
 			duplicate = duplicate * 10;
-			duplicate = duplicate + n % 10;
-			n = n / 10;
+			duplicate = duplicate + casted_n % 10;
+			casted_n = casted_n / 10;
 		}
 
 		while (duplicate != 0)
@@ -33,5 +34,5 @@ void print_number(int n)
 		}
 	}
 	else
-		_putchar(n + '0');
+		_putchar(casted_n + '0');
 }
