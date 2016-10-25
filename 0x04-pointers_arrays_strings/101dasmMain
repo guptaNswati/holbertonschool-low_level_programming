@@ -1,0 +1,17 @@
+/* trying to understand c main function from assembly code  via gdb */
+
+% - memory regsiters
+$ - constant values in hex
+
+rbp - base pointer
+rsp - stack pointer
+
+/* first line of 101-crackme main in assembly */
+
+1. save current base pointer
+2. make base pointer point to current stack entry
+3. reserves 32 bytes on stack
+5. stores %edi -20 bytes from rbp (current base pointer)
+6. store %rsi -32 bytes from rbp
+
+call function with return value
