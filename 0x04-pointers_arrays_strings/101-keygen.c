@@ -13,7 +13,7 @@ int main(void)
 	int i, l_limit, u_limit, sum;
 	char last_c;
 
-	char alphnum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char alphnum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop";
 	char randStr[40];
 
 	l_limit = 2772 - 122;
@@ -32,7 +32,7 @@ int main(void)
 	last_c = u_limit - sum;
 	randStr[i] = last_c;
 	randStr[i + 1] = '\0';
-
 	printf("%s", randStr);
+
 	return (0);
 }
