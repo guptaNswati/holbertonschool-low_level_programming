@@ -1,6 +1,6 @@
-#include <string.h>
 #include <stdio.h>
 #include "holberton.h"
+
 /**
 * num_checker - checks if a given char is number or not
 * @a: char to be checked
@@ -26,15 +26,16 @@ int num_checker(char a)
 **/
 int _atoi(char *s)
 {
-	int i, num, neg, isNum, length;
+	int i, num, neg, isNum;
 
-	length = strlen(s);
 	neg = 0;
 	num = 0;
-	for (i = 0; i < length; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
 		if (s[i] == '-')
+		{
 			neg++;
+		}
 
 		isNum = num_checker(s[i]);
 
@@ -42,11 +43,13 @@ int _atoi(char *s)
 		{
 			num = 10 * num + (s[i] - 48);
 			i = i + 1;
-			while (i < length)
+			while (s[i] != '\0')
 			{
 				isNum = num_checker(s[i]);
 				if (isNum != 1)
+				{
 					break;
+				}
 				num = 10 * num + (s[i] - 48);
 				i++;
 			}
@@ -54,6 +57,8 @@ int _atoi(char *s)
 		}
 	}
 	if (neg % 2 != 0)
+	{
 		num *= -1;
+	}
 	return (num);
 }
