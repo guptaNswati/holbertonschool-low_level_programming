@@ -12,9 +12,9 @@ int main(void)
 
 	n = _atoi("98");
 	printf("%d\n", n);
-	n = _atoi("          ------++++++-----+++++--98");
+	n = _atoi("somthing");
 	printf("%d\n", n);
-	n = _atoi("-402");
+	n = _atoi("--402");
 	printf("%d\n", n);
 	n = _atoi("214748364");
 	printf("%d\n", n);

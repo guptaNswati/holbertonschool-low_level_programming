@@ -56,7 +56,7 @@ int _atoi(char *s)
 			break;
 		}
 	}
-	if (neg % 2 != 0)
+	if (neg % 2 != 0 && num != 0)
 	{
 		num *= -1;
 	}

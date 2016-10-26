@@ -31,7 +31,7 @@ int main(void)
 
 	last_c = u_limit - sum;
 	randStr[i] = last_c;
-	randStr[i+1] = '\0';
+	randStr[i + 1] = '\0';
 
 	printf("%s", randStr);
 	return (0);
