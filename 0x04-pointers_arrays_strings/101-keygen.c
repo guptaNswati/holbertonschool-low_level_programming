@@ -29,12 +29,10 @@ int main(void)
 		i++;
 	}
 
-	i = i;
-
 	last_c = u_limit - sum;
-	randStr[i + 1] = last_c;
-	randStr[i] = '\0';
+	randStr[i] = last_c;
+	randStr[i+1] = '\0';
 
-	printf("%s\n", randStr);
+	printf("%s", randStr);
 	return (0);
 }
