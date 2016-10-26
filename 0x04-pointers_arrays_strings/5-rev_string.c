@@ -28,14 +28,16 @@ int _strlen(char *s)
 void rev_string(char *s)
 {
 	char first, last;
-	int i;
+	int i = 0;
 	int size = _strlen(s) - 1;
 
-	for (i = 0; i < size; i++)
+	while (i < size)
 	{
 		first = s[i];
-		last = s[size - i];
+		last = s[size];
 		s[i] = last;
-		s[size - i] = first;
+		s[size] = first;
+		i++;
+		size--;
 	}
 }

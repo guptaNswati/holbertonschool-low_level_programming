@@ -1,17 +1,33 @@
-#include <string.h>
-#include <stdio.h>
 #include "holberton.h"
 
 /**
+* _strlen - returns the length of a string.
+* @s: a pointer to a char
+* Return: length of a string
+**/
+
+int _strlen(char *s)
+{
+	int length, i = 0;
+
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	length = i;
+	return (length);
+}
+
+/**
 * puts2 - prints one char out of 2 of a string
-* @*str: a pointer to string
+* @str: a pointer to string
 * Return: nothing
 **/
 
 void puts2(char *str)
 {
 	int i;
-	int size = strlen(str);
+	int size = _strlen(str);
 
 	for (i = 0; i < size; i += 2)
 	{
