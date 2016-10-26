@@ -13,7 +13,9 @@ int num_checker(char a)
 	while (num <= '9')
 	{
 		if (a == num)
+		{
 			return (1);
+		}
 		num++;
 	}
 	return (0);
@@ -41,7 +43,7 @@ int _atoi(char *s)
 
 		if (isNum == 1)
 		{
-			num = 10 * num + (s[i] - 48);
+			num = 10 * num - (s[i] - '0');
 			i = i + 1;
 			while (s[i] != '\0')
 			{
@@ -50,15 +52,15 @@ int _atoi(char *s)
 				{
 					break;
 				}
-				num = 10 * num + (s[i] - 48);
+				num = 10 * num - (s[i] - '0');
 				i++;
 			}
 			break;
 		}
 	}
-	if (neg % 2 != 0 && num != 0)
+	if (neg % 2 == 0 && num != 0)
 	{
-		num *= -1;
+		num = -num;
 	}
 	return (num);
 }
