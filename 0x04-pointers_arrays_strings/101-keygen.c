@@ -29,9 +29,11 @@ int main(void)
 		i++;
 	}
 
+	i = i;
+
 	last_c = u_limit - sum;
 	randStr[i + 1] = last_c;
-	randStr[i] = 0;
+	randStr[i] = '\0';
 
 	printf("%s\n", randStr);
 	return (0);
