@@ -23,8 +23,8 @@ int _strcmp(char *s1, char *s2)
 		j++;
 	}
 	if (i > j)
-		return 1;
+		return (1);
 	else if (i < j)
-		return -1;
-	return(0);
+		return (-1);
+	return (0);
 }
