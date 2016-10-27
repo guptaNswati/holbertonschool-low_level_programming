@@ -19,10 +19,13 @@ char *rot13(char *a)
 		{
 			a[i] = a[i] + 13;
 		}
-		while ((a[i] >= 'n' && a[i] <= 'z') ||
-			     (a[i] >= 'N' && a[i] <= 'Z'))
+		else
 		{
-			a[i] = a[i] - 13;
+			while ((a[i] >= 'n' && a[i] <= 'z') ||
+			       (a[i] >= 'N' && a[i] <= 'Z'))
+			{
+				a[i] = a[i] - 13;
+			}
 		}
 		i++;
 	}
