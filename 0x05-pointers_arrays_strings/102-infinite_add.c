@@ -35,12 +35,10 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	for (; size_r > 0; size_r--)
 	{
 		m = (n1[n1_s] - '0') + (n2[n2_s] - '0') + k;
-		printf("m %d\n", m);
 		if (m > 9)
 		{
 			r[size_r] = (m % 10) + '0';
 			k = m / 10 ;
-			printf("k %d\n", k);
 		}
 		else if (m < 9 && m >= 0)
 		{
@@ -52,7 +50,5 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	}
 	r[0] = k + '0';
 	/*r[i] = '\0'; */
-
-	printf("r is %s\n", r);
 	return (r);
 }
