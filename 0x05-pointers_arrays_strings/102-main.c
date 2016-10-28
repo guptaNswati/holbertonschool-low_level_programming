@@ -8,12 +8,12 @@
  */
 int main(void)
 {
-	char *n = "9888996";
+	char *n = "98889";
 	char *m = "9895";
 	char r2[3];
 	char *res;
 
-        res = infinite_add(n, m, r2, 3);
+        res = infinite_add(n, m, r2, 10);
         if (res == 0)
         {
                 printf("Error\n");
