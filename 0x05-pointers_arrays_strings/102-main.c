@@ -8,8 +8,8 @@
  */
 int main(void)
 {
-	char *n = "98";
-	char *m = "98";
+	char *n = "9888996";
+	char *m = "9895";
 	char r2[3];
 	char *res;
 
