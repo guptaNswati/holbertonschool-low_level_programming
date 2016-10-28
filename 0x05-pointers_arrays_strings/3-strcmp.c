@@ -1,5 +1,5 @@
 #include "holberton.h"
-
+#include <string.h>
 /**
 * *_strcmp - compares two strings.
 * @s1: string to compare
@@ -9,6 +9,8 @@
 
 int _strcmp(char *s1, char *s2)
 {
+	return (strcmp(s1, s2));
+/*
 	int i, j;
 
 	i = 0;
@@ -24,7 +26,7 @@ int _strcmp(char *s1, char *s2)
 	}
 	if (i > j)
 		return (15);
-	else if (i < j)
+	if (i < j)
 		return (-15);
-	return (0);
+		return (0); */
 }
