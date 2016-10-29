@@ -34,7 +34,7 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	size_r--;
 	if (n1_s > size_r || n2_s > size_r || size_r == 0 ||
 	    (n1_s == size_r && n2_s == size_r &&
-	     (n1[0] - '0') + (n2[0] - '0') > 9))
+	     (*n1 - '0') + (*n2 - '0') > 9))
 	{
 		return (0);
 	}
@@ -52,14 +52,12 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		k = m / 10;
 		n1_s--, n2_s--, size_r--;
 	}
-	if (size_r > 0 && k == 1)
+	if (size_r > 0 && (k < 9 && k > 0))
 	{
 		r[size_r] = k + '0';
 		return (r + size_r);
 	}
 	else if (k == 0)
-	{
 		return (r + size_r);
-	}
 	return (0);
 }
