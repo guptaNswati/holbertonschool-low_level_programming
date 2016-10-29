@@ -32,12 +32,11 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	n1_s = _strlen(n1);
 	n2_s = _strlen(n2);
 	size_r--;
-	if (n1_s > size_r || n2_s > size_r || size_r == 0 ||
-	    (n1_s == size_r && n2_s == size_r &&
-	     (*n1 - '0') + (*n2 - '0') > 9))
-	{
+	if (n1_s > size_r || n2_s > size_r || size_r == 0)
 		return (0);
-	}
+	if (n1_s == size_r && n2_s == size_r &&
+	    (n1[0] - '0') + (n2[0] - '0') > 9)
+		return (0);
 	n1_s--;
 	n2_s--;
 	while (n1_s >= 0 || n2_s >= 0)
