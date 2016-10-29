@@ -1,5 +1,5 @@
 #include "holberton.h"
-#include <stdio.h>
+
 /**
 * _strlen - calculate string length
 * @a: pointer to a string
@@ -51,8 +51,12 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		k = m / 10;
 		n1_s--, n2_s--, size_r--;
 	}
-	if (size_r > 0 && (k < 9 || k > 0))
+	if (size_r > 0 && (k < 9 || k >= 0))
 	{
+		if (k == 0)
+		{
+			return (r + size_r);
+		}
 		r[size_r] = k + '0';
 		return (r + size_r);
 	}
