@@ -17,19 +17,19 @@ void print_diagsums(int *a, int size)
 	leftSum = 0;
 	rigtSum = 0;
 
-	for (k = 0; k < size; k++)
-	{
 		for (i = 0; i < size; i++)
 		{
-			leftSum += a[i];
-			printf("a[i] %d \n", a[k][i]);
+			leftSum += *(a + i * size + i);
+			printf("a[i] %d \n", *(a + i * size + i));
 		}
-	}
-	/* printf("%lu, ",leftSum); 
+	printf("%lu, ",leftSum);
 
-	for(j = (size - 1); j >= 0; j--)
+	size--;
+	for(; size > 0; size--)
 	{
-		rigtSum += a[j];
+		rigtSum += *(a + size * size + size);
+		printf("a[i] %d \n", *(a + size * size + size));
 	}
-	printf("%lu\n",rigtSum); */
+	printf("a[j] %d \n", *(a + size - 1 * size + size - 1));
+	printf("%lu\n",rigtSum);
 }
