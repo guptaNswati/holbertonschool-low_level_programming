@@ -1,5 +1,5 @@
 #include "holberton.h"
-
+#include <stdlib.h>
 /**
 * *_strstr - locates a substring.
 * @haystack: pointer to string to search in
@@ -26,5 +26,5 @@ char *_strstr(char *haystack, char *needle)
 			return (res);
 		haystack = res + 1;
 	}
-	return ('\0');
+	return (NULL);
 }
