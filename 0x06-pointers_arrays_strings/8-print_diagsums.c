@@ -18,7 +18,7 @@ void print_diagsums(int *a, int size)
 
 	for (i = 0; i < size; i++)
 	{
-		leftSum += *(a + i * size + i);
+		leftSum += *(a + i * (size + 1));
 		rigtSum += *(a + (i + 1) * (size - 1));
 	}
 	printf("%lu, %lu\n", leftSum, rigtSum);

@@ -1,0 +1,38 @@
+__libc_start_main(0x400876, 1, 0x7ffeef114908, 0x400a60 <unfinished ...>
+strncmp("XDG_SESSION_ID=4", "jennieandjayloveasm=", 20)                               = -18
+strncmp("TERM=xterm-256color", "jennieandjayloveasm=", 20)                            = -22
+strncmp("SHELL=/bin/bash", "jennieandjayloveasm=", 20)                                = -23
+strncmp("SSH_CLIENT=10.0.2.2 62421 22", "jennieandjayloveasm=", 20)                   = -23
+strncmp("OLDPWD=/home/vagrant/holbertonsc"..., "jennieandjayloveasm=", 20)            = -27
+strncmp("SSH_TTY=/dev/pts/0", "jennieandjayloveasm=", 20)                             = -23
+strncmp("USER=vagrant", "jennieandjayloveasm=", 20)                                   = -21
+strncmp("LS_COLORS=rs=0:di=01;34:ln=01;36"..., "jennieandjayloveasm=", 20)            = -30
+strncmp("MAIL=/var/mail/vagrant", "jennieandjayloveasm=", 20)                         = -29
+strncmp("PATH=/usr/local/sbin:/usr/local/"..., "jennieandjayloveasm=", 20)            = -26
+strncmp("PWD=/home/vagrant/holbertonschoo"..., "jennieandjayloveasm=", 20)            = -26
+strncmp("LANG=en_US.UTF-8", "jennieandjayloveasm=", 20)                               = -30
+strncmp("jennieandjayloveasm=abc123", "jennieandjayloveasm=", 20)                     = 0
+MD5_Init(0x7ffeef114780, 0x400b00, 10, 16)                                            = 1
+strlen("abc123")                                                                      = 6
+MD5_Update(0x7ffeef114780, 0x7ffeef115f16, 6, 0x7ffeef115f16)                         = 1
+MD5_Final(0x7ffeef1147e0, 0x7ffeef114780, 0x7ffeef114780, 12)                         = 1
+sprintf("e9", "%02x", 0xe9)                                                           = 2
+sprintf("9a", "%02x", 0x9a)                                                           = 2
+sprintf("18", "%02x", 0x18)                                                           = 2
+sprintf("c4", "%02x", 0xc4)                                                           = 2
+sprintf("28", "%02x", 0x28)                                                           = 2
+sprintf("cb", "%02x", 0xcb)                                                           = 2
+sprintf("38", "%02x", 0x38)                                                           = 2
+sprintf("d5", "%02x", 0xd5)                                                           = 2
+sprintf("f2", "%02x", 0xf2)                                                           = 2
+sprintf("60", "%02x", 0x60)                                                           = 2
+sprintf("85", "%02x", 0x85)                                                           = 2
+sprintf("36", "%02x", 0x36)                                                           = 2
+sprintf("78", "%02x", 0x78)                                                           = 2
+sprintf("92", "%02x", 0x92)                                                           = 2
+sprintf("2e", "%02x", 0x2e)                                                           = 2
+sprintf("03", "%02x", 0x3)                                                            = 2
+strcmp("e99a18c428cb38d5f260853678922e03"..., "e99a18c428cb38d5f260853678922e03"...)  = 0
+puts("Access Granted"Access Granted
+)                                                                = 15
++++ exited (status 0) +++
