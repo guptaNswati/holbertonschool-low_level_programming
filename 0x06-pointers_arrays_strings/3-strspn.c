@@ -3,7 +3,7 @@
 /**
 *  _strspn - gets the length of a prefix substring
 * @s: pointer to string
-* @c: pointer to substring
+* @accept: pointer to substring
 * Return: the number of bytes of accept
 **/
 

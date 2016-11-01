@@ -21,6 +21,6 @@ int main(void)
 		{10, 12401, 10452, 11542545, 1214543435},
 	};
 	print_diagsums((int *)c3, 3);
-/*	print_diagsums((int *)c5, 5); */
+	print_diagsums((int *)c5, 5); 
 	return (0);
 }

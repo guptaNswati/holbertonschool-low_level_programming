@@ -10,26 +10,16 @@
 
 void print_diagsums(int *a, int size)
 {
-	int i, j, k;
+	int i;
 	long leftSum, rigtSum;
-	int *b = a;
 
 	leftSum = 0;
 	rigtSum = 0;
 
-		for (i = 0; i < size; i++)
-		{
-			leftSum += *(a + i * size + i);
-			printf("a[i] %d \n", *(a + i * size + i));
-		}
-	printf("%lu, ",leftSum);
-
-	size--;
-	for(; size > 0; size--)
+	for (i = 0; i < size; i++)
 	{
-		rigtSum += *(a + size * size + size);
-		printf("a[i] %d \n", *(a + size * size + size));
+		leftSum += *(a + i * size + i);
+		rigtSum += *(a + (i + 1) * (size - 1));
 	}
-	printf("a[j] %d \n", *(a + size - 1 * size + size - 1));
-	printf("%lu\n",rigtSum);
+	printf("%lu, %lu\n", leftSum, rigtSum);
 }
