@@ -8,7 +8,7 @@
  */
 int main(void)
 {
-	int c3[3][3] = {
+	int c3[4][4] = {
 		{0, 1, 5},
 		{10, 11, 12},
 		{1000, 101, 102},
@@ -21,6 +21,6 @@ int main(void)
 		{10, 12401, 10452, 11542545, 1214543435},
 	};
 	print_diagsums((int *)c3, 3);
-	print_diagsums((int *)c5, 5); 
+	print_diagsums((int *)c5, 5);
 	return (0);
 }
