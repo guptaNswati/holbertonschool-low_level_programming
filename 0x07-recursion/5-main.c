@@ -20,7 +20,7 @@ int main(void)
 	printf("3 %d\n", r);
 	r = _sqrt_recursion(4);
 	printf("4 %d\n", r);
-	r = _sqrt_recursion(10);
-	printf("10 %d\n", r);
+	r = _sqrt_recursion(9);
+	printf("9 %d\n", r);
 	return (0);
 }

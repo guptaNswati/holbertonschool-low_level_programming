@@ -8,7 +8,7 @@
 **/
 int sqtRecursive(int n, int m)
 {
-	if (n =< 0)
+	if (n <= 0)
 		return (-1);
 	if (n * n == m)
 		return (n);
@@ -25,7 +25,7 @@ int _sqrt_recursion(int n)
 {
 	if (n == 1)
 		return (1);
-	return (sqtRecursive(n / 2, m));
+	return (sqtRecursive(n / 2, n));
 }
 
 /**
