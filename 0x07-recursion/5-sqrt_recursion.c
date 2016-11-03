@@ -9,7 +9,7 @@
 int sqtRecursive(int n, int m)
 {
 	if (n <= 0)
-                return (-1);
+		return (-1);
 	if (n * n == m)
 		return (n);
 	return (sqtRecursive(n - 1, m));
@@ -30,4 +30,3 @@ int _sqrt_recursion(int n)
 		return (1);
 	return (sqtRecursive(n, m));
 }
- 

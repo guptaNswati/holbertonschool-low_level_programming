@@ -1,5 +1,5 @@
 #include "holberton.h"
-#include <stdio.h>
+
 /**
 * _strlen_recursion - finds the length of a string
 * @s: pointer to string
@@ -7,13 +7,13 @@
 **/
 int _strlen_recursion(char *s)
 {
-        if (*s == '\0')
+	if (*s == '\0')
 		return (0);
-        return (_strlen_recursion(s + 1) + 1);
+	return (_strlen_recursion(s + 1) + 1);
 }
 
 /**
-* equalityCheck - checks if two chars of a string are equal
+* is_palind_recursive - checks if two chars of a string are equal
 * @s: string to be checked
 * @i: first index
 * @j: last index
