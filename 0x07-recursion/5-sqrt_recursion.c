@@ -1,4 +1,21 @@
 #include "holberton.h"
+#include <stdio.h>
+
+/**
+* sqtRecursive - computes square root recursively
+* @n: given number
+* @m: comparison number
+* Return: 1 if not found sqrroot, else sqrroot
+**/
+int sqtRecursive(int n, int m)
+{
+	if (n <= 0)
+                return (-1);
+	if (n * n == m)
+		return (n);
+	return (sqtRecursive(n - 1, m));
+}
+
 
 /**
 * _sqrt_recursion - finds the natural square root of a number
@@ -10,18 +27,7 @@ int _sqrt_recursion(int n)
 	int m;
 
 	m = n;
-	if (n <= 0)
-	{
-		return (-1);
-	}
 	if (n == 1)
-	{
 		return (1);
-	}
-	n = n/2;
-	if (n*n == m)
-	{
-		return (n);
-	}
-	return (_sqrt_recursion(n - 1));
+	return (sqtRecursive(n, m));
 }
