@@ -8,11 +8,11 @@
 **/
 int sqtRecursive(int n, int m)
 {
-	if (n < 0)
-		return (-1);
 	if (n * n == m)
 		return (n);
-	return (sqtRecursive(n - 1, m));
+	if (n * n > m)
+		return (sqtRecursive(n - 1, m));
+	return (-1);
 }
 
 
