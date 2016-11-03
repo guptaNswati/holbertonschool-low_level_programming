@@ -10,8 +10,8 @@ int main(void)
 {
 	int r;
 
-	r = _sqrt_recursion(1);
-	printf("1 %d\n", r);
+	r = _sqrt_recursion(8);
+	printf("8 %d\n", r);
 	r = _sqrt_recursion(-1024);
 	printf("-1024 %d\n", r);
 	r = _sqrt_recursion(0);
