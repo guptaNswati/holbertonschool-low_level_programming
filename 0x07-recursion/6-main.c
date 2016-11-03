@@ -12,13 +12,13 @@ int main(void)
 
 	r = is_prime_number(1);
 	printf("%d\n", r);
-	r = is_prime_number(1024);
+	r = is_prime_number(2);
 	printf("%d\n", r);
-	r = is_prime_number(16);
+	r = is_prime_number(3);
 	printf("%d\n", r);
-	r = is_prime_number(17);
+	r = is_prime_number(0);
 	printf("%d\n", r);
-	r = is_prime_number(25);
+	r = is_prime_number(-25);
 	printf("%d\n", r);
 	r = is_prime_number(-1);
 	printf("%d\n", r);
