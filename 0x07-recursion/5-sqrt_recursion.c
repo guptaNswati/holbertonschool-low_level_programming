@@ -1,5 +1,4 @@
 #include "holberton.h"
-#include <stdio.h>
 
 /**
 * sqtRecursive - computes square root recursively
@@ -31,3 +30,4 @@ int _sqrt_recursion(int n)
 		return (1);
 	return (sqtRecursive(n, m));
 }
+ 
