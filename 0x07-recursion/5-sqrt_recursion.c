@@ -1,20 +1,29 @@
 #include "holberton.h"
 
 /**
-* sqtRecursive - computes square root recursively
-* @n: given number
-* @m: comparison number
+* sqtRecursive - computes square root recursively doing binary search
+* @start: inital number
+* @end: last number within the limit of number
+* @m: given number
 * Return: 1 if not found sqrroot, else sqrroot
 **/
-int sqtRecursive(int n, int m)
+int sqtRecursive(int start, int end, int m)
 {
-	if (n * n == m)
-		return (n);
-	if (n * n > m)
-		return (sqtRecursive(n - 1, m));
+	long mid;
+
+	if (end >= start)
+	{
+		mid = start + (end - start) / 2;
+		if (mid * mid == m)
+			return (mid);
+		/* following binary search */
+		if (mid * mid > m)
+			return (sqtRecursive(start, mid - 1, m));
+		if (mid * mid < m)
+			return (sqtRecursive(mid + 1, end, m));
+	}
 	return (-1);
 }
-
 
 /**
 * _sqrt_recursion - finds the natural square root of a number
@@ -25,9 +34,7 @@ int _sqrt_recursion(int n)
 {
 	if (n < 0)
 		return (-1);
-	if (n == 0)
-		return (0);
-	if (n == 1)
-		return (1);
-	return (sqtRecursive(n / 2, n));
+	if (n == 0 || n == 1)
+		return (n);
+	return (sqtRecursive(2, n, n));
 }
