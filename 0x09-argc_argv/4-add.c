@@ -7,7 +7,7 @@
 * @argv: array of pointers to arguement strings
 * Return: result of addition or 1
 **/
-int main(int argc , char *argv[])
+int main(int argc, char *argv[])
 {
 	int i, num, sum;
 
