@@ -1,6 +1,6 @@
 #include "holberton.h"
 #include <stdlib.h>
-#include <string.h>
+
 /**
 * *argstostr - concatenates all arguements to the program
 * @ac -  arguement count
@@ -12,17 +12,21 @@ char *argstostr(int ac, char **av)
 	char *strDup;
 	int i, j, k, size;
 
-	k = size = 0;
+	size = 0;
+	/* count the number of chars in each string */
 	for (i = 0; i < ac; i++)
 	{
 		for (j = 0; av[i][j] != '\0'; j++)
 			size++;
 	}
+	/* allocate memory for total number of chars and
+	   new line for each word */
 	strDup = malloc(sizeof(char) * (ac + size));
 
 	if (strDup == NULL)
 		return (NULL);
 
+	k = 0;
 	for (i = 0; i < ac; i++)
         {
 		for (j = 0; av[i][j] != '\0'; j++)
