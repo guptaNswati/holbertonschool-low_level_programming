@@ -3,37 +3,36 @@
 
 /**
 * **strtow - splits a string into words.
-* @s1 - first string
-* @s2 - second string
-* Return: pointer to new space in memory or null
+* @str - string to be splitted
+* Return: pointer to an array of strings (words) or null
 **/
 char **strtow(char *str)
 {
-	char *strDup;
-	int i, j, size;
+	char **strDup;
+	int i, j, k, size, words;
 
-	i = j = 0;
-	while (s1[i] != '\0')
+	i = j = words = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != ' ')
+			j++;
+		if(str[i + 1] != ' ')
+			words++;
 		i++;
-	while (s2[j] != '\0')
-                j++;
+	}
+	strDup = malloc(sizeof(char) * words);
 
-	size = i + j;
-	strDup = malloc(sizeof(char) * size);
+	for (i = 0; i < words; i++)
+		strDup[i] = malloc(sizeof(char) * j);
 
 	if (strDup == NULL)
 		return (NULL);
-	i = j = 0;
-	while (s1[i] != '\0')
+
+	for (i = 0; i < words; i++)
 	{
-		strDup[i] = s1[i];
-		i++;
+		for (k = 0; k < j; k++, str++)
+			strDup[i][k] = *str;
 	}
-	while (s2[j] != '\0')
-        {
-                strDup[i] = s2[j];
-                i++, j++;
-        }
-	strDup[i] = '\0';
+	strDup[i][k] = '\0';
 	return (strDup);
 }
