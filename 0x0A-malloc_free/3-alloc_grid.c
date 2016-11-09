@@ -2,12 +2,12 @@
 #include <stdlib.h>
 
 /**
-* **alloc_grid - creates a 2d integer grid
-* @width - number of columns
-* @height - number of rows
+* alloc_grid - creates a 2d integer grid
+* @width: number of columns
+* @height: number of rows
 * Return: pointer to grid or null
 **/
-int **alloc_grid(int width, int height)
+int alloc_grid(int width, int height)
 {
 	int **grid, i, j;
 

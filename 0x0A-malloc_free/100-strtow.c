@@ -1,11 +1,11 @@
 #include "holberton.h"
 #include <stdlib.h>
 /**
-* **strtow - splits a string into words.
-* @str - string to be splitted
+* strtow - splits a string into words.
+* @str: string to be splitted
 * Return: pointer to an array of strings (words) or null
 **/
-char **strtow(char *str)
+char strtow(char *str)
 {
 	char **strDup;
 	int i, j, k, n, words;
