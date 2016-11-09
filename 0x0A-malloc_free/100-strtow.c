@@ -7,19 +7,20 @@
 **/
 int word_counter(char *str)
 {
-	int i, j, words;
+	int i, words;
 
 	i = words = 0;
 	while (str[i] != '\0')
-	{
-		j = 0;
-		if (str[i] != ' ')
-			while (str[i + j] != ' ')
-				j++;
-		if (j != 0)
-			words += 1, i += j;
-		else
-			i++;
+        {
+		if (str[i] != ' ' && str[i + 1] != ' ')
+		{
+			return (1);
+		}
+		else if (str[i] == ' ' && str[i + 1] != ' ')
+		{
+			words += 1;
+		}
+		i++;
 	}
 	return (words);
 }
@@ -45,10 +46,12 @@ char **strtow(char *str)
 	char **strDup;
 	int i, j, k, n, words;
 
+/*	if (str == '\0')
+	return (NULL); */
 	words = word_counter(str);
-	if (words < 1)
-		return (NULL);
-	strDup = malloc(sizeof(char) * words);
+/*	if (words < 1)
+	return (NULL); */
+	strDup = malloc(sizeof(char *) * words);
 	if (strDup == NULL)
 		return (NULL);
 	k = 0;
@@ -56,27 +59,41 @@ char **strtow(char *str)
 	{
 		while (str[k] != '\0')
 		{
-			j = 0;
-			if (str[k] != ' ')
-				while (str[k + j] != ' ')
-					j++;
-			if (j != 0)
+			n = 0;
+			if (str[k] != ' ' && str[k + 1] != ' ')
 			{
-				strDup[i] = malloc(sizeof(char) * j);
+				strDup[i] = malloc(sizeof(char *) * k);
 				if (strDup[i] == NULL)
-				{
-					freeRows(strDup, i);
+                                {
+                                        freeRows(strDup, i);
 					return (NULL);
+                                }
+				else
+				{
+					strDup[i][n] = str[n];
+                                        n++;
 				}
-				n = 0;
-				while (n < j)
-					strDup[i][n] = str[k + n++];
-				strDup[i][j] = '\0';
-				k += j;
-				break;
+
 			}
+			else if (str[k] == ' ' && str[k + 1] != ' ')
+			{
+				strDup[i] = malloc(sizeof(char *) * n);
+                                if (strDup[i] == NULL)
+                                {
+                                        freeRows(strDup, i);
+                                        return (NULL);
+                                }
+                                else
+                                {
+                                        strDup[i][n] = str[n];
+                                        n++;
+                                }
+			}
+			k += n;
+			break;
 			k++;
 		}
+		strDup[i][n] = '\0';
 	}
 	strDup[i] = '\0';
 	return (strDup);
