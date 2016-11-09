@@ -26,7 +26,7 @@ char *argstostr(int ac, char **av)
 	 /* allocate memory for total number of chars and
 	 * new line for each word
 	 */
-	strDup = malloc(sizeof(char) * (ac + size));
+	strDup = malloc(sizeof(char *) * (ac + size));
 
 	if (strDup == NULL)
 		return (NULL);
