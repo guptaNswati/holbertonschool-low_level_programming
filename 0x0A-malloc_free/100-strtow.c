@@ -1,14 +1,13 @@
 #include "holberton.h"
 #include <stdlib.h>
 /**
-* strtow - splits a string into words.
-* @str: string to be splitted
-* Return: pointer to an array of strings (words) or null
+* word_counter - counts number of words in 1d array of strings
+* @str: pointer to char
+* Return: number of words
 **/
-char **strtow(char *str)
+int word_counter(char *str)
 {
-	char **strDup;
-	int i, j, k, n, words;
+	int i, j, words;
 
 	i = words = 0;
 	while (str[i] != '\0')
@@ -18,17 +17,40 @@ char **strtow(char *str)
 			while (str[i + j] != ' ')
 				j++;
 		if (j != 0)
-		{
-			words += 1;
-			i += j;
-		}
+			words += 1, i += j;
 		else
 			i++;
 	}
+	return (words);
+}
+/**
+* freeRows - free allocated spaces to array rows
+* @strDup: pointer to pointer to char
+* @i: number of rows to be freed
+* Return: nothing
+**/
+void freeRows(char **strDup, int i)
+{
+	while (--i >= 0)
+		free(strDup[--i]);
+	free(strDup);
+}
+/**
+* strtow - splits a string into words.
+* @str: string to be splitted
+* Return: pointer to an array of strings (words) or null
+**/
+char **strtow(char *str)
+{
+	char **strDup;
+	int i, j, k, n, words;
+
+	words = word_counter(str);
+	if (words < 1)
+		return (NULL);
 	strDup = malloc(sizeof(char) * words);
 	if (strDup == NULL)
-                return (NULL);
-
+		return (NULL);
 	k = 0;
 	for (i = 0; i < words; i++)
 	{
@@ -43,17 +65,12 @@ char **strtow(char *str)
 				strDup[i] = malloc(sizeof(char) * j);
 				if (strDup[i] == NULL)
 				{
-					while (--i >=0)
-						free(strDup[--i]);
-					free(strDup);
+					freeRows(strDup, i);
 					return (NULL);
 				}
 				n = 0;
 				while (n < j)
-				{
-					strDup[i][n] = str[k + n];
-					n++;
-				}
+					strDup[i][n] = str[k + n++];
 				strDup[i][j] = '\0';
 				k += j;
 				break;
