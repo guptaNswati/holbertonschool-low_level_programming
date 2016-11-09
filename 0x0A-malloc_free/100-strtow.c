@@ -1,6 +1,5 @@
 #include "holberton.h"
 #include <stdlib.h>
-#include <stdio.h>
 /**
 * **strtow - splits a string into words.
 * @str - string to be splitted
@@ -28,8 +27,6 @@ char **strtow(char *str)
 		else
 			i++;
 	}
-	printf("%d\n", words);
-
 	strDup = malloc(sizeof(char) * words);
 	k = 0;
 	for (i = 0; i < words; i++)
@@ -82,11 +79,3 @@ char **strtow(char *str)
 	}
 	return (strDup);
 }
-/*
-int main(void)
-{
-	char **tab;
-
-	tab = strtow("      Holberton School         #cisfun      ");
-	return (0);
-	} */
