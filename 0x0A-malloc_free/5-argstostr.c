@@ -12,7 +12,7 @@ char *argstostr(int ac, char **av)
 	char *strDup;
 	int i, j, k, size;
 
-	if (ac < 2)
+	if (ac < 1 || av == NULL)
 		return (NULL);
 
 	size = 0;
