@@ -12,6 +12,9 @@ char *argstostr(int ac, char **av)
 	char *strDup;
 	int i, j, k, size;
 
+	if (ac == 0 || av == NULL)
+		return (NULL);
+
 	size = 0;
 	/* count the number of chars in each string */
 	for (i = 0; i < ac; i++)

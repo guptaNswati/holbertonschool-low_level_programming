@@ -19,8 +19,10 @@ char *str_concat(char *s1, char *s2)
 		j++;
 
 	size = i + j;
-	strDup = malloc(sizeof(char) * size);
+	if (size == 0)
+		return (NULL);
 
+	strDup = malloc(sizeof(char) * size);
 	if (strDup == NULL)
 		return (NULL);
 	i = j = 0;
