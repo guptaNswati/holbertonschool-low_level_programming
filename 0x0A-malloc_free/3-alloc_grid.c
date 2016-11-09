@@ -7,9 +7,12 @@
 * @height: number of rows
 * Return: pointer to grid or null
 **/
-int alloc_grid(int width, int height)
+int **alloc_grid(int width, int height)
 {
 	int **grid, i, j;
+
+	if ((width || height) < 1)
+		return (NULL);
 
 	grid = malloc(sizeof(int) * height);
 
