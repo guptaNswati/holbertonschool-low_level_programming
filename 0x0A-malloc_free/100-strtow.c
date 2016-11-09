@@ -41,6 +41,13 @@ char **strtow(char *str)
 			if (j != 0)
 			{
 				strDup[i] = malloc(sizeof(char) * j);
+				if (strDup[i] == NULL)
+				{
+					while (--i >=0)
+						free(strDup[--i]);
+					free(strDup);
+					return (NULL);
+				}
 				n = 0;
 				while (n < j)
 				{
