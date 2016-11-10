@@ -22,8 +22,8 @@ int wordCounterRec(char *str, int i)
 int word_counter(char *str)
 {
 	if (str[0] != ' ')
-		return (1 + wordCounterRec(str, 1));
-	return (wordCounterRec(str, 1));
+		return (1 + wordCounterRec(str, 0));
+	return (wordCounterRec(str, 0));
 }
 /**
 * strtow - splits a string into words.
@@ -44,12 +44,12 @@ char **strtow(char *str)
 	if (strDup == NULL)
 		return (NULL);
 	i = 0;
-	while (i < words && *str != '\0')
+	while (i <= words && *str != '\0')
 	{
 		if (*str != ' ')
 		{
 			n = 0;
-			while (str[n] != ' ' && str[n] != '\0')
+			while (str[n] != ' ')
 				n++;
 			strDup[i] = malloc(sizeof(char) * (n + 1));
 			if (strDup[i] == NULL)
