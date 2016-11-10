@@ -20,14 +20,17 @@ char *str_concat(char *s1, char *s2)
 	i = j = 0;
 	while (s1[i] != '\0')
 		i++;
+	i++;
+
 	while (s2[j] != '\0')
 		j++;
+	j++;
 
 	size = i + j;
 	if (size == 0)
 		return (NULL);
 
-	size += 3;
+	size++;
 	strDup = malloc(sizeof(char) * size);
 	if (strDup == NULL)
 		return (NULL);
