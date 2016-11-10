@@ -27,62 +27,63 @@ int word_counterRec(char *str, int i)
 	return (word_counterRec(str, i + 1));
 }
 /**
-* currentIndex - tracks current char index
-* @str: pointer to array
-* @index: current index
-* Return: next index
+* lenCounter - creates an array of each words length
+* @str: pointer to char
+* @words: number of words
+* Return: pointer to an int
 **/
-int currentIndex(char *str, int index)
+int lenCounter(char *str)
 {
-	int len;
+	int i;
 
-	len = 0;
-	while (str[index] != '\0')
-        {
-                if (str[index] == ' ' && str[index + 1] != ' ')
-		{
-			printf("str[i] %c\n", str[index]);
-			len++;
-		}
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != ' ' && str[i + 1] != ' ')
+			i++;
 		else
 			break;
-		index++;
 	}
-	printf("len is %d\n", len);
-	return (len);
+	if (i != 0)
+		i++;
+	return (i);
 }
 /**
 * createString - creates strings from an array of chars
 * @str: pointer to char
-* @m: cuurent word index in 2d array
-* @twoD: 2d array
+* @words: number of words
 * Return: pointer to char
 **/
-char *createString(char *str, int m, char **twoD)
+char **createString(char *str, int words)
 {
+	char **arr;
 	char *res;
-	int j, n;
+	int i, j, n;
 
-	n = currentIndex(str, 1);
-	if (n != 0)
+	arr = malloc(sizeof(char *) * words);
+        if (arr == NULL)
+                return (NULL);
+	for (i = 0; i < words; i++)
 	{
+		n = lenCounter(str);
 		res = malloc(sizeof(char *) * n);
 		if (res == NULL)
 		{
-			while (--m >= 0)
-				free(twoD[--m]);
-			free(twoD);
+			while (--i >= 0)
+				free(arr[--i]);
+			free(arr);
 			return (NULL);
 		}
 		for (j = 0; j < n; j++, str++)
 		{
-			res[j] = *str;
-			printf("res[j] is %c\n", res[j]);
+			res[j] = *(str);
 		}
-		*str = str[n];
+		res[j] = '\0';
+		arr[i] = res;
+		str++;
 	}
-	res[j] = '\0';
-	return (res);
+	arr[i] = '\0';
+	return (arr);
 }
 /**
 * strtow - splits a string into words.
@@ -102,22 +103,12 @@ char **strtow(char *str)
 		strDup = malloc(sizeof(char *) * words);
 		if (strDup == NULL)
 			return (NULL);
-		for (n = 0; *str != '\0'; n++, str++)
-			strDup[n] = str;
-		strDup[n] = '\0';
+		n = 0;
+		for (*str; *str != '\0'; n++, str++)
+			*(strDup + n) = str;
+		*(strDup + n) = '\0';
 		return (strDup);
 	}
-	strDup = malloc(sizeof(char *) * words);
-	if (strDup == NULL)
-		return (NULL);
-
-	for (i = 0; i < words; i++)
-	{
-		printf("i is %d\n", i);
-		strDup[i] = createString(str, i, strDup);
-		if (strDup[i] == NULL)
-			return (NULL);
-	}
-	strDup[i] = '\0';
+	strDup = createString(str + 1, words);
 	return (strDup);
 }
