@@ -26,6 +26,25 @@ void printError()
 	_putchar('\n');
 }
 /**
+* _strlen - calculates length of passed string
+* @str: pointer to char
+* Return: length of string
+**/
+int _strlen(char *str)
+{
+	int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] < '0' || str[i] > '9')
+		{
+			printError();
+			return (-1);
+		}
+	}
+	return (i);
+}
+/**
 * printResult - prints result
 * @result: takes an int
 * Return: nothing
@@ -44,30 +63,50 @@ void printResult(int result)
 **/
 int main(int argc, char *argv[])
 {
-	int result, num, i, j;
+	int mul, i, len1, len2, resLen, k;
+	char *num1, *num2, *res;
 
 	if (argc < 3 || argc > 3)
 	{
 		printError();
 		exit (98);
 	}
-	result = 1;
-	for (j = 1; j < argc; j++)
+	len1 = _strlen(argv[1]);
+	if (len1 == -1)
+		exit(98);
+	num1 = malloc(sizeof(char) * len1 + 1);
+	if (num1 == NULL)
 	{
-		num = 0;
-		for (i = 0; argv[j][i] != '\0'; i++)
-		{
-			if (argv[j][i] >= '0' && argv[j][i] <= '9')
-				num = num * 10 + (argv[j][i] - '0');
-			else
-			{
-				printError();
-				exit (98);
-			}
-		}
-		result *= num;
+		printError();
+		exit(98);
 	}
-	printResult(result);
+	len2 = _strlen(argv[2]);
+	if (len2 == -1)
+		exit (98);
+	num2 = malloc(sizeof(char) * len2 + 1);
+	if (num2 == NULL)
+	{
+		printError();
+		free(num1);
+		exit(98);
+	}
+	resLen = len1 + len2;
+	res = malloc(sizeof(char) * resLen + 1);
+	if (res == NULL)
+	{
+		printError();
+                free(num1);
+		free(num2);
+                exit(98);
+	}
+	for (i = 0; i < len1; i++)
+		num1[i] = argv[1][i];
+	for (i = 0; i < len2; i++)
+		num2[i] = argv[2][i];
+	k = 0;
+	/*for(reslen - 1; reslen >= 0; reslen--)
+	{
+	mul = (num1[len1 - 1] - '0') * (num2[len2 - 1] - '0'; */
 	_putchar('\n');
 	return (0);
 }
