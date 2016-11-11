@@ -64,14 +64,17 @@ char *mulNums(char *str, int len, int n)
 	}
 	k = 0;
 	mul = 1;
-        for (i = len; i >= 1; i--)
+        for (len; len >= 1; len--)
         {
                 mul = ((str[len - 1] - '0') * n) + k;
-                res[i] = (mul % 10) + '0';
+                res[len] = (mul % 10) + '0';
                 k = mul / 10;
         }
-        res[i] = k + '0';
-	return (k);
+	if (k >= 0 && k <= 9)
+		res[len] = k + '0';
+	else
+		res[len] = '0';
+	return (res);
 }
 /**
 * addNums - add two arrays of digits
@@ -85,24 +88,26 @@ char *mulNums(char *str, int len, int n)
 char *addNums(char *str1, char *str2, int size, int len1, int len2)
 {
 	char *add;
-	int sum;
+	int sum, k;
 
-	add = malloc(sizeof(char) * size);
+	add = malloc(sizeof(char) * size + 1);
 	if (add == NULL)
         {
                 printError();
                 exit(98);
         }
-	sum = 0;
-	for (size - 1; size >= 1; size--)
+	sum = k = 0 ;
+	for (size; size >= 1; size--)
 	{
 		sum = (str1[len1 - 1] - '0') + (str2[len2 - 1] - '0') + k;
-                printf("sum is %d\n", sum);
                 add[size] = (sum % 10) + '0';
                 k = sum / 10;
 		len1--, len2--;
 	}
-	add[size] = k + '0';
+	if (k >= 0 && k <= 9)
+                add[size] = k + '0';
+        else
+                add[size] = '0';
 	return (add);
 }
 /**
@@ -137,32 +142,9 @@ int main(int argc, char *argv[])
 	if (len1 == -1 || len2 == -1)
 		exit(98);
 
-	res = malloc(sizeof(char) * len1 + 1);
-	temp = malloc(sizeof(char) * len1 + 2);
-	sum = malloc(sizeof(char) * len1 + 3);
-	if (res == NULL || temp == NULL)
-	{
-		printError();
-                exit(98);
-	}
-	k = 0;
-	for (i = len1 - 1; i >= 0; i--)
-	{
-		mul = (argv[1][i] - '0') * (argv[2][len2 - 1] - '0') + k;
-		res[i + 1] = (mul % 10) + '0';
-		k = mul / 10;
-	}
-	res[i + 1] = k + '0';
-
-	temp[len1] = '0';
-	for (i = len1 - 1; i >= 0; i--)
-        {
-               tempMul = (argv[1][i] - '0') * (argv[2][len2 - 2] - '0') + k;
-                temp[i + 1] = (tempMul % 10) + '0';
-                k = tempMul / 10;
-        }
-	temp[i + 1] = k + '0';
-	printf("sum is %s\n", sum);
-
+	res = addNums(argv[1], argv[2], len1, len1, len2);
+	printf("res is %s\n", res); 
+/*	temp = mulNums(argv[1], len1, 5);
+	printf("%s\n", temp); */
 	return (0);
 }
