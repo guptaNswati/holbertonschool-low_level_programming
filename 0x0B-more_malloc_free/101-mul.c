@@ -45,6 +45,67 @@ int _strlen(char *str)
 	return (i);
 }
 /**
+* mulNums - multiply an array
+* @str: array to be multiplied
+* @len: len of str
+* @n: multiplier
+* Return: array with result
+**/
+char *mulNums(char *str, int len, int n)
+{
+	char *res;
+	int k, mul;
+
+	res = malloc(sizeof(char) * len + 1);
+	if (res == NULL)
+        {
+                printError();
+                exit(98);
+	}
+	k = 0;
+	mul = 1;
+        for (i = len; i >= 1; i--)
+        {
+                mul = ((str[len - 1] - '0') * n) + k;
+                res[i] = (mul % 10) + '0';
+                k = mul / 10;
+        }
+        res[i] = k + '0';
+	return (k);
+}
+/**
+* addNums - add two arrays of digits
+* @str1: array 1
+* @str2: array2
+* @size: memory to allocate
+* @len1: length of str1
+* @len2: length of str2
+* Return: pointer to char with sum
+**/
+char *addNums(char *str1, char *str2, int size, int len1, int len2)
+{
+	char *add;
+	int sum;
+
+	add = malloc(sizeof(char) * size);
+	if (add == NULL)
+        {
+                printError();
+                exit(98);
+        }
+	sum = 0;
+	for (size - 1; size >= 1; size--)
+	{
+		sum = (str1[len1 - 1] - '0') + (str2[len2 - 1] - '0') + k;
+                printf("sum is %d\n", sum);
+                add[size] = (sum % 10) + '0';
+                k = sum / 10;
+		len1--, len2--;
+	}
+	add[size] = k + '0';
+	return (add);
+}
+/**
 * printResult - prints result
 * @result: takes an int
 * Return: nothing
@@ -63,8 +124,8 @@ void printResult(int result)
 **/
 int main(int argc, char *argv[])
 {
-	int mul, i, len1, len2, resLen, k;
-	char *num1, *num2, *res;
+	int mul, tempMul, tsum, i, len1, len2, resLen, k;
+	char *current, *temp, *res, *sum;
 
 	if (argc < 3 || argc > 3)
 	{
@@ -72,41 +133,36 @@ int main(int argc, char *argv[])
 		exit (98);
 	}
 	len1 = _strlen(argv[1]);
-	if (len1 == -1)
-		exit(98);
-	num1 = malloc(sizeof(char) * len1 + 1);
-	if (num1 == NULL)
-	{
-		printError();
-		exit(98);
-	}
 	len2 = _strlen(argv[2]);
-	if (len2 == -1)
-		exit (98);
-	num2 = malloc(sizeof(char) * len2 + 1);
-	if (num2 == NULL)
-	{
-		printError();
-		free(num1);
+	if (len1 == -1 || len2 == -1)
 		exit(98);
-	}
-	resLen = len1 + len2;
-	res = malloc(sizeof(char) * resLen + 1);
-	if (res == NULL)
+
+	res = malloc(sizeof(char) * len1 + 1);
+	temp = malloc(sizeof(char) * len1 + 2);
+	sum = malloc(sizeof(char) * len1 + 3);
+	if (res == NULL || temp == NULL)
 	{
 		printError();
-                free(num1);
-		free(num2);
                 exit(98);
 	}
-	for (i = 0; i < len1; i++)
-		num1[i] = argv[1][i];
-	for (i = 0; i < len2; i++)
-		num2[i] = argv[2][i];
 	k = 0;
-	/*for(reslen - 1; reslen >= 0; reslen--)
+	for (i = len1 - 1; i >= 0; i--)
 	{
-	mul = (num1[len1 - 1] - '0') * (num2[len2 - 1] - '0'; */
-	_putchar('\n');
+		mul = (argv[1][i] - '0') * (argv[2][len2 - 1] - '0') + k;
+		res[i + 1] = (mul % 10) + '0';
+		k = mul / 10;
+	}
+	res[i + 1] = k + '0';
+
+	temp[len1] = '0';
+	for (i = len1 - 1; i >= 0; i--)
+        {
+               tempMul = (argv[1][i] - '0') * (argv[2][len2 - 2] - '0') + k;
+                temp[i + 1] = (tempMul % 10) + '0';
+                k = tempMul / 10;
+        }
+	temp[i + 1] = k + '0';
+	printf("sum is %s\n", sum);
+
 	return (0);
 }
