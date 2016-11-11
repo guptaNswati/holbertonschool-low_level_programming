@@ -32,14 +32,9 @@ void printError()
 **/
 void printResult(int result)
 {
-	if (result < 10)
-		_putchar(result + '0');
-	else
-	{
-		_putchar(result / 10 + '0');
-		_putchar(result % 10 + '0');
-	}
-	_putchar('\n');
+	if (result / 10)
+	    printResult(result / 10);
+	_putchar(result % 10 + '0');
 }
 /**
 * main - multiplies two positive numbers and prints result or error
@@ -73,5 +68,6 @@ int main(int argc, char *argv[])
 		result *= num;
 	}
 	printResult(result);
+	_putchar('\n');
 	return (0);
 }
