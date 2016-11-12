@@ -49,31 +49,39 @@ int _strlen(char *str)
 * @str: array to be multiplied
 * @len: len of str
 * @n: multiplier
+* @zeros: number of zeros to be added
 * Return: array with result
 **/
-char *mulNums(char *str, int len, int n)
+char *mulNums(char *str, int len, int n, int zeros)
 {
 	char *res;
-	int k, mul;
+	int k, mul, size;
 
-	res = malloc(sizeof(char) * len + 1);
+	size = len + zeros + 1;
+	res = malloc(sizeof(char) * size);
 	if (res == NULL)
         {
                 printError();
                 exit(98);
 	}
+	size--;
+	while (zeros >= 0)
+	{
+		res[size] = '0';
+		size--, zeros--;
+	}
 	k = 0;
 	mul = 1;
-        for (len; len >= 1; len--)
+        for (size; size >= 1; size--)
         {
                 mul = ((str[len - 1] - '0') * n) + k;
                 res[len] = (mul % 10) + '0';
                 k = mul / 10;
         }
 	if (k >= 0 && k <= 9)
-		res[len] = k + '0';
+		res[size] = k + '0';
 	else
-		res[len] = '0';
+		res[size] = '0';
 	return (res);
 }
 /**
@@ -129,7 +137,7 @@ void printResult(int result)
 **/
 int main(int argc, char *argv[])
 {
-	int mul, tempMul, tsum, i, len1, len2, resLen, k;
+	int len1, len2, zero, sumLen, tempLen;
 	char *current, *temp, *res, *sum;
 
 	if (argc < 3 || argc > 3)
@@ -142,9 +150,18 @@ int main(int argc, char *argv[])
 	if (len1 == -1 || len2 == -1)
 		exit(98);
 
-	res = addNums(argv[1], argv[2], len1, len1, len2);
-	printf("res is %s\n", res); 
-/*	temp = mulNums(argv[1], len1, 5);
-	printf("%s\n", temp); */
+	tempLen = len1;
+	zero = 0;
+	len2--;
+	current = mulNums(argv[1], tempLen, argv[2][len2], zero);
+	while (len2 >= 0)
+	{
+		temp = mulNums(argv[1], tempLen, argv[2][--len2], zero++);
+		sumLen = tempLen + zero;
+		sum = addNums(current, temp, sumLen, tempLen + 1, sumLen + 1);
+		current = sum;
+		tempLen = sumLen;
+	}
+	printf("sum is %s\n", sum);
 	return (0);
 }
