@@ -52,7 +52,7 @@ int _strlen(char *str)
 * @zeros: number of zeros to be added
 * Return: array with result
 **/
-char *mulNums(char *str, int len, int n, int zeros)
+char *mulNums(char *str, int len, char n, int zeros)
 {
 	char *res;
 	int k, mul, size;
@@ -65,18 +65,20 @@ char *mulNums(char *str, int len, int n, int zeros)
                 exit(98);
 	}
 	size--;
-	while (zeros >= 0)
+	while (zeros > 0)
 	{
+		/*	printf("zeros %d\n", zeros); */
 		res[size] = '0';
 		size--, zeros--;
 	}
 	k = 0;
 	mul = 1;
-        for (size; size >= 1; size--)
+        for (size; size > 0; size--)
         {
-                mul = ((str[len - 1] - '0') * n) + k;
-                res[len] = (mul % 10) + '0';
+                mul = ((str[len - 1] - '0') * (n - '0')) + k;
+                res[size] = (mul % 10) + '0';
                 k = mul / 10;
+		len--;
         }
 	if (k >= 0 && k <= 9)
 		res[size] = k + '0';
@@ -105,17 +107,20 @@ char *addNums(char *str1, char *str2, int size, int len1, int len2)
                 exit(98);
         }
 	sum = k = 0 ;
-	for (size; size >= 1; size--)
+	while (size >= 1 && len1 >= 0)
 	{
-		sum = (str1[len1 - 1] - '0') + (str2[len2 - 1] - '0') + k;
+		if (len1 < 0)
+			sum = (str2[len2 - 1] - '0') + k;
+		else
+			sum = (str1[len1 - 1] - '0') + (str2[len2 - 1] - '0') + k;
                 add[size] = (sum % 10) + '0';
                 k = sum / 10;
-		len1--, len2--;
+		len1--, len2--, size--;
 	}
 	if (k >= 0 && k <= 9)
-                add[size] = k + '0';
-        else
-                add[size] = '0';
+                add[size--] = k + '0';
+	else
+		add[size--] = '0';
 	return (add);
 }
 /**
@@ -154,14 +159,15 @@ int main(int argc, char *argv[])
 	zero = 0;
 	len2--;
 	current = mulNums(argv[1], tempLen, argv[2][len2], zero);
-	while (len2 >= 0)
+	printf("current %s\n", current);
+	while (--len2 >= 0)
 	{
-		temp = mulNums(argv[1], tempLen, argv[2][--len2], zero++);
+		temp = mulNums(argv[1], tempLen, argv[2][len2], zero++);
 		sumLen = tempLen + zero;
-		sum = addNums(current, temp, sumLen, tempLen + 1, sumLen + 1);
+		sum = addNums(current, temp, sumLen, tempLen, sumLen);
+		printf("sum is %s\n", sum);
 		current = sum;
 		tempLen = sumLen;
 	}
-	printf("sum is %s\n", sum);
 	return (0);
 }
