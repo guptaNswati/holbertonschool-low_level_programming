@@ -1,0 +1,1 @@
+echo __BASE_FILE__
