@@ -90,37 +90,42 @@ char *mulNums(char *str, int len, char n, int zeros)
 * addNums - add two arrays of digits
 * @str1: array 1
 * @str2: array2
-* @size: memory to allocate
-* @len1: length of str1
-* @len2: length of str2
 * Return: pointer to char with sum
 **/
-char *addNums(char *str1, char *str2, int size, int len1, int len2)
+char *addNums(char *str1, char *str2)
 {
 	char *add;
-	int sum, k;
+	int sum, k, len1, len2, size;
 
-	add = malloc(sizeof(char) * size + 1);
+	len1 = _strlen(str1);
+	len2 = _strlen(str2);
+	size = len2 + 1;
+	add = malloc(sizeof(char) * size);
 	if (add == NULL)
         {
                 printError();
                 exit(98);
         }
-	sum = k = 0 ;
-	while (size >= 1 && len1 >= 0)
+	size--, len2--, len1--;
+	sum = k = 0;
+	sum = (str1[len1] - '0') + k;
+	add[size] = (sum % 10) + '0';
+	k = sum / 10;
+	size--, len1--;
+	while (size > 0)
 	{
 		if (len1 < 0)
-			sum = (str2[len2 - 1] - '0') + k;
+			sum = (str2[len2] - '0') + k;
 		else
-			sum = (str1[len1 - 1] - '0') + (str2[len2 - 1] - '0') + k;
+			sum = (str1[len1] - '0') + (str2[len2] - '0') + k;
                 add[size] = (sum % 10) + '0';
                 k = sum / 10;
-		len1--, len2--, size--;
+		size--, len1--, len2--;
 	}
 	if (k >= 0 && k <= 9)
-                add[size--] = k + '0';
+                add[size] = k + '0';
 	else
-		add[size--] = '0';
+		add[size] = '0';
 	return (add);
 }
 /**
@@ -163,11 +168,10 @@ int main(int argc, char *argv[])
 	while (--len2 >= 0)
 	{
 		temp = mulNums(argv[1], tempLen, argv[2][len2], zero++);
-		sumLen = tempLen + zero;
-		sum = addNums(current, temp, sumLen, tempLen, sumLen);
-		printf("sum is %s\n", sum);
+		printf("temp %s\n", temp);
+		sum = addNums(current, temp);
+		printf("sum %s\n", sum);
 		current = sum;
-		tempLen = sumLen;
 	}
 	return (0);
 }
