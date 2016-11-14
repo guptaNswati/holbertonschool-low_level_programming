@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include "holberton.h"
+#include <stdio.h>
+
 /**
 * printError - prints error message
 * Return: nothing
@@ -46,6 +48,23 @@ int _strlen(char *str)
 	return (i);
 }
 /**
+* _reallocate - reallocates memory if carry over if greater than 9
+* @str: pointer to char
+* @newSize: new size to allocate
+**/
+char *_reallocate(char *str, int newSize)
+{
+	char *newStr;
+
+	newStr = malloc(newSize * sizeof(char *));
+	if (newStr == NULL)
+	{
+		free(str);
+		return (NULL);
+	}
+	return (newStr);
+}
+/**
 * mulNums - multiply an array
 * @str: array to be multiplied
 * @n: multiplier
@@ -54,14 +73,17 @@ int _strlen(char *str)
 **/
 char *mulNums(char *str, char n, int zeros)
 {
-	char *res;
-	int k, mul, size, len;
+	char *res, *newRes;
+	int i, k, mul, size, len, reSize;
 
 	len = _strlen(str);
-	size = len + zeros + 1;
+	size = reSize = len + zeros + 1;
 	res = malloc(sizeof(char) * size);
 	if (res == NULL)
+	{
+		printError();
 		return (NULL);
+	}
 	size--;
 	while (zeros > 0)
 	{
@@ -78,9 +100,23 @@ char *mulNums(char *str, char n, int zeros)
 		size--, len--;
 	}
 	if (k >= 0 && k <= 9)
-		res[size] = k + '0';
-	else
-		res[size] = '0';
+        {
+                res[size] = k + '0';
+                return (res);
+        }
+        else if (k > 9)
+        {
+                res[size] = (k % 10) + '0';
+                newRes = _reallocate(res, reSize + 1);
+                if (newRes == NULL)
+                        return (NULL);
+                newRes[0] = (k / 10) + '0';
+                for(i = 1; i < reSize + 1; i++)
+                        newRes[i] = res[i];
+                free(res);
+                return (newRes);
+        }
+	res[size] = '0';
 	return (res);
 }
 /**
@@ -91,17 +127,18 @@ char *mulNums(char *str, char n, int zeros)
 **/
 char *addNums(char *str1, char *str2)
 {
-	char *add;
-	int sum, k, len1, len2, size;
+	char *add, *newAdd;
+	int sum, k, len1, len2, size, reSize, i;
 
 	len1 = _strlen(str1);
 	len2 = _strlen(str2);
-	size = len2 + 1;
+	size = reSize = len2 + 1;
 	add = malloc(sizeof(char) * size);
 	if (add == NULL)
 	{
 		free(str1);
 		free(str2);
+		printError();
 		return (NULL);
 	}
 	size--, len2--, len1--;
@@ -121,9 +158,23 @@ char *addNums(char *str1, char *str2)
 		size--, len1--, len2--;
 	}
 	if (k >= 0 && k <= 9)
+	{
 		add[size] = k + '0';
-	else
-		add[size] = '0';
+		return (add);
+	}
+	else if (k > 9)
+	{
+		add[size] = (k % 10) + '0';
+		newAdd = _reallocate(add, reSize + 1);
+		if (newAdd == NULL)
+			return (NULL);
+		newAdd[0] = (k / 10) + '0';
+		for(i = 1; i < reSize + 1; i++)
+			newAdd[i] = add[i];
+		free(add);
+		return (newAdd);
+	}
+	add[size] = '0';
 	return (add);
 }
 /**
@@ -150,8 +201,8 @@ void printResult(char *result)
 **/
 int main(int argc, char *argv[])
 {
-	int zero, len2;
-	char *current, *temp, *sum;
+	int zero, len1, len2, counter;
+	char *str1, *str2, *current, *temp, *sum;
 
 	if (argc < 3 || argc > 3)
 	{
@@ -160,30 +211,35 @@ int main(int argc, char *argv[])
 	}
 	if (digit_checker(argv[1]) == -1 || digit_checker(argv[2]) == -1)
 		exit(98);
-
+	len1 = _strlen(argv[1]);
 	len2 = _strlen(argv[2]);
-	len2--;
-	zero = 0;
-	current = mulNums(argv[1], argv[2][len2], zero);
-	if (current == NULL)
+	if (len2 > len1)
 	{
-		printError();
-		exit(98);
+		str1 = argv[2];
+		str2 = argv[1];
+		counter = len1 - 1;
 	}
-	while (--len2 >= 0)
+	else
 	{
-		temp = mulNums(argv[1], argv[2][len2], zero++);
+		str1 = argv[1];
+		str2 = argv[2];
+		counter = len2 - 1;
+	}
+	zero = 0;
+	current = mulNums(str1, str2[counter], zero);
+	printf("current %s\n", current);
+	if (current == NULL)
+		exit(98);
+	while (--counter >= 0)
+	{
+		temp = mulNums(str1, str2[counter], zero++);
+		printf("temp %s\n", temp);
 		if (temp == NULL)
-		{
-			printError();
 			exit(98);
-		}
 		sum = addNums(current, temp);
+		printf("sum %s\n", sum);
 		if (sum == NULL)
-		{
-			printError();
 			exit(98);
-		}
 		free(current);
 		free(temp);
 		current = sum;
