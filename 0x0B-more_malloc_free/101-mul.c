@@ -1,22 +1,10 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-
-/**
-* _putchar - writes the character c to stdout
-* @c: The character to print
-* Return: On success 1.
-* On error, -1 is returned, and errno is set appropriately.
-*/
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
+#include "holberton.h"
 /**
 * printError - prints error message
 * Return: nothing
 **/
-void printError()
+void printError(void)
 {
 	_putchar('E');
 	_putchar('r');
@@ -26,11 +14,11 @@ void printError()
 	_putchar('\n');
 }
 /**
-* _strlen - calculates length of passed string
+* digit_checker - checks if the passed arguements are valid
 * @str: pointer to char
-* Return: length of string
+* Return: 0 if all chars are digits else -1
 **/
-int _strlen(char *str)
+int digit_checker(char *str)
 {
 	int i;
 
@@ -42,44 +30,53 @@ int _strlen(char *str)
 			return (-1);
 		}
 	}
+	return (0);
+}
+/**
+* _strlen - calculates length of passed string
+* @str: pointer to char
+* Return: length of string
+**/
+int _strlen(char *str)
+{
+	int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+		;
 	return (i);
 }
 /**
 * mulNums - multiply an array
 * @str: array to be multiplied
-* @len: len of str
 * @n: multiplier
 * @zeros: number of zeros to be added
 * Return: array with result
 **/
-char *mulNums(char *str, int len, char n, int zeros)
+char *mulNums(char *str, char n, int zeros)
 {
 	char *res;
-	int k, mul, size;
+	int k, mul, size, len;
 
+	len = _strlen(str);
 	size = len + zeros + 1;
 	res = malloc(sizeof(char) * size);
 	if (res == NULL)
-        {
-                printError();
-                exit(98);
-	}
+		return (NULL);
 	size--;
 	while (zeros > 0)
 	{
-		/*	printf("zeros %d\n", zeros); */
 		res[size] = '0';
 		size--, zeros--;
 	}
 	k = 0;
 	mul = 1;
-        for (size; size > 0; size--)
-        {
-                mul = ((str[len - 1] - '0') * (n - '0')) + k;
-                res[size] = (mul % 10) + '0';
-                k = mul / 10;
-		len--;
-        }
+	while (size > 0)
+	{
+		mul = ((str[len - 1] - '0') * (n - '0')) + k;
+		res[size] = (mul % 10) + '0';
+		k = mul / 10;
+		size--, len--;
+	}
 	if (k >= 0 && k <= 9)
 		res[size] = k + '0';
 	else
@@ -102,10 +99,11 @@ char *addNums(char *str1, char *str2)
 	size = len2 + 1;
 	add = malloc(sizeof(char) * size);
 	if (add == NULL)
-        {
-                printError();
-                exit(98);
-        }
+	{
+		free(str1);
+		free(str2);
+		return (NULL);
+	}
 	size--, len2--, len1--;
 	sum = k = 0;
 	sum = (str1[len1] - '0') + k;
@@ -118,60 +116,78 @@ char *addNums(char *str1, char *str2)
 			sum = (str2[len2] - '0') + k;
 		else
 			sum = (str1[len1] - '0') + (str2[len2] - '0') + k;
-                add[size] = (sum % 10) + '0';
-                k = sum / 10;
+		add[size] = (sum % 10) + '0';
+		k = sum / 10;
 		size--, len1--, len2--;
 	}
 	if (k >= 0 && k <= 9)
-                add[size] = k + '0';
+		add[size] = k + '0';
 	else
 		add[size] = '0';
 	return (add);
 }
 /**
 * printResult - prints result
-* @result: takes an int
+* @result: resultant string
 * Return: nothing
 **/
-void printResult(int result)
+void printResult(char *result)
 {
-	if (result / 10)
-	    printResult(result / 10);
-	_putchar(result % 10 + '0');
+	int i;
+
+	if (result[0] != '0')
+		_putchar(result[0]);
+
+	for (i = 1; result[i] != '\0'; i++)
+		_putchar(result[i]);
+	_putchar('\n');
 }
 /**
 * main - multiplies two positive numbers and prints result or error
 * @argc: arguement count
-* @agrv: poinetr to arguements
+* @argv: poinetr to arguements
 * Return: 0 or exit with 98
 **/
 int main(int argc, char *argv[])
 {
-	int len1, len2, zero, sumLen, tempLen;
-	char *current, *temp, *res, *sum;
+	int zero, len2;
+	char *current, *temp, *sum;
 
 	if (argc < 3 || argc > 3)
 	{
 		printError();
-		exit (98);
+		exit(98);
 	}
-	len1 = _strlen(argv[1]);
-	len2 = _strlen(argv[2]);
-	if (len1 == -1 || len2 == -1)
+	if (digit_checker(argv[1]) == -1 || digit_checker(argv[2]) == -1)
 		exit(98);
 
-	tempLen = len1;
-	zero = 0;
+	len2 = _strlen(argv[2]);
 	len2--;
-	current = mulNums(argv[1], tempLen, argv[2][len2], zero);
-	printf("current %s\n", current);
+	zero = 0;
+	current = mulNums(argv[1], argv[2][len2], zero);
+	if (current == NULL)
+	{
+		printError();
+		exit(98);
+	}
 	while (--len2 >= 0)
 	{
-		temp = mulNums(argv[1], tempLen, argv[2][len2], zero++);
-		printf("temp %s\n", temp);
+		temp = mulNums(argv[1], argv[2][len2], zero++);
+		if (temp == NULL)
+		{
+			printError();
+			exit(98);
+		}
 		sum = addNums(current, temp);
-		printf("sum %s\n", sum);
+		if (sum == NULL)
+		{
+			printError();
+			exit(98);
+		}
+		free(current);
+		free(temp);
 		current = sum;
 	}
+	printResult(sum);
 	return (0);
 }
