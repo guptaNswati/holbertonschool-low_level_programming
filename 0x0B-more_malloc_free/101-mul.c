@@ -1,7 +1,5 @@
 #include <stdlib.h>
 #include "holberton.h"
-#include <stdio.h>
-
 /**
 * printError - prints error message
 * Return: nothing
@@ -51,6 +49,7 @@ int _strlen(char *str)
 * _reallocate - reallocates memory if carry over if greater than 9
 * @str: pointer to char
 * @newSize: new size to allocate
+* Return: pointer to newly allocated memory
 **/
 char *_reallocate(char *str, int newSize)
 {
@@ -100,22 +99,22 @@ char *mulNums(char *str, char n, int zeros)
 		size--, len--;
 	}
 	if (k >= 0 && k <= 9)
-        {
-                res[size] = k + '0';
-                return (res);
-        }
-        else if (k > 9)
-        {
-                res[size] = (k % 10) + '0';
-                newRes = _reallocate(res, reSize + 1);
-                if (newRes == NULL)
-                        return (NULL);
-                newRes[0] = (k / 10) + '0';
-                for(i = 1; i < reSize + 1; i++)
-                        newRes[i] = res[i];
-                free(res);
-                return (newRes);
-        }
+	{
+		res[size] = k + '0';
+		return (res);
+	}
+	else if (k > 9)
+	{
+		res[size] = (k % 10) + '0';
+		newRes = _reallocate(res, reSize + 1);
+		if (newRes == NULL)
+			return (NULL);
+		newRes[0] = (k / 10) + '0';
+		for (i = 1; i < reSize + 1; i++)
+			newRes[i] = res[i];
+		free(res);
+		return (newRes);
+	}
 	res[size] = '0';
 	return (res);
 }
@@ -132,7 +131,7 @@ char *addNums(char *str1, char *str2)
 
 	len1 = _strlen(str1);
 	len2 = _strlen(str2);
-	size = reSize = len2 + 1;
+	size = reSize = len2 + 2;
 	add = malloc(sizeof(char) * size);
 	if (add == NULL)
 	{
@@ -147,7 +146,7 @@ char *addNums(char *str1, char *str2)
 	add[size] = (sum % 10) + '0';
 	k = sum / 10;
 	size--, len1--;
-	while (size > 0)
+	while (len2 >= 0)
 	{
 		if (len1 < 0)
 			sum = (str2[len2] - '0') + k;
@@ -169,7 +168,7 @@ char *addNums(char *str1, char *str2)
 		if (newAdd == NULL)
 			return (NULL);
 		newAdd[0] = (k / 10) + '0';
-		for(i = 1; i < reSize + 1; i++)
+		for (i = 1; i < reSize + 1; i++)
 			newAdd[i] = add[i];
 		free(add);
 		return (newAdd);
@@ -227,17 +226,14 @@ int main(int argc, char *argv[])
 	}
 	zero = 0;
 	current = mulNums(str1, str2[counter], zero);
-	printf("current %s\n", current);
 	if (current == NULL)
 		exit(98);
 	while (--counter >= 0)
 	{
 		temp = mulNums(str1, str2[counter], zero++);
-		printf("temp %s\n", temp);
 		if (temp == NULL)
 			exit(98);
 		sum = addNums(current, temp);
-		printf("sum %s\n", sum);
 		if (sum == NULL)
 			exit(98);
 		free(current);
