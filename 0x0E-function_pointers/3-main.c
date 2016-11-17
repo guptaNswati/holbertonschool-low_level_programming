@@ -15,13 +15,13 @@ int main(int argc, char *argv[])
 
 	if (argc != 4)
 	{
-		printf("argc Error\n");
+		printf("Error\n");
 		exit(98);
 	}
 	result = get_op_func(argv[2]);
 	if (result == NULL)
 	{
-		printf("operator Error\n");
+		printf("Error\n");
 		exit(99);
 	}
 	num1 = atoi(argv[1]);
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	res = result(num1, num2);
 	if (res == -1)
 	{
-		printf("res Error\n");
+		printf("Error\n");
 		exit(100);
 	}
 	printf("%d\n", res);
