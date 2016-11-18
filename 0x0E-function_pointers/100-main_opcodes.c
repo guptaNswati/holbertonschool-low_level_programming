@@ -7,7 +7,7 @@
 * @agrv: arguement
 * Return: nothing but exit with 1 or 2 if fails
 **/
-void main(int argc, char *agrv[])
+int main(int argc, char *agrv[])
 {
 	int num, i;
 	char *str;
@@ -27,4 +27,5 @@ void main(int argc, char *agrv[])
 	for (i = 0; i < num - 1; i++)
 		printf("%02hhx ", str[i]);
 	printf("%02hhx\n", str[i]);
+	return (0);
 }
