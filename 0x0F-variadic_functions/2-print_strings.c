@@ -1,0 +1,49 @@
+#include <stdarg.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "variadic_functions.h"
+
+/**
+* print_strings - prints strings, followed by a new line
+* @separator: string to be printed between strings
+* @n: number of arguements
+* Return: nothing, prints number if separator is not NULL
+**/
+void print_strings(const char *separator, const unsigned int n, ...)
+{
+	va_list paramsList;
+	unsigned int i;
+	char *str;
+
+	if (n == 0)
+		;
+	else
+	{
+		va_start(paramsList, n);
+		for (i = 0; i < n - 1; i++)
+		{
+			str = va_arg(paramsList, char *);
+
+			if (separator != NULL || *separator != '\0')
+			{
+				if (str == NULL || *str == '\0')
+					printf("(nil)%s", separator);
+				else
+					printf("%s%s", str, separator);
+			}
+			else
+			{
+				if (str == NULL || *str == '\0')
+					printf("(nil)\n");
+				else
+					printf("%s", str);
+			}
+		}
+		str = va_arg(paramsList, char *);
+		if (str != NULL || *str != '\0')
+			printf("%s\n", str);
+		else
+			printf("(nil)\n");
+		va_end(paramsList);
+	}
+}
