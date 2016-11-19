@@ -1,6 +1,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "variadic_functions.h"
+
+#define TYPE(b) ("%"#b)
+
 /**
 * print_all - prints anything
 * @format: list of types of arguments passed to the function
@@ -10,40 +13,39 @@ void print_all(const char * const format, ...)
 {
 	va_list paramsList;
 	char *str, t;
-	int k;
+	int k, j;
+	struct type
+	{
+		char a;
+		char *ttype;
+	};
+	struct type tarray[4];
 
+	tarray[0].a = 'c';
+	tarray[0].ttype = "int";
+	tarray[1].a = 'i';
+	tarray[1].ttype = "int";
+	tarray[2].a = 'f';
+	tarray[2].ttype = "double";
+	tarray[3].a = 's';
+	tarray[3].ttype = "char *";
 	va_start(paramsList, format);
 	k = 0;
 	while (format[k] != '\0')
 	{
 		t = format[k];
-		switch (t)
+		j = 0;
+		while (j < 4)
 		{
-		case 'c':
-			printf("%c", va_arg(paramsList, int));
-			k++;
-			break;
-		case 'i':
-			printf("%d", va_arg(paramsList, int));
-			k++;
-			break;
-		case 'f':
-			printf("%f", va_arg(paramsList, double));
-			k++;
-			break;
-		case 's':
-			str = va_arg(paramsList, char *);
-			if (str != NULL)
-				printf("%s", str);
-			else
-				printf("(nil)");
-			k++;
-			break;
-		default:
-			k++;
+			if (t == tarray[j].a)
+			{
+				str = va_arg(paramsList, tarray[j].ttype);
+				printf(TYPE(t), str);
+				break;
+			}
+			j++;
 		}
-		if (t != '\0' && (t == 'c' || t == 'i' || t == 'f' || t == 's'))
-			printf(", ");
+		k++;
 	}
 	printf("\n");
 	va_end(paramsList);
