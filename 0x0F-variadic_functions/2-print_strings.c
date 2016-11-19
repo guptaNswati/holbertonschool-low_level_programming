@@ -16,34 +16,22 @@ void print_strings(const char *separator, const unsigned int n, ...)
 	char *str;
 
 	if (n == 0)
-		;
-	else
 	{
-		va_start(paramsList, n);
-		for (i = 0; i < n - 1; i++)
-		{
-			str = va_arg(paramsList, char *);
-
-			if (separator != NULL || *separator != '\0')
-			{
-				if (str == NULL || *str == '\0')
-					printf("(nil)%s", separator);
-				else
-					printf("%s%s", str, separator);
-			}
-			else
-			{
-				if (str == NULL || *str == '\0')
-					printf("(nil)\n");
-				else
-					printf("%s", str);
-			}
-		}
-		str = va_arg(paramsList, char *);
-		if (str != NULL || *str != '\0')
-			printf("%s\n", str);
-		else
-			printf("(nil)\n");
-		va_end(paramsList);
+		printf("\n");
+		return;
 	}
+	va_start(paramsList, n);
+	for (i = 0; i < n - 1; i++)
+	{
+		str = va_arg(paramsList, char *);
+		if (str == NULL)
+			printf("(nil)");
+		else
+			printf("%s", str);
+		if (separator != NULL)
+			printf("%s", str);
+	}
+	str = va_arg(paramsList, char *);
+	printf("%s\n", str);
+	va_end(paramsList);
 }
