@@ -10,18 +10,17 @@
 void print_all(const char * const format, ...)
 {
 	va_list paramsList;
-	char *str;
+	char *str, t;
 	int k;
 
-	if (format == NULL || *format == '\0')
-		;
-	else
+	if (format != NULL || *format != '\0')
 	{
 		va_start(paramsList, format);
 		k = 0;
 		while (format[k] != '\0')
 		{
-			switch (format[k])
+			t = format[k];
+			switch (t)
 			{
 			case 'c':
 				printf("%c", va_arg(paramsList, int));
@@ -46,10 +45,9 @@ void print_all(const char * const format, ...)
 			default:
 				k++;
 			}
-			if (format[k] != '\0' &&
-			    (format[k] == 'c' || format[k] == 'i' ||
-			     format[k] == 'f' || format[k]  == 's'))
-				printf(", ");
+			if (t != '\0' && (t == 'c' || t == 'i'
+					  || t == 'f' || t == 's'))
+			printf(", ");
 		}
 		printf("\n");
 		va_end(paramsList);
