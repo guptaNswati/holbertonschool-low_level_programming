@@ -21,7 +21,7 @@ void print_strings(const char *separator, const unsigned int n, ...)
 		return;
 	}
 	va_start(paramsList, n);
-	for (i = 0; i < n - 1; i++)
+	for (i = 0; i < (n - 1); i++)
 	{
 		str = va_arg(paramsList, char *);
 		if (str == NULL)
@@ -29,9 +29,8 @@ void print_strings(const char *separator, const unsigned int n, ...)
 		else
 			printf("%s", str);
 		if (separator != NULL)
-			printf("%s", str);
+			printf("%s", separator);
 	}
-	str = va_arg(paramsList, char *);
-	printf("%s\n", str);
+	printf("%s\n", va_arg(paramsList, char *));
 	va_end(paramsList);
 }
