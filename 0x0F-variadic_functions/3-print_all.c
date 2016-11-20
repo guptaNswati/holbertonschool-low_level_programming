@@ -6,7 +6,7 @@
 /**
 * printC_I - prints a char or an int
 * @b: format specifier for printf
-* @arg: arguement to be printed
+* @param: arguement to be printed
 * Return: nothing, but print a char or an int
 **/
 void printC_I(char b, va_list param)
@@ -20,30 +20,35 @@ void printC_I(char b, va_list param)
 /**
 * printFlt - prints a float
 * @b: format specifier for printf
-* @arg: arguement to be printed
+* @param: arguement to be printed
 * Return: nothing, but print a float
 **/
 void printFlt(char b, va_list param)
 {
-	printf("%f", va_arg(param, double));
+	/* double guard */
+	if (b == 'f')
+		printf("%f", va_arg(param, double));
 }
 
 /**
 * printStr - prints a string
 * @b: format specifier
-* @arg: string to be printed
+* @param: string to be printed
 * Return: nothing, but prints a string if not null, else (nil)
 **/
 void printStr(char b, va_list param)
 {
 	char *s;
 
-	s = va_arg(param, char *);
+	if (b == 's')
+	{
+		s = va_arg(param, char *);
 
-	if (s != NULL)
-		printf("%s", s);
-	else
-		printf("(nil)");
+		if (s != NULL)
+			printf("%s", s);
+		else
+			printf("(nil)");
+	}
 }
 
 /**
@@ -56,7 +61,7 @@ void print_all(const char * const format, ...)
 	va_list paramsList;
 	int k, j;
 
-	struct type tarray[] = {{'c', printC_I},
+	type tarray[] = {{'c', printC_I},
 				{'i', printC_I},
 				{'f', printFlt},
 				{'s', printStr},
