@@ -1,8 +1,50 @@
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "variadic_functions.h"
 
-#define TYPE(b) ("%"#b)
+/**
+* printC_I - prints a char or an int
+* @b: format specifier for printf
+* @arg: arguement to be printed
+* Return: nothing, but print a char or an int
+**/
+void printC_I(char b, va_list param)
+{
+	if (b == 'c')
+		printf("%c", va_arg(param, int));
+	else
+		printf("%d", va_arg(param, int));
+}
+
+/**
+* printFlt - prints a float
+* @b: format specifier for printf
+* @arg: arguement to be printed
+* Return: nothing, but print a float
+**/
+void printFlt(char b, va_list param)
+{
+	printf("%f", va_arg(param, double));
+}
+
+/**
+* printStr - prints a string
+* @b: format specifier
+* @arg: string to be printed
+* Return: nothing, but prints a string if not null, else (nil)
+**/
+void printStr(char b, va_list param)
+{
+	char *s;
+
+	s = va_arg(param, char *);
+
+	if (s != NULL)
+		printf("%s", s);
+	else
+		printf("(nil)");
+}
 
 /**
 * print_all - prints anything
@@ -12,35 +54,25 @@
 void print_all(const char * const format, ...)
 {
 	va_list paramsList;
-	char *str, t;
 	int k, j;
-	struct type
-	{
-		char a;
-		char *ttype;
-	};
-	struct type tarray[4];
 
-	tarray[0].a = 'c';
-	tarray[0].ttype = "int";
-	tarray[1].a = 'i';
-	tarray[1].ttype = "int";
-	tarray[2].a = 'f';
-	tarray[2].ttype = "double";
-	tarray[3].a = 's';
-	tarray[3].ttype = "char *";
+	struct type tarray[] = {{'c', printC_I},
+				{'i', printC_I},
+				{'f', printFlt},
+				{'s', printStr},
+	};
 	va_start(paramsList, format);
 	k = 0;
 	while (format[k] != '\0')
 	{
-		t = format[k];
 		j = 0;
 		while (j < 4)
 		{
-			if (t == tarray[j].a)
+			if (format[k] == tarray[j].a)
 			{
-				str = va_arg(paramsList, tarray[j].ttype);
-				printf(TYPE(t), str);
+				tarray[j].ttype(tarray[j].a, paramsList);
+				if (format[k + 1] != '\0')
+					printf(", ");
 				break;
 			}
 			j++;
