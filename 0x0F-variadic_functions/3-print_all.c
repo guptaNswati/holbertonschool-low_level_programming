@@ -9,12 +9,9 @@
 * @param: arguement to be printed
 * Return: nothing, but print a char or an int
 **/
-void printC_I(char b, va_list param)
+void printC_I(char *b, va_list param)
 {
-	if (b == 'c')
-		printf("%c", va_arg(param, int));
-	else
-		printf("%d", va_arg(param, int));
+	printf(b, va_arg(param, int));
 }
 
 /**
@@ -23,11 +20,9 @@ void printC_I(char b, va_list param)
 * @param: arguement to be printed
 * Return: nothing, but print a float
 **/
-void printFlt(char b, va_list param)
+void printFlt(char *b, va_list param)
 {
-	/* double guard */
-	if (b == 'f')
-		printf("%f", va_arg(param, double));
+	printf(b, va_arg(param, double));
 }
 
 /**
@@ -36,19 +31,16 @@ void printFlt(char b, va_list param)
 * @param: string to be printed
 * Return: nothing, but prints a string if not null, else (nil)
 **/
-void printStr(char b, va_list param)
+void printStr(char *b, va_list param)
 {
 	char *s;
 
-	if (b == 's')
-	{
-		s = va_arg(param, char *);
+	s = va_arg(param, char *);
 
 		if (s != NULL)
-			printf("%s", s);
+			printf(b, s);
 		else
 			printf("(nil)");
-	}
 }
 
 /**
@@ -60,30 +52,31 @@ void print_all(const char * const format, ...)
 {
 	va_list paramsList;
 	int k, j;
+	char *sep;
 
-	type tarray[] = {{'c', printC_I},
-				{'i', printC_I},
-				{'f', printFlt},
-				{'s', printStr},
+	type tarray[] = {{'c', "%c", printC_I},
+			 {'i', "%d", printC_I},
+			 {'f', "%f", printFlt},
+			 {'s', "%s", printStr}
 	};
 	va_start(paramsList, format);
 	k = 0;
-	while (format[k] != '\0')
+	sep = "";
+	while (format != NULL && format[k] != '\0')
 	{
 		j = 0;
 		while (j < 4)
 		{
 			if (format[k] == tarray[j].a)
 			{
-				tarray[j].ttype(tarray[j].a, paramsList);
-				if (format[k + 1] != '\0')
-					printf(", ");
-				break;
+				printf("%s", sep);
+				tarray[j].ttype(tarray[j].f, paramsList);
+				sep = ", ";
 			}
 			j++;
 		}
 		k++;
 	}
-	printf("\n");
 	va_end(paramsList);
+	printf("\n");
 }
