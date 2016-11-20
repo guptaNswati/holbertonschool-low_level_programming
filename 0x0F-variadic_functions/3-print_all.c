@@ -37,10 +37,9 @@ void printStr(char *b, va_list param)
 
 	s = va_arg(param, char *);
 
-		if (s != NULL)
-			printf(b, s);
-		else
-			printf("(nil)");
+	if (s == NULL)
+		printf("(nil)");
+	printf(b, s);
 }
 
 /**
