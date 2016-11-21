@@ -1,4 +1,3 @@
-#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "variadic_functions.h"
@@ -36,9 +35,8 @@ void printStr(char *b, va_list param)
 	char *s;
 
 	s = va_arg(param, char *);
-
 	if (s == NULL)
-		printf("(nil)");
+		s = "(nil)";
 	printf(b, s);
 }
 
@@ -56,7 +54,7 @@ void print_all(const char * const format, ...)
 	type tarray[] = {{'c', "%c", printC_I},
 			 {'i', "%d", printC_I},
 			 {'f', "%f", printFlt},
-			 {'s', "%s", printStr}
+			 {'s', "%s", printStr},
 	};
 	va_start(paramsList, format);
 	k = 0;
