@@ -4,7 +4,7 @@
 #include <string.h>
 /**
 * add_node_end - function that adds a new node at the end of list_t list
-* @h: pointer to pointer to elements of type list_t
+* @head: pointer to pointer to list_t list
 * @str: string to copy to new node
 * Return: the address of the new element, or NULL if it failed
 **/

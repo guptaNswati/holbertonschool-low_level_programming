@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 /**
-* add_node - function that adds a new node at the beginning of list_t
-* @h: pointer to pointer to elements of type list_t
+* add_node - function that adds a new node at the beginning of list_t list
+* @head: pointer to pointer to list_t list
 * @str: string to copy to new node
 * Return: the address of the new element, or NULL if it failed
 **/
