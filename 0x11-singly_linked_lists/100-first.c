@@ -6,7 +6,7 @@
 * refer https://gcc.gnu.org/onlinedocs/gcc-4.3.0/gcc/Function-Attributes.html
 * Here, the constructor attribute causes the function to be called
 * automatically before execution enters main ()
-* be4mian - function that prints a string before main is executed
+* be4main - function that prints a string before main is executed
 **/
 void __attribute__((constructor)) be4main()
 {
