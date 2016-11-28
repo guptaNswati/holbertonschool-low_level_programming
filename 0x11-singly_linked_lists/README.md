@@ -17,3 +17,6 @@ lists.h
 
 4-free_list.c
 	-  function that free a list_t list.
+
+tests
+	- folder containing test files for all the functions
