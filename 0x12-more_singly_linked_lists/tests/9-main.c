@@ -23,7 +23,12 @@ int main(void)
 	add_nodeint_end(&head, 1024);
 	print_listint(head);
 	printf("-----------------\n");
+	if(insert_nodeint_at_index(&head, 8, 4096) == NULL)
+		printf("null\n");
+	insert_nodeint_at_index(&head, 0, 4096);
+	insert_nodeint_at_index(&head, 7, 4096);
 	insert_nodeint_at_index(&head, 1, 4096);
+	insert_nodeint_at_index(&head, 5, 4096);
 	print_listint(head);
 	free_listint2(&head);
 	return (0);
