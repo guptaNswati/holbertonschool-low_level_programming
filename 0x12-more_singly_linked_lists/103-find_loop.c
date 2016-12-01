@@ -22,6 +22,7 @@ listint_t *find_listint_loop(listint_t *head)
 		if (prev == nex)
 		{
 			/* Start back at begining to find where loop starts */
+			prev = head;
 			while (prev != nex)
 			{
 				prev = (*prev).next;
