@@ -29,7 +29,7 @@ int main(void)
 	{
 		printf("Loop starts at [%p] %d\n", (void *)node, node->n);
 	}
-	free_listint_safe(&head2);
+/*	free_listint_safe(&head2); */
 	head = NULL;
 	node = add_nodeint(&head, 0);
 	add_nodeint(&head, 1);
@@ -48,6 +48,6 @@ int main(void)
 	{
 		printf("Loop starts at [%p] %d\n", (void *)node, node->n);
 	}
-	free_listint_safe(&head);
+/*	free_listint_safe(&head); */
 	return (0);
 }

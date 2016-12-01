@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 /**
-* print_listint_safe - prints all the elements of a listint_t list, safe version
-* @h: pointer to elements of type listint_t
+* print_listint_safe - prints listint_t list, safe version
+* @head: pointer to elements of type listint_t
 * Return: the number of nodes in the list
 **/
 size_t print_listint_safe(const listint_t *head)
@@ -21,8 +21,7 @@ size_t print_listint_safe(const listint_t *head)
 		nex = nex->next->next;
 		if (prev == nex)
 		{
-			printf("p is %d, n is %d\n", prev->n, nex->n);
-			/*	printf("-> [%p] %d\n", (void *)prev, 98); */
+			printf("-> [%p] %d\n", (void *)prev, (*prev).n);
 			exit(98);
 		}
 		counter++;

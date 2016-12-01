@@ -3,7 +3,7 @@
 #include "lists.h"
 
 /**
-* get_nodeint_at_index - inserts new  node in listint_t list at given index
+* insert_nodeint_at_index - inserts new  node in listint_t list at given index
 * @head: pointer to head pointer of the list
 * @index: node to insert at
 * @n: data of the new node
