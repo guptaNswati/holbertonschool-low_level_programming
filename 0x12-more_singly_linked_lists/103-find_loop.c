@@ -26,7 +26,7 @@ listint_t *find_listint_loop(listint_t *head)
 			while (prev != nex)
 			{
 				prev = (*prev).next;
-				nex = (*prev).next;
+				nex = (*nex).next; /*not same as (*prev).next*/
 			}
 			return (prev);
 		}
