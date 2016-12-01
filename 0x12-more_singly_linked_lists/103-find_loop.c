@@ -11,6 +11,9 @@ listint_t *find_listint_loop(listint_t *head)
 {
 	listint_t *prev, *nex;
 
+	/* if theres nothing in list, return null */
+	if (head == NULL)
+		return (NULL);
 	prev = nex = head;
 	while (prev && nex && (*nex).next)
 	{
@@ -27,5 +30,6 @@ listint_t *find_listint_loop(listint_t *head)
 			return (prev);
 		}
 	}
+	/* could find the loop, return null */
 	return (NULL);
 }
