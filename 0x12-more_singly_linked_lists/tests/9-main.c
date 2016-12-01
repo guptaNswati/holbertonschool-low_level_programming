@@ -25,6 +25,8 @@ int main(void)
 	printf("-----------------\n");
 	if(insert_nodeint_at_index(&head, 8, 4096) == NULL)
 		printf("null\n");
+	if(insert_nodeint_at_index(&head, 9, 4096) == NULL)
+                printf("null\n");
 	insert_nodeint_at_index(&head, 0, 4096);
 	insert_nodeint_at_index(&head, 7, 4096);
 	insert_nodeint_at_index(&head, 1, 4096);
