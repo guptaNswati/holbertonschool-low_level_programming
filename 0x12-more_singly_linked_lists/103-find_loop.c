@@ -3,22 +3,29 @@
 #include <stdlib.h>
 
 /**
-* find_listint_loop - finds the loop of the listint_t list
+* find_listint_loop - finds the loop in list using Floyd cycle detection algo
 * @head: pointer to elements of type listint_t
 * Return: address of the node where the loop starts, or NULL if no loop
 **/
 listint_t *find_listint_loop(listint_t *head)
 {
-	listint_t *prev, *nex, *temp;
+	listint_t *prev, *nex;
 
 	prev = nex = head;
 	while (prev && nex && (*nex).next)
 	{
-		temp = prev;
 		prev = (*prev).next;
-		nex = nex->next->next;
+		nex = (*nex).next->next;
 		if (prev == nex)
-			return (temp);
+		{
+			/* Start back at begining to find where loop starts */
+			while (prev != nex)
+			{
+				prev = (*prev).next;
+				nex = (*prev).next;
+			}
+			return (prev);
+		}
 	}
 	return (NULL);
 }
