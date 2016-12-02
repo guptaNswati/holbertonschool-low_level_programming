@@ -14,23 +14,16 @@ int main(void)
 
 	head = NULL;
 	add_nodeint_end(&head, 0);
-	add_nodeint_end(&head, 1);
+/*	add_nodeint_end(&head, 1);
 	add_nodeint_end(&head, 2);
 	add_nodeint_end(&head, 3);
 	add_nodeint_end(&head, 4);
 	add_nodeint_end(&head, 98);
 	add_nodeint_end(&head, 402);
-	add_nodeint_end(&head, 1024);
+	add_nodeint_end(&head, 1024); */
 	print_listint(head);
 	printf("-----------------\n");
-	if(insert_nodeint_at_index(&head, 8, 4096) == NULL)
-		printf("null\n");
-	if(insert_nodeint_at_index(&head, 9, 4096) == NULL)
-                printf("null\n");
-	insert_nodeint_at_index(&head, 0, 4096);
-	insert_nodeint_at_index(&head, 7, 4096);
 	insert_nodeint_at_index(&head, 1, 4096);
-	insert_nodeint_at_index(&head, 5, 4096);
 	print_listint(head);
 	free_listint2(&head);
 	return (0);
