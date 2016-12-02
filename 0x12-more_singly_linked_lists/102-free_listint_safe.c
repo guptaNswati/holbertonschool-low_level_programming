@@ -1,25 +1,84 @@
 #include "lists.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
-* free_listint_safe - free a listint_t list, safe version
-* @h: pointer to the header pointer of the list
-* Return: size of the list that was free'd
+* add_node - function that adds a new node at the start of adrsList list
+* @head: pointer to pointer to adrsList list
+* @ptr: address to be added
+* Return: the address of head, or NULL if it failed
+**/
+adrsList *add_node(adrsList **head, void *ptr)
+{
+	adrsList *new;
+
+	new = malloc(sizeof(adrsList));
+	if (new == NULL)
+	{
+		return (NULL);
+	}
+	(*new).ptr = ptr;
+	(*new).next = *head;
+	*head = new;
+	return (*head);
+}
+
+/**
+* free_aList - frees newly craeted address list
+* @h: head of the list
+**/
+size_t free_aList(void* h)
+{
+	adrsList *frN;
+	size_t counter;
+
+	counter = 0;
+	if (h == NULL)
+		return (counter);
+	while (h)
+	{
+		frN = h;
+		h = h->next;
+		free(frN);
+		counter++;
+	}
+	h = NULL;
+	return (counter);
+}
+
+/**
+* free_listint_safe - function that frees linked list
+* @h: pointer to pointer to elements of type listint_t
+* Return: the number of nodes in the list that were freed
 **/
 size_t free_listint_safe(listint_t **h)
 {
-	listint_t *temp;
-	size_t len;
+	size_t counter;
+	adrsList *newList, *newHead;
 
-	len = 0;
-	while (*h != NULL)
+	counter = 0;
+	if (*h == NULL)
+		return (counter);
+
+	newHead = newList = NULL;
+	while (*h)
 	{
-		temp = *h;
+		while (newList)
+		{
+			if ((*newList).ptr == *h)
+			{
+				counter += free_aList((void *)newHead);
+				counter += free_aList((void *)*h);
+				return (counter);
+			}
+			newList = (*newList).next;
+		}
+		newList = add_node(&newHead, (void *)*h);
+		if (newList == NULL)
+			break;
 		*h = (*(*h)).next;
-		free(temp);
-		len++;
 	}
-	*h = NULL;
-	return (len);
+	counter += free_aList((void *)newHead);
+	counter += free_aList((void *)*h);
+	return (counter);
 }
