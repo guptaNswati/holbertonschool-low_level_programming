@@ -46,7 +46,8 @@ typedef struct adrsList
 adrsList *add_node(adrsList **head, void *ptr);
 void free_adrsList(adrsList *h);
 size_t print_listint_safe(const listint_t *head);
-void free_newList(adrsList* h);
+void free_newList(adrsList *h);
+size_t free_list(listint_t **h);
 size_t free_listint_safe(listint_t **h);
 listint_t *find_listint_loop(listint_t *head);
 #endif

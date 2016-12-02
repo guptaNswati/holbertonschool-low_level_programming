@@ -5,8 +5,9 @@
 /**
 * free_newList - frees newly craeted address list
 * @h: head of the list
+* Return: nothing
 **/
-void free_newList(adrsList* h)
+void free_newList(adrsList *h)
 {
 	adrsList *frN;
 
@@ -15,12 +16,37 @@ void free_newList(adrsList* h)
 		while (h)
 		{
 			frN = h;
-			h = h->next;
+			h = (*h).next;
 			free(frN);
 		}
 		h = NULL;
 	}
 }
+/**
+* free_list - free the non-cyclic list and counts the nodes freed
+* @h: head of the list
+* Return: number of nodes freed
+**/
+size_t free_list(listint_t **h)
+{
+	listint_t *freeH;
+	size_t counter;
+
+	counter = 0;
+	if (*h == NULL)
+	 	return (counter);
+
+	while (*h)
+	{
+		freeH = *h;
+		*h = (*(*h)).next;
+		free(freeH);
+		counter++;
+	}
+	*h = NULL;
+	return (counter);
+}
+
 
 /**
 * free_listint_safe - function that frees linked list
@@ -30,13 +56,10 @@ void free_newList(adrsList* h)
 size_t free_listint_safe(listint_t **h)
 {
 	size_t counter;
-	listint_t *temp;
+	listint_t ***oldAdrs;
 	adrsList *newList, *newHead;
 
-	counter = 0;
-	if (*h == NULL)
-		return (counter);
-
+	oldAdrs = &h;
 	newHead = newList = NULL;
 	while (*h)
 	{
@@ -45,18 +68,15 @@ size_t free_listint_safe(listint_t **h)
 			if ((*newList).ptr == *h)
 			{
 				free_newList(newHead);
-				*h = NULL;
+				counter = free_list(*oldAdrs);
 				return (counter);
 			}
 			newList = (*newList).next;
 		}
 		newList = add_node(&newHead, (void *)*h);
-		temp = *h;
 		*h = (*(*h)).next;
-		free(temp);
-		counter++;
 	}
 	free_newList(newHead);
-	*h = NULL;
+	counter = free_list(*oldAdrs);
 	return (counter);
 }
