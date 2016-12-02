@@ -10,24 +10,34 @@
 **/
 adrsList *add_node(adrsList **head, void *ptr)
 {
-	adrsList *new, *frN;
+	adrsList *new;
 
 	new = malloc(sizeof(adrsList));
 	if (new == NULL)
 	{
-		while (*head)
-		{
-			frN = *head;
-			*head = (*(*head)).next;
-			free(frN);
-		}
-		*head = NULL;
+		free_adrsList(*head);
 		return (NULL);
 	}
 	(*new).ptr = ptr;
 	(*new).next = *head;
 	*head = new;
 	return (*head);
+}
+
+/**
+* free_adrsList - frees newly craeted address list
+* @h: head of the list
+**/
+void free_adrsList(adrsList *h)
+{
+	adrsList *frN;
+
+	while (h)
+	{
+		frN = h;
+		h = (*h).next;
+		free(frN);
+	}
 }
 
 /**
@@ -38,8 +48,7 @@ adrsList *add_node(adrsList **head, void *ptr)
 size_t print_listint_safe(const listint_t *head)
 {
 	size_t counter;
-	const listint_t *temp;
-	adrsList *newList, *newHead, *frNew;
+	adrsList *newList, *newHead;
 
 	if (head == NULL)
 		return (0);
@@ -53,13 +62,7 @@ size_t print_listint_safe(const listint_t *head)
 			if ((*newList).ptr == head)
 			{
 				printf("-> [%p] %d\n", (void *)head, (*head).n);
-				while (newHead)
-				{
-					frNew = newHead;
-					newHead = (*newHead).next;
-					free(frNew);
-				}
-				frNew = NULL;
+				free_adrsList(newHead);
 				exit(98);
 			}
 			newList = (*newList).next;
@@ -69,12 +72,6 @@ size_t print_listint_safe(const listint_t *head)
 		head = (*head).next;
 		counter++;
 	}
-	while (newHead)
-	{
-		frNew = newHead;
-		newHead = (*newHead).next;
-		free(frNew);
-	}
-	frNew = NULL;
+	free_adrsList(newHead);
 	return (counter);
 }
