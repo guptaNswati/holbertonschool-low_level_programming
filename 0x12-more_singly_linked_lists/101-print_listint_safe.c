@@ -21,9 +21,8 @@ size_t print_listint_safe(const listint_t *head)
 			break;
 		else if (next == temp || next->next == temp)
 		{
-			printf("coming in\n");
 			printf("-> [%p] %d\n", (void *)temp, (*temp).n);
-			return (0);
+			exit (98);
 		}
 		else
 		{
