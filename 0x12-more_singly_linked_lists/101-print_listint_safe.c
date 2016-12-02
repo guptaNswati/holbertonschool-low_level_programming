@@ -10,34 +10,37 @@
 size_t print_listint_safe(const listint_t *head)
 {
 	size_t counter;
-	const listint_t *prev, *nex;
+/*	const listint_t *temp; */
 
-	if (head == NULL)
-		return (0);
-	if ((*head).next == NULL)
-	{
-		printf("[%p] %d\n", (void *)head, (*head).n);
-		return (1);
-	}
-	if ((*head).next == head)
-	{
-		printf("-> [%p] %d\n", (void *)head, (*head).n);
-		exit (98);
-	}
 	counter = 0;
-	prev = head;
-	nex = (*head).next->next;
-	while (prev != nex || (prev && nex))
+	if (head != NULL)
 	{
-		printf("[%p] %d\n", (void *)prev, (*prev).n);
-		prev = (*prev).next;
-		nex = nex->next->next;
-		/*	if (prev == nex)
+		while (head != NULL)
 		{
-			printf("-> [%p] %d\n", (void *)prev, (*prev).n);
-			exit(98);
-			} */
-		counter++;
+			printf("[%p] %d\n", (void *)head, (*head).n);
+			counter++;
+			head = (*head).next;
+			if (head == (*head).next)
+			{
+				break;
+			}
+		}
 	}
+/*		temp = head;
+		while (1)
+		{
+			printf("[%p] %d\n", (void *)temp, (*temp).n);
+			counter++;
+			temp = (*temp).next;
+			if (temp == head)
+			{
+				printf("coming in\n");
+				printf("-> [%p] %d\n", (void *)temp, (*temp).n);
+				return (0);
+			}
+			if (temp == NULL)
+				break;
+		}
+	} */
 	return (counter);
 }
