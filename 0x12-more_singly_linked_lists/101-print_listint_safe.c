@@ -10,37 +10,28 @@
 size_t print_listint_safe(const listint_t *head)
 {
 	size_t counter;
-/*	const listint_t *temp; */
+	const listint_t *temp, *next;
 
 	counter = 0;
-	if (head != NULL)
+	temp = head;
+	next = head->next;
+	while (1)
 	{
-		while (head != NULL)
+		if (!next || !next->next)
+			break;
+		else if (next == temp || next->next == temp)
 		{
-			printf("[%p] %d\n", (void *)head, (*head).n);
-			counter++;
-			head = (*head).next;
-			if (head == (*head).next)
-			{
-				break;
-			}
+			printf("coming in\n");
+			printf("-> [%p] %d\n", (void *)temp, (*temp).n);
+			return (0);
 		}
-	}
-/*		temp = head;
-		while (1)
+		else
 		{
 			printf("[%p] %d\n", (void *)temp, (*temp).n);
 			counter++;
 			temp = (*temp).next;
-			if (temp == head)
-			{
-				printf("coming in\n");
-				printf("-> [%p] %d\n", (void *)temp, (*temp).n);
-				return (0);
-			}
-			if (temp == NULL)
-				break;
+			next = next->next->next;
 		}
-	} */
+	}
 	return (counter);
 }
