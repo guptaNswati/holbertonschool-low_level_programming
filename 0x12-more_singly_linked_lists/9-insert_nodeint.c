@@ -46,7 +46,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int index, int n)
 	if (temp == NULL && i == index)
 	{
 		(*prev).next = new;
- 		return (new);
+		return (new);
 	}
 	free(new); /* coud not find a place */
 	return (NULL);
