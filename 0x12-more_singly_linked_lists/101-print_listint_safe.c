@@ -16,7 +16,7 @@ adrsList *add_node(adrsList **head, void *ptr)
 	if (new == NULL)
 	{
 		free_adrsList(*head);
-		return (NULL);
+		exit(98);
 	}
 	(*new).ptr = ptr;
 	(*new).next = *head;
@@ -50,10 +50,10 @@ size_t print_listint_safe(const listint_t *head)
 	size_t counter;
 	adrsList *newList, *newHead;
 
-	if (head == NULL)
-		return (0);
-
 	counter = 0;
+	if (head == NULL)
+		return (counter);
+
 	newHead = newList = NULL;
 	while (head)
 	{
@@ -63,7 +63,7 @@ size_t print_listint_safe(const listint_t *head)
 			{
 				printf("-> [%p] %d\n", (void *)head, (*head).n);
 				free_adrsList(newHead);
-				exit(98);
+				return (counter);
 			}
 			newList = (*newList).next;
 		}
