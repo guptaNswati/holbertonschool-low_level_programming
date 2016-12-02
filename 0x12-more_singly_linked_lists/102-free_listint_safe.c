@@ -3,47 +3,23 @@
 #include <stdlib.h>
 
 /**
-* add_node - function that adds a new node at the start of adrsList list
-* @head: pointer to pointer to adrsList list
-* @ptr: address to be added
-* Return: the address of head, or NULL if it failed
-**/
-adrsList *add_node(adrsList **head, void *ptr)
-{
-	adrsList *new;
-
-	new = malloc(sizeof(adrsList));
-	if (new == NULL)
-	{
-		return (NULL);
-	}
-	(*new).ptr = ptr;
-	(*new).next = *head;
-	*head = new;
-	return (*head);
-}
-
-/**
-* free_aList - frees newly craeted address list
+* free_newList - frees newly craeted address list
 * @h: head of the list
 **/
-size_t free_aList(void* h)
+void free_newList(adrsList* h)
 {
 	adrsList *frN;
-	size_t counter;
 
-	counter = 0;
-	if (h == NULL)
-		return (counter);
-	while (h)
+	if (h != NULL)
 	{
-		frN = h;
-		h = h->next;
-		free(frN);
-		counter++;
+		while (h)
+		{
+			frN = h;
+			h = h->next;
+			free(frN);
+		}
+		h = NULL;
 	}
-	h = NULL;
-	return (counter);
 }
 
 /**
@@ -54,6 +30,7 @@ size_t free_aList(void* h)
 size_t free_listint_safe(listint_t **h)
 {
 	size_t counter;
+	listint_t *temp;
 	adrsList *newList, *newHead;
 
 	counter = 0;
@@ -67,18 +44,19 @@ size_t free_listint_safe(listint_t **h)
 		{
 			if ((*newList).ptr == *h)
 			{
-				counter += free_aList((void *)newHead);
-				counter += free_aList((void *)*h);
+				free_newList(newHead);
+				*h = NULL;
 				return (counter);
 			}
 			newList = (*newList).next;
 		}
 		newList = add_node(&newHead, (void *)*h);
-		if (newList == NULL)
-			break;
+		temp = *h;
 		*h = (*(*h)).next;
+		free(temp);
+		counter++;
 	}
-	counter += free_aList((void *)newHead);
-	counter += free_aList((void *)*h);
+	free_newList(newHead);
+	*h = NULL;
 	return (counter);
 }
