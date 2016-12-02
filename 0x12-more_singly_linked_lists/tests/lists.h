@@ -30,6 +30,19 @@ listint_t *insert_nodeint_at_index(listint_t **head,
 				   unsigned int index, int n);
 int delete_nodeint_at_index(listint_t **head, unsigned int index);
 listint_t *reverse_listint(listint_t **head);
+
+/**
+* struct adrsList - linkedlist of addresses
+* @ptr: address
+* @next: pointer to next adrsList node
+* Description: list for saving once met addresses
+**/
+typedef struct adrsList
+{
+        void *ptr;
+        struct adrsList *next;
+} adrsList;
+
 size_t print_listint_safe(const listint_t *head);
 size_t free_listint_safe(listint_t **h);
 listint_t *find_listint_loop(listint_t *head);
