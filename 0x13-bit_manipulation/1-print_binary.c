@@ -27,20 +27,13 @@ void print_binary(unsigned long int n)
 		_putchar('0');
 		return;
 	}
-	if (n == 1)
+	/* if n is odd, print 1 */
+	if (n & 1)
 	{
-		putchar('1');
+		_putchar('1');
 		return;
 	}
-	while (n > 0)
-	{
-		/* if n is odd, print 1 */
-		if (n & 1)
-			_putchar('1');
-		/* else n is even, print 0 */
-		else
-			_putchar('0');
-		/* divide by 2, with right shift operator */
-		n = n >> 1;
-	}
+	if (n >> 1)
+		print_binary(n >> 1);
+	_putchar((n >> 1) - 48);
 }
