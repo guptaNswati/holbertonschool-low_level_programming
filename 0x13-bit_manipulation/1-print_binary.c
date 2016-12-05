@@ -22,6 +22,8 @@ int _putchar(char c)
 **/
 void print_binary(unsigned long int n)
 {
+	unsigned long int i;
+
 	if (n == 0)
 	{
 		_putchar('0');
@@ -32,9 +34,9 @@ void print_binary(unsigned long int n)
 		_putchar('1');
 		return;
 	}
-	for (; n > 0; n = n >> 1)
+	for (i = 1 << 31; i > 0; i = i >> 1)
 	{
-		if (n & 1)
+		if (n & i)
 			_putchar('1');
 		else
 			_putchar('0');
