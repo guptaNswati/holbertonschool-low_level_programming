@@ -10,13 +10,14 @@
 **/
 int set_bit(unsigned long int *n, unsigned int index)
 {
-	int i;
+	unsigned int i;
+
 	for (i = 0; i < sizeof(n); i++)
 	{
 		if (i == index)
 		{
 			/* whatever 2^index is, make it 1 */
-			n[i] |= 1 << index;
+			*n |= 1 << index;
 			return (1);
 		}
 	}
