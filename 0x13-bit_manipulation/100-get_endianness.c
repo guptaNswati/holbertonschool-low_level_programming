@@ -10,7 +10,7 @@ int get_endianness(void)
 	int num;
 	char *adrs;
 
-	num = 0x01234567;
+	num = 2;
 	adrs = (char *)&num;
 	if (*adrs)
 		return (1);
