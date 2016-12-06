@@ -12,5 +12,6 @@ int get_bit(unsigned long int n, unsigned int index)
 {
 	if (index > 31)
 		return (-1);
-	return ((n | (1 << index)) & 1);
+/* shift n to index and check if its 0 or 1, if 1 & 1, return 1, else 0 */
+	return ((n >> index) & 1);
 }
