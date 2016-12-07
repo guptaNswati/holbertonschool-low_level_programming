@@ -14,19 +14,14 @@
 int create_file(const char *filename, char *text_content)
 {
 	ssize_t count;
-	int crt, opn, i;
+	int crt, i;
 
 	if (filename == NULL)
 		return (-1);
-/* first lets create in two steps */
-	crt = creat(filename, S_IRUSR | S_IWUSR);
+/* create using open in 1 step */
+	crt = open(filename, O_WRONLY | O_CREAT, 00600);
 	if (crt == -1)
 		return (-1);
-	opn = open(filename, O_WRONLY);
-	if(opn == - 1)
-		return (-1);
-	if (text_content == NULL)
-		return (1);
 
 	/* calculate length of text_content */
 	while (text_content[i] != '\0')
@@ -35,7 +30,7 @@ int create_file(const char *filename, char *text_content)
 	count = write(crt, text_content, i);
 	if (count == -1)
 		return (-1);
-	close(opn);
+
 	close(crt);
 	return (1);
 }
