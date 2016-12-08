@@ -243,7 +243,7 @@ int elf_HeaderRead(const char *filename)
 		print_dta((unsigned int)header->e_ident[EI_DATA]);
 		print_vrsn(header->e_version);
 		print_os((unsigned int)header->e_ident[EI_OSABI]);
-		printf("ABI Version:          \n");
+		printf("ABI Version:     %u\n", header->e_ident[EI_ABIVERSION]);
 		print_typ(header->e_type);
 		printf("Entry point address:          0x%x\n", header->e_entry);
 		fclose(file);
