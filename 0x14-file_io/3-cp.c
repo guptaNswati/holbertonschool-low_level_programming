@@ -16,16 +16,10 @@ void copy_file(const char *file1, char *file2)
 {
 	ssize_t count, count_out;
 	int f1, f2, fcls1, fcls2;
-	char bufr[1024];
+	char bufr[1204];
 
 	f1 = open(file1, O_RDONLY);
 	if (f1 == -1)
-	{
-		dprintf(2, "Error: Can't read from file %s\n", file1);
-		exit(98);
-	}
-	count = read(f1, bufr, 1024);
-	if (count == -1)
 	{
 		dprintf(2, "Error: Can't read from file %s\n", file1);
 		exit(98);
@@ -36,11 +30,21 @@ void copy_file(const char *file1, char *file2)
 		dprintf(2, "Error: Can't write to %s\n", file2);
 		exit(99);
 	}
-	count_out = write(f2, bufr, count);
-	if (count_out == -1)
+	count = 0;
+	while (count != 0)
 	{
-		dprintf(2, "Error: Can't write to %s\n", file2);
-		exit(99);
+		count = read(f1, bufr, 1204);
+		if (count == -1)
+		{
+			dprintf(2, "Error: Can't read from file %s\n", file1);
+			exit(98);
+		}
+		count_out = write(f2, bufr, count);
+		if (count_out == -1)
+		{
+			dprintf(2, "Error: Can't write to %s\n", file2);
+			exit(99);
+		}
 	}
 	fcls1 = close(f1);
 	if (fcls1 == -1)

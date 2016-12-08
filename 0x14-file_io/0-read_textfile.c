@@ -15,28 +15,44 @@ ssize_t read_textfile(const char *filename, size_t letters)
 {
 	ssize_t count, count_out;
 	int opn, cls;
-	char bufr[5000];
+	char *bufr;
 
 	if (filename == NULL)
 		return (0);
+
+	bufr = malloc(sizeof(char) * letters);
+	if (bufr == NULL)
+		return (0);
+
 	opn = open(filename, O_RDONLY);
 	if (opn == -1)
+	{
+		freee(bufr);
 		return (0);
+	}
 
 	/* for the number of bytes read */
-	count = read(opn, &bufr, letters);
-
+	count = read(opn, bufr, letters);
 	/* zero indicates end of file and -1 is returned when an error occurs */
 	if (count == -1)
+	{
+		free(bufr);
 		return (0);
+	}
 
-	count_out = write(1, &bufr, count);
+	count_out = write(1, bufr, count);
 	if (count_out == -1)
+	{
+		free(bufr);
 		return (0);
+	}
 
 	cls = close(opn);
 	if (cls == -1)
+	{
+		free(bufr);
 		return (0);
-
+	}
+	free(bufr);
 	return (count_out);
 }
