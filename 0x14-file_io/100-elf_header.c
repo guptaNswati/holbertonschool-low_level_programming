@@ -1,3 +1,4 @@
+#include "holberton.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdint.h>
@@ -10,33 +11,39 @@
 **/
 int elf_HeaderRead(const char *filename)
 {
-	ElfHdr header;
-	FILE *file, *outpt;
-	char outFile[1024];
+	ElfHdr *header;
+	FILE *file;
+	size_t result, i, h_size;
 
 	file = fopen(filename, "rb");
-	if (file)
+	if (file == NULL)
+		return (-1);
+
+	h_size = sizeof(ElfHdr) * 1024;
+	header = malloc(h_size);
+	if (header == NULL)
+		return (-1);
+	result = fread(header, 1, h_size, file);
+
+	/* check if file is an elf file or not */
+	if (header->e_ident[0] == 0x7f &&
+	    header->e_ident[1] == 'E' &&
+	    header->e_ident[2] == 'L' &&
+	    header->e_ident[3] == 'F')
 	{
-		fread(&header, 1, sizeof(header), file);
-		/* check if file is an elf file or not */
-		if (header.e_ident[0] == 0x7f &&
-		    header.e_ident[1] == 'E' &&
-		    header.e_ident[2] == 'L' &&
-		    header.e_ident[3] == 'F')
+		/* write contents to output file */
+		printf("%s\n", header->e_ident);
+/*		for (i = 0; i < 16; i++)
 		{
-			/* write contents to output file */
-			outpt = fopen(outFile, "wb");
-			if (outpt)
-			{
-				fwrite(&header, 1, sizeof(header), outpt);
-				fclose(outpt);
-				fclose(file);
-				return (1);
-			}
-			return (-1);
-		}
+			printf("%c\n", header->e_ident[i]);
+			} */
+		printf("%u\n", header->e_type);
+		printf("%ud\n", header->e_version);
+		printf("%ud\n", header->e_entry);
 	}
-	return (-1);
+	fclose(file);
+	free(header);
+	return (0);
 }
 
 /**
