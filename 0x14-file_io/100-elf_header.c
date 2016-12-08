@@ -3,6 +3,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+/**
+* struct ElfHdr - struct for defining header items
+* @e_ident: ELF Identification for machine-independent data to decode and
+* interpret the file’s contents
+* @e_type: identifies the object file type
+* @e_version: identifies the object file version
+* @e_entry: for the virtual address to which the system first transfers control
+**/
 typedef struct ElfHdr{
         unsigned char  e_ident[16];
         unsigned short e_type;
@@ -10,6 +18,11 @@ typedef struct ElfHdr{
         unsigned int e_entry;
 } ElfHdr;
 
+/**
+* elf_HeaderRead - helper function to open, read and write the elf
+* @filename: elf file to be read
+* Return: 0 on success, -1 on failure
+**/
 int elf_HeaderRead(const char *filename)
 {
 	ElfHdr header;
@@ -41,6 +54,13 @@ int elf_HeaderRead(const char *filename)
 	return (-1);
 }
 
+/**
+* main - displays the information contained in the ELF header
+* refer http://www.skyfree.org/linux/references/ELF_Format.pdf
+* @argc: number of args
+* @argv: pointer to arg
+* Return: 0 on success or exit with 98 on failure
+**/
 int main(int argc, char **argv)
 {
 	int res;
