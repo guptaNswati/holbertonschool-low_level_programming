@@ -13,25 +13,30 @@
 **/
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t count, i;
-	int opn;
-	char bufr[5000], *bufPointr;
+	ssize_t count, count_out;
+	int opn, cls;
+	char bufr[5000];
 
-	opn = open(filename, O_RDWR);
+	if (filename == NULL)
+		return (0);
+	opn = open(filename, O_RDONLY);
 	if (opn == -1)
 		return (0);
 
-	bufPointr = bufr;
 	/* for the number of bytes read */
-	count = read(opn, bufPointr, letters);
+	count = read(opn, &bufr, letters);
 
 	/* zero indicates end of file and -1 is returned when an error occurs */
 	if (count == -1)
 		return (0);
 
-	for (i = 0; i < count; i++)
-		_putchar(bufr[i]);
+	count_out = write(1, &bufr, count);
+	if (count_out == -1)
+		return (0);
 
-	close(opn);
-	return (i);
+	cls = close(opn);
+	if (cls == -1)
+		return (0);
+
+	return (count_out);
 }

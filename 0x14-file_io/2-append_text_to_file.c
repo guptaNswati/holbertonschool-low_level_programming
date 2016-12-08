@@ -14,7 +14,7 @@
 int append_text_to_file(const char *filename, char *text_content)
 {
 	ssize_t count;
-	int apnd, i;
+	int apnd, i, cls;
 
 	if (filename == NULL)
 		return (-1);
@@ -31,6 +31,8 @@ int append_text_to_file(const char *filename, char *text_content)
 	if (count == -1)
 		return (-1);
 
-	close(apnd);
+	cls = close(apnd);
+	if (cls == -1)
+		return (-1);
 	return (1);
 }
