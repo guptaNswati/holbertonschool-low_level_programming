@@ -26,12 +26,9 @@ void copy_file(const char *file1, char *file2)
 	}
 	f2 = open(file2, O_WRONLY | O_CREAT, 00664);
 	if (f2 == -1)
-	{
-		dprintf(2, "Error: Can't write to %s\n", file2);
-		exit(99);
-	}
-	count = 0;
-	while (count != 0)
+		dprintf(2, "Error: Can't write to %s\n", file2), exit(99);
+	count = 1;
+	while (count > 0)
 	{
 		count = read(f1, bufr, 1204);
 		if (count == -1)
@@ -48,16 +45,10 @@ void copy_file(const char *file1, char *file2)
 	}
 	fcls1 = close(f1);
 	if (fcls1 == -1)
-	{
-		dprintf(2, "Error: Can't close fd %d\n", fcls1);
-		exit(100);
-	}
+		dprintf(2, "Error: Can't close fd %d\n", fcls1), exit(100);
 	fcls2 = close(f2);
 	if (fcls2 == -1)
-	{
-		dprintf(2, "Error: Can't close fd %d\n", fcls2);
-		exit(100);
-	}
+		dprintf(2, "Error: Can't close fd %d\n", fcls2), exit(100);
 }
 
 /**
