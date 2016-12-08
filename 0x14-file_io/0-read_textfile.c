@@ -4,7 +4,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
+#include <stdio.h>
 /**
 * read_textfile - reads a text file and print it to the POSIX standard output
 * @filename: file to be read
@@ -27,7 +27,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	opn = open(filename, O_RDONLY);
 	if (opn == -1)
 	{
-		freee(bufr);
+		free(bufr);
 		return (0);
 	}
 
@@ -39,20 +39,16 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		free(bufr);
 		return (0);
 	}
-
-	count_out = write(1, bufr, count);
+/* <unistd.h> symbolic constant of STDOUT_FILENO has fd of 1*/
+	count_out = write(STDOUT_FILENO, bufr, count);
 	if (count_out == -1)
 	{
 		free(bufr);
 		return (0);
 	}
-
+	free(bufr);
 	cls = close(opn);
 	if (cls == -1)
-	{
-		free(bufr);
 		return (0);
-	}
-	free(bufr);
 	return (count_out);
 }

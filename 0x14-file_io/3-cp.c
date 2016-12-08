@@ -27,6 +27,7 @@ void copy_file(const char *file1, char *file2)
 	f2 = open(file2, O_WRONLY | O_CREAT, 00664);
 	if (f2 == -1)
 		dprintf(2, "Error: Can't write to %s\n", file2), exit(99);
+
 	count = 1;
 	while (count > 0)
 	{
