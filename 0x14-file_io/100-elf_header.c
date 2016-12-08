@@ -12,7 +12,7 @@
 **/
 void print_typ(unsigned int value)
 {
-	printf("Type:          ");
+	printf("Type:                                           ");
 	if (value == 0)
 	{
 		printf("NONE (No file type)\n");
@@ -56,7 +56,7 @@ void print_typ(unsigned int value)
  **/
 void print_os(unsigned int value)
 {
-	printf("OS/ABI:          ");
+	printf("OS/ABI:                                         ");
 	if (value == 0)
 	{
 		printf("System V\n");
@@ -141,7 +141,7 @@ void print_os(unsigned int value)
 **/
 void print_clas(unsigned int value)
 {
-	printf("Class:          ");
+	printf("Class:                                          ");
 	if (value == 0)
 	{
 		printf("Invalid\n");
@@ -165,7 +165,7 @@ void print_clas(unsigned int value)
 **/
 void print_dta(unsigned int value)
 {
-	printf("Data:          ");
+	printf("Data:                                           ");
 	if (value == 0)
 	{
                 printf("Invalid data encoding\n");
@@ -189,15 +189,15 @@ void print_dta(unsigned int value)
 **/
 void print_vrsn(unsigned int value)
 {
-	printf("Version:          ");
+	printf("Version:                                        ");
 	if (value == 0)
 	{
-		printf("%u(Invalid)\n", value);
+		printf("%u (Invalid)\n", value);
 		return;
 	}
 	if (value == 1)
 	{
-                printf("%u(Current)\n", value);
+                printf("%u (Current)\n", value);
                 return;
         }
 }
@@ -243,9 +243,11 @@ int elf_HeaderRead(const char *filename)
 		print_dta((unsigned int)header->e_ident[EI_DATA]);
 		print_vrsn(header->e_version);
 		print_os((unsigned int)header->e_ident[EI_OSABI]);
-		printf("ABI Version:     %u\n", header->e_ident[EI_ABIVERSION]);
+		printf("ABI Version:                                    %u\n",
+		       header->e_ident[EI_ABIVERSION]);
 		print_typ(header->e_type);
-		printf("Entry point address:          0x%x\n", header->e_entry);
+		printf("Entry point address:                            0x%x\n",
+		       header->e_entry);
 		fclose(file);
 		free(header);
 		return (0);
