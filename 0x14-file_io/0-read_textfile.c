@@ -41,7 +41,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	}
 /* <unistd.h> symbolic constant of STDOUT_FILENO has fd of 1*/
 	count_out = write(STDOUT_FILENO, bufr, count);
-	if (count_out == -1)
+	if (count_out == -1 || count_out != count)
 	{
 		free(bufr);
 		return (0);

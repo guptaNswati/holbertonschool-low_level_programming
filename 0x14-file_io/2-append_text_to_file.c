@@ -33,7 +33,7 @@ int append_text_to_file(const char *filename, char *text_content)
 		i++;
 
 	count = write(apnd, text_content, i);
-	if (count == -1)
+	if (count == -1 || count != i)
 		return (-1);
 
 	cls = close(apnd);
