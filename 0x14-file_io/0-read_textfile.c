@@ -34,7 +34,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	/* for the number of bytes read */
 	count = read(opn, bufr, letters);
 	/* zero indicates end of file and -1 is returned when an error occurs */
-	if (count == -1)
+	if (count == -1 || count != letters)
 	{
 		free(bufr);
 		return (0);
