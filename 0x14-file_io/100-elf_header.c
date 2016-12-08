@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <elf.h>
 
 /**
 * elf_HeaderRead - helper function to open, read and write the elf
@@ -32,14 +33,20 @@ int elf_HeaderRead(const char *filename)
 	    header->e_ident[3] == 'F')
 	{
 		/* write contents to output file */
-		printf("%s\n", header->e_ident);
-/*		for (i = 0; i < 16; i++)
-		{
-			printf("%c\n", header->e_ident[i]);
-			} */
-		printf("%u\n", header->e_type);
-		printf("%ud\n", header->e_version);
-		printf("%ud\n", header->e_entry);
+		printf("ELF Header:\n");
+		printf("Magic:   %x %x %x %x", header->e_ident[0],
+		       header->e_ident[1], header->e_ident[2],
+		       header->e_ident[3]);
+		for (i = 4; i < 16; i++)
+			printf("0%x ", header->e_ident[i]);
+		printf("\n");
+		printf("Class: %d\n", (int)header->e_ident[EI_CLASS]);
+		printf("Data: %d\n", (int)header->e_ident[EI_DATA]);
+		printf("Version: %d\n", (int)header->e_ident[EI_VERSION]);
+		printf("OS/ABI: \n");
+		printf("ABI Version: %ud\n", header->e_version);
+		printf("Type: %u\n", header->e_type);
+		printf("Entry point address: 0x%u\n", header->e_entry);
 	}
 	fclose(file);
 	free(header);
