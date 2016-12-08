@@ -4,21 +4,6 @@
 #include <stdlib.h>
 
 /**
-* struct ElfHdr - struct for defining header items
-* @e_ident: ELF Identification for machine-independent data to decode and
-* interpret the file’s contents
-* @e_type: identifies the object file type
-* @e_version: identifies the object file version
-* @e_entry: for the virtual address to which the system first transfers control
-**/
-typedef struct ElfHdr{
-        unsigned char  e_ident[16];
-        unsigned short e_type;
-        unsigned int e_version;
-        unsigned int e_entry;
-} ElfHdr;
-
-/**
 * elf_HeaderRead - helper function to open, read and write the elf
 * @filename: elf file to be read
 * Return: 0 on success, -1 on failure
@@ -74,7 +59,7 @@ int main(int argc, char **argv)
 	if (res == -1)
 	{
 		fprintf(stderr, "Unable to read elf\n");
-                exit(98);
+		exit(98);
 	}
 	return (0);
 }

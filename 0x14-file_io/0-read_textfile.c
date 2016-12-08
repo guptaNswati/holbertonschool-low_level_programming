@@ -18,7 +18,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	char bufr[5000], *bufPointr;
 
 	opn = open(filename, O_RDWR);
-	if (opn < 0)
+	if (opn == -1)
 		return (0);
 
 	bufPointr = bufr;
@@ -26,7 +26,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	count = read(opn, bufPointr, letters);
 
 	/* zero indicates end of file and -1 is returned when an error occurs */
-	if (count < 0)
+	if (count == -1)
 		return (0);
 
 	for (i = 0; i < count; i++)
