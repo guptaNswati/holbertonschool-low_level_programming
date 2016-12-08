@@ -6,6 +6,104 @@
 #include <elf.h>
 
 /**
+* print_type - prints elf header type information
+* @value: unsigned int for specifying the details
+* Return: nothing
+**/
+void print_typ(unsigned int value)
+{
+	printf("Type:                           ");
+	if (value == 0)
+	{
+		printf("NONE (No file type)\n");
+		return;
+	}
+	if (value == 1)
+	{
+                printf("REL (Relocatable file)\n");
+                return;
+        }
+	if (value == 2)
+	{
+                printf("EXEC (Executable file)\n");
+                return;
+        }
+	if (value == 3)
+	{
+                printf("DYN (Shared object file)\n");
+                return;
+        }
+	if (value == 4)
+	{
+                printf("CORE (Core file)\n");
+                return;
+        }
+	if (value == 65280)
+	{
+                printf("LOPROC (Processor-specific)\n");
+                return;
+        }
+	if (value == 65535)
+	{
+                printf("HIPROC (Processor-specific)\n");
+                return;
+        }
+}
+
+void print_clas(unsigned int value)
+{
+	printf("Class:                            ");
+	if (value == 0)
+	{
+		printf("Invalid\n");
+                return;
+        }
+        if (value == 1)
+        {
+                printf("ELF32\n");
+                return;
+        }
+	if (value == 2)
+	{
+		printf("ELF64\n");
+		return;
+	}
+}
+void print_dta(unsigned int value)
+{
+	printf("Data:                             ");
+	if (value == 0)
+	{
+                printf("Invalid data encoding\n");
+                return;
+        }
+	if (value == 1)
+	{
+		printf("2's complement, little endian\n");
+		return;
+	}
+	if (value == 2)
+	{
+                printf("2's complement, big endian\n");
+                return;
+        }
+}
+void print_vrsn(unsigned int value)
+{
+	printf("Version:                          ");
+	if (value == 0)
+	{
+		printf("%u(Invalid)\n", value);
+		return;
+	}
+	if (value == 1)
+	{
+                printf("%u(Current)\n", value);
+                return;
+        }
+}
+
+/**
 * elf_HeaderRead - helper function to open, read and write the elf
 * @filename: elf file to be read
 * Return: 0 on success, -1 on failure
@@ -15,6 +113,7 @@ int elf_HeaderRead(const char *filename)
 	ElfHdr *header;
 	FILE *file;
 	size_t result, i, h_size;
+	int typ;
 
 	file = fopen(filename, "rb");
 	if (file == NULL)
@@ -40,13 +139,13 @@ int elf_HeaderRead(const char *filename)
 		for (i = 4; i < 16; i++)
 			printf("0%x ", header->e_ident[i]);
 		printf("\n");
-		printf("Class: %d\n", (int)header->e_ident[EI_CLASS]);
-		printf("Data: %d\n", (int)header->e_ident[EI_DATA]);
-		printf("Version: %d\n", (int)header->e_ident[EI_VERSION]);
+		print_clas((unsigned int)header->e_ident[EI_CLASS]);
+		print_dta((unsigned int)header->e_ident[EI_DATA]);
+		print_vrsn(header->e_version);
+		printf("ABI Version: \n");
 		printf("OS/ABI: \n");
-		printf("ABI Version: %ud\n", header->e_version);
-		printf("Type: %u\n", header->e_type);
-		printf("Entry point address: 0x%u\n", header->e_entry);
+		print_typ(header->e_type);
+		printf("Entry point address:          0x%u\n", header->e_entry);
 	}
 	fclose(file);
 	free(header);
