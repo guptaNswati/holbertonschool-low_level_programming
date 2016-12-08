@@ -12,7 +12,7 @@
 **/
 void print_typ(unsigned int value)
 {
-	printf("Type:                           ");
+	printf("Type:          ");
 	if (value == 0)
 	{
 		printf("NONE (No file type)\n");
@@ -49,10 +49,99 @@ void print_typ(unsigned int value)
                 return;
         }
 }
-
+/**
+ * print_os - prints elf header OS/ABI information
+ * @value: unsigned int for specifying the details
+ * Return: nothing
+ **/
+void print_os(unsigned int value)
+{
+	printf("OS/ABI:          ");
+	if (value == 0)
+	{
+		printf("System V\n");
+		return;
+	}
+	if (value == 1)
+	{
+                printf("HP-UX\n");
+                return;
+        }
+	if (value == 2)
+	{
+                printf("NetBSD\n");
+                return;
+        }
+	if (value == 3)
+	{
+                printf("Linux\n");
+                return;
+        }
+	if (value == 6)
+	{
+                printf("Solaris\n");
+                return;
+        }
+	if (value == 7)
+	{
+                printf("AIX\n");
+                return;
+        }
+	if (value == 8)
+	{
+                printf("IRIX\n");
+                return;
+        }
+	if (value == 9)
+        {
+                printf("FreeBSD\n");
+                return;
+        }
+	if (value == 12)
+        {
+                printf("OpenBSD\n");
+                return;
+        }
+	if (value == 13)
+        {
+                printf("OpenVMS\n");
+                return;
+        }
+	if (value == 14)
+        {
+                printf("NonStop Kernel\n");
+                return;
+        }
+	if (value == 15)
+        {
+                printf("AROS\n");
+                return;
+        }
+	if (value == 16)
+        {
+                printf("Fenix OS\n");
+                return;
+        }
+	if (value == 17)
+        {
+                printf("Cloud ABI\n");
+                return;
+        }
+	if (value == 83)
+        {
+                printf("Sortix\n");
+                return;
+        }
+	printf("<unknown: %u>\n", value);
+}
+/**
+* print_clas - prints elf header class information
+* @value: unsigned int for specifying the details
+* Return: nothing
+**/
 void print_clas(unsigned int value)
 {
-	printf("Class:                            ");
+	printf("Class:          ");
 	if (value == 0)
 	{
 		printf("Invalid\n");
@@ -69,9 +158,14 @@ void print_clas(unsigned int value)
 		return;
 	}
 }
+/**
+* print_dta - prints elf header data information
+* @value: unsigned int for specifying the details
+* Return: nothing
+**/
 void print_dta(unsigned int value)
 {
-	printf("Data:                             ");
+	printf("Data:          ");
 	if (value == 0)
 	{
                 printf("Invalid data encoding\n");
@@ -88,9 +182,14 @@ void print_dta(unsigned int value)
                 return;
         }
 }
+/**
+* print_vrsn - prints elf header version information
+* @value: unsigned int for specifying the details
+* Return: nothing
+**/
 void print_vrsn(unsigned int value)
 {
-	printf("Version:                          ");
+	printf("Version:          ");
 	if (value == 0)
 	{
 		printf("%u(Invalid)\n", value);
@@ -112,8 +211,8 @@ int elf_HeaderRead(const char *filename)
 {
 	ElfHdr *header;
 	FILE *file;
-	size_t result, i, h_size;
-	int typ;
+	size_t i, h_size;
+	ssize_t result;
 
 	file = fopen(filename, "rb");
 	if (file == NULL)
@@ -124,7 +223,8 @@ int elf_HeaderRead(const char *filename)
 	if (header == NULL)
 		return (-1);
 	result = fread(header, 1, h_size, file);
-
+	if (result == -1)
+		return (-1);
 	/* check if file is an elf file or not */
 	if (header->e_ident[0] == 0x7f &&
 	    header->e_ident[1] == 'E' &&
@@ -133,7 +233,7 @@ int elf_HeaderRead(const char *filename)
 	{
 		/* write contents to output file */
 		printf("ELF Header:\n");
-		printf("Magic:   %x %x %x %x", header->e_ident[0],
+		printf("Magic:     %x %x %x %x", header->e_ident[0],
 		       header->e_ident[1], header->e_ident[2],
 		       header->e_ident[3]);
 		for (i = 4; i < 16; i++)
@@ -142,14 +242,15 @@ int elf_HeaderRead(const char *filename)
 		print_clas((unsigned int)header->e_ident[EI_CLASS]);
 		print_dta((unsigned int)header->e_ident[EI_DATA]);
 		print_vrsn(header->e_version);
-		printf("ABI Version: \n");
-		printf("OS/ABI: \n");
+		print_os((unsigned int)header->e_ident[EI_OSABI]);
+		printf("ABI Version:          \n");
 		print_typ(header->e_type);
-		printf("Entry point address:          0x%u\n", header->e_entry);
+		printf("Entry point address:          0x%x\n", header->e_entry);
+		fclose(file);
+		free(header);
+		return (0);
 	}
-	fclose(file);
-	free(header);
-	return (0);
+	return (-1);
 }
 
 /**

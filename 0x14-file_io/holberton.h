@@ -24,5 +24,10 @@ ssize_t read_textfile(const char *filename, size_t letters);
 int create_file(const char *filename, char *text_content);
 int append_text_to_file(const char *filename, char *text_content);
 void copy_file(const char *file1, char *file2);
+void print_os(unsigned int value);
+void print_typ(unsigned int value);
+void print_clas(unsigned int value);
+void print_dta(unsigned int value);
+void print_vrsn(unsigned int value);
 int elf_HeaderRead(const char *filename);
 #endif
