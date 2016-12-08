@@ -12,6 +12,8 @@ int main(void)
 
 	n = flip_bits(1024, 1);
 	printf("%u\n", n);
+	n = flip_bits(1024, 2);
+        printf("%u\n", n);
 	n = flip_bits(402, 98);
 	printf("%u\n", n);
 	n = flip_bits(1024, 3);

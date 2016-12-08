@@ -1,4 +1,5 @@
 #include "holberton.h"
+#include <stdio.h>
 
 /**
 *  _pow_recursion - calculates value of x raised to the power of y
@@ -16,5 +17,6 @@ int _pow_recursion(int x, int y)
 	{
 		return (1);
 	}
+	printf("%d\n", x * x);
 	return (x * _pow_recursion(x, y - 1));
 }

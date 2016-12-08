@@ -16,6 +16,7 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 	count = 0;
 	for (num = n ^ m; num != 0; num = num >> 1)
 	{
+		printf("num is %lu\n", num);
 		count += (num & 1);
 	}
 	return (count);

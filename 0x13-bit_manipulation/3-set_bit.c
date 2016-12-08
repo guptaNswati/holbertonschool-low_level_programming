@@ -10,9 +10,9 @@
 **/
 int set_bit(unsigned long int *n, unsigned int index)
 {
-	unsigned int i;
+	unsigned int i, j;
 
-	for (i = 0; i < (sizeof(n) * sizeof(int)); i++)
+	for (i = 0; i < (sizeof(unsigned long int) * 8); i++)
 	{
 		if (i == index)
 		{
