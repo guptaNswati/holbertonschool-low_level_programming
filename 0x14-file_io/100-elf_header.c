@@ -8,10 +8,25 @@
 **/
 void read_elf_header(int32_t fd, Elf32_Ehdr *elf_header)
 {
-	assert(elf_header != NULL);
-	assert(lseek(fd, (off_t)0, SEEK_SET) == (off_t)0);
-	assert(read(fd, (void *)elf_header,
-		    sizeof(Elf32_Ehdr)) == sizeof(Elf32_Ehdr));
+	if (elf_header == NULL)
+	{
+		dprintf(STDERR_FILENO, "header null Unable to read elf\n");
+		exit(98);
+	}
+	/*SEEK_SET: The file offset is set to offset bytes. */
+	if (lseek(fd, (off_t)0, SEEK_SET) != (off_t)0)
+	{
+		/* if could not reposition the file offset. */
+		dprintf(STDERR_FILENO, "offset Unable to read elf\n");
+		exit(98);
+	}
+	/* if read is not what is needed */
+	if (read(fd, (void *)elf_header,
+		 sizeof(Elf32_Ehdr)) != sizeof(Elf32_Ehdr))
+	{
+		dprintf(STDERR_FILENO, "size of Unable to read elf\n");
+		exit(98);
+	}
 }
 
 /**
@@ -45,18 +60,18 @@ void print_typ(Elf32_Ehdr eh)
 		break;
 
 	case ET_REL:
-		printf("REL (Relocatable)\n");
+		printf("REL (Relocatable file)\n");
 		break;
 
 	case ET_EXEC:
-		printf("EXEC (Executable)\n");
+		printf("EXEC (Executable file)\n");
 		break;
 
 	case ET_DYN:
 		printf("DYN (Shared Object file)\n");
 		break;
 	default:
-		printf("Unknown (0x%x)\n", eh.e_type);
+		printf("<unknown: %x>\n", eh.e_type);
 	}
 }
 /**
@@ -126,7 +141,7 @@ void print_os(Elf32_Ehdr eh)
 		break;
 
 	default:
-		printf("Unknown (0x%x)\n", eh.e_ident[EI_OSABI]);
+		printf("<unknown: %x>\n", eh.e_ident[EI_OSABI]);
 	}
 }
 /**
@@ -240,8 +255,7 @@ int32_t main(int32_t argc, char *argv[])
 	fd = open(argv[1], O_RDONLY | O_SYNC);
 	if (fd == -1)
 	{
-		dprintf(STDERR_FILENO, "Error %d Unable to open %s\n",
-			fd, argv[1]);
+		dprintf(STDERR_FILENO, "Error: Unable to open %s\n", argv[1]);
 		exit(98);
 	}
 
