@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
+
 /**
 * read_textfile - reads a text file and print it to the POSIX standard output
 * @filename: file to be read
@@ -34,7 +35,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	/* for the number of bytes read */
 	count = read(opn, bufr, letters);
 	/* zero indicates end of file and -1 is returned when an error occurs */
-	if (count == -1 || count != letters)
+	if (count == -1)
 	{
 		free(bufr);
 		return (0);
