@@ -70,8 +70,13 @@ void print_typ(Elf32_Ehdr eh)
 	case ET_DYN:
 		printf("DYN (Shared Object file)\n");
 		break;
+
+	case ET_CORE:
+		printf("CORE (Core file)");
+		break;
+
 	default:
-		printf("<unknown: %x>\n", eh.e_type);
+		printf("<unknown: %d>\n", eh.e_type);
 	}
 }
 /**
@@ -87,61 +92,50 @@ void print_os(Elf32_Ehdr eh)
 	case ELFOSABI_SYSV:
 		printf("UNIX - System V\n");
 		break;
-
 	case ELFOSABI_HPUX:
-		printf("HP-UX\n");
+		printf("UNIX - HP-UX\n");
 		break;
-
 	case ELFOSABI_NETBSD:
-		printf("NetBSD\n");
+		printf("UNIX - NetBSD\n");
 		break;
-
 	case ELFOSABI_LINUX:
-		printf("Linux\n");
+		printf("UNIX - GNU");
 		break;
-
 	case ELFOSABI_SOLARIS:
-		printf("Sun Solaris\n");
+		printf("UNIX - Solaris\n");
 		break;
-
 	case ELFOSABI_AIX:
-		printf("IBM AIX\n");
+		printf("UNIX - AIX\n");
 		break;
-
 	case ELFOSABI_IRIX:
-		printf("SGI Irix\n");
+		printf("UNIX - Irix\n");
 		break;
-
 	case ELFOSABI_FREEBSD:
-		printf("FreeBSD\n");
+		printf("UNIX - FreeBSD\n");
 		break;
-
 	case ELFOSABI_TRU64:
-		printf("Compaq TRU64 UNIX\n");
+		printf("UNIX - TRU64\n");
 		break;
-
 	case ELFOSABI_MODESTO:
 		printf("Novell Modesto\n");
 		break;
-
 	case ELFOSABI_OPENBSD:
-		printf("OpenBSD\n");
+		printf("UNIX - OpenBSD\n");
 		break;
-
-	case ELFOSABI_ARM_AEABI:
-		printf("ARM EABI\n");
+	case 13:
+		printf("VMS - OpenVMS\n");
 		break;
-
-	case ELFOSABI_ARM:
-		printf("ARM\n");
+	case 14:
+		printf("HP - Non-Stop Kernel\n");
 		break;
-
-	case ELFOSABI_STANDALONE:
-		printf("Standalone (embedded) app\n");
+	case 15:
+		printf("AROS\n");
 		break;
-
+	case 16:
+		printf("FenixOS");
+		break;
 	default:
-		printf("<unknown: %x>\n", eh.e_ident[EI_OSABI]);
+		printf("<unknown: %d>\n", eh.e_ident[EI_OSABI]);
 	}
 }
 /**
@@ -163,7 +157,7 @@ void print_clas(Elf32_Ehdr eh)
 		break;
 
 	default:
-		printf("INVALID CLASS\n");
+		printf("Invalid class\n");
 	}
 
 }
@@ -186,7 +180,7 @@ void print_dta(Elf32_Ehdr eh)
 		break;
 
 	default:
-		printf("INVALID Format\n");
+		printf("Invalid ELF data\n");
 	}
 }
 /**
@@ -200,10 +194,11 @@ void print_vrsn(Elf32_Ehdr eh)
 	switch (eh.e_version)
 	{
 	case EV_NONE:
-		printf("%u (Invalid)\n", 0);
+		printf("Invalid version\n");
 		break;
+
 	default:
-		printf("%u (Current)\n", 1);
+		printf("%d (Current)\n", 1);
 	}
 }
 
@@ -221,6 +216,7 @@ void print_elf_header(Elf32_Ehdr elf_header)
 	printf("Magic:     %x %x %x %x", elf_header.e_ident[0],
 	       elf_header.e_ident[1], elf_header.e_ident[2],
 	       elf_header.e_ident[3]);
+
 	for (i = 4; i < 16; i++)
 		printf("0%x ", elf_header.e_ident[i]);
 	printf("\n");
@@ -251,8 +247,12 @@ int32_t main(int32_t argc, char *argv[])
 		dprintf(STDERR_FILENO, "Usage: %s <ELF_FILE>\n", argv[0]);
 		exit(98);
 	}
-
-	fd = open(argv[1], O_RDONLY | O_SYNC);
+	if (argv[1] == NULL)
+	{
+		dprintf(STDERR_FILENO, "Error: Filename is empty\n");
+		exit(98);
+	}
+	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Unable to open %s\n", argv[1]);
