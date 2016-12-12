@@ -1,10 +1,4 @@
 #include "holberton.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
 #define BUFRSIZE 1204
 #define ER STDERR_FILENO
 
@@ -14,7 +8,7 @@
 * @file2: file to copy to
 * Return: nothing, or exit on failure
 **/
-void copy_file(const char *file1, char *file2)
+void copy_file(const char *file1, char *fil2)
 {
 	ssize_t count, count_out;
 	int f1, f2, fcls1, fcls2;
@@ -28,10 +22,9 @@ void copy_file(const char *file1, char *file2)
 		exit(98);
 	}
 	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
-
-	f2 = open(file2, O_WRONLY | O_CREAT, mode);
+	f2 = open(fil2, O_CREAT | O_WRONLY | O_TRUNC, mode);
 	if (f2 == -1)
-		dprintf(ER, "Error: Can't write to %s\n", file2), exit(99);
+		dprintf(ER, "Error: Can't write to %s\n", fil2), exit(99);
 	count = 1;
 	while (count > 0)
 	{
@@ -41,11 +34,14 @@ void copy_file(const char *file1, char *file2)
 			dprintf(ER, "Error: Can't read from file %s\n", file1);
 			exit(98);
 		}
-		count_out = write(f2, bufr, count);
-		if (count_out == -1 || count_out != count)
+		if (count > 0)
 		{
-			dprintf(ER, "Error: Can't write to %s\n", file2);
-			exit(99);
+			count_out = write(f2, bufr, count);
+			if (count_out == -1)
+			{
+				dprintf(ER, "Error: Can't write to %s\n", fil2);
+				exit(99);
+			}
 		}
 	}
 	fcls1 = close(f1);
@@ -68,16 +64,6 @@ int main(int argc, char **argv)
 	{
 		dprintf(ER, "Usage: cp file_from file_to\n");
 		exit(97);
-	}
-	if (argv[1] == NULL)
-	{
-		dprintf(ER, "Error: Can't read from file %s\n", file1);
-		exit(98);
-	}
-	if (argv[2] == NULL)
-	{
-		dprintf(ER, "Error: Can't read from file %s\n", file2);
-		exit(99);
 	}
 	copy_file(argv[1], argv[2]);
 	return (0);
