@@ -5,7 +5,7 @@
 /**
 * copy_file - copies the content of a file to another file
 * @file1: file to copy from
-* @file2: file to copy to
+* @fil2: file to copy to
 * Return: nothing, or exit on failure
 **/
 void copy_file(const char *file1, char *fil2)
