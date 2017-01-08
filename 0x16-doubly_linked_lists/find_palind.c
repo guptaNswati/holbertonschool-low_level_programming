@@ -1,5 +1,15 @@
 #include "lists.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
+/**
+* is_palind - creates a linkedlist of the the given numbers digits to check
+* if the number is palindrome or not
+* @product: number to be checked
+* Return: 1 on succes, else -1
+**/
 int is_palind(int product)
 {
 	dlistint_t *head, *tmp, *cur;
@@ -39,9 +49,15 @@ int is_palind(int product)
 	return (1);
 }
 
-int find_palind()
+/**
+* find_palind - finds the largest palindrome of product of two three digit
+* numbers and writes the result to a file
+* Return: nothing
+**/
+void find_palind()
 {
-	int m, n, product, tmp;
+	int m, n, product, tmp, fd, i;
+	char buf[6];
 
 	tmp = 0;
 	for (m = 999; m > 100; m--)
@@ -56,11 +72,15 @@ int find_palind()
 			}
 		}
 	}
-	return (tmp);
-}
-
-int main()
-{
-	printf("%d\n", find_palind());
-	return (0);
+	fd = open("102-result", O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+	if (fd == -1)
+		exit (98);
+	i = 0;
+	while (tmp != 0)
+	{
+		buf[i] = tmp % 10 + '0';
+		tmp /= 10;
+		i++;
+	}
+	write(fd, buf, 6);
 }
