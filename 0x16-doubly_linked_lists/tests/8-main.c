@@ -23,9 +23,9 @@ int main(void)
 	add_dnodeint_end(&head, 1024);
 	print_dlistint(head);
 	printf("----------------- (test 1\n");
-	delete_dnodeint_at_index(&head, 7);
+	printf("[res] %d\n", delete_dnodeint_at_index(&head, 7));
 	print_dlistint(head);
-	printf("-----------------\n");
+/*	printf("-----------------\n");
 	delete_dnodeint_at_index(&head, 7);
 	print_dlistint(head);
 	printf("-----------------\n");
@@ -72,6 +72,6 @@ int main(void)
 	print_dlistint(head);
 	printf("-----------------\n");
 	delete_dnodeint_at_index(&head, 0);
-	print_dlistint(head);
+	print_dlistint(head); */
 	return (0);
 }
