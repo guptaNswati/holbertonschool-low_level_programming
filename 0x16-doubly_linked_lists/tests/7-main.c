@@ -13,6 +13,8 @@ int main(void)
 	dlistint_t *head;
 
 	head = NULL;
+	insert_dnodeint_at_index(&head, 0, 4096); 
+	print_dlistint(head);
  	add_dnodeint_end(&head, 0);
 	add_dnodeint_end(&head, 1);
 	add_dnodeint_end(&head, 2);
@@ -23,7 +25,7 @@ int main(void)
 	add_dnodeint_end(&head, 1024);
 	print_dlistint(head);
 	printf("-----------------(tset case begins)\n");
-	insert_dnodeint_at_index(&head, 6, 4096);
+	printf("[res] %p\n", (void *)insert_dnodeint_at_index(&head, 91, 4096));
 	print_dlistint(head);
 	printf("-----------------(test case ends)\n");
 
