@@ -1,5 +1,9 @@
 0x04. C - pointers, arrays and strings
 
+holberton.h - conatins prototypes of all the functions.
+
+_putchar.c - writes a character to stdout.
+
 0-reset_to_98.c - function that takes a pointer to an int as parameter
 		and updates the value it points to to 98.
 
