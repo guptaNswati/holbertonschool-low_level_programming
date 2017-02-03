@@ -1,5 +1,4 @@
 #include "hash_tables.h"
-#include <math.h>
 
 /**
 * key_index - gives the index of a key using hash_djb2()
