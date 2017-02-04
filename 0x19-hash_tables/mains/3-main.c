@@ -17,5 +17,11 @@ int main(void)
 	hash_table_set(ht, "betty", "holberton");
 	hash_table_set(ht, "be", "holberton");
 	hash_table_set(ht, "bet", "holberton");
+	hash_table_set(ht, "hetairas", "collides");
+	hash_table_set(ht, "heliotropes", "collides");
+	hash_table_set(ht, "depravement", "collides");
+	hash_table_set(ht, "mentioner", "something");
+	hash_table_set(ht, "neurospora", "something");
+	hash_table_set(ht, "serafins", "something");
 	return (EXIT_SUCCESS);
 }
