@@ -74,7 +74,7 @@ shash_node_t *add_node_sorted1(shash_node_t **head, shash_node_t *tmp)
 			else if (strcmp(cur->key, tmp->key) < 0 &&
 			    strcmp(cur->next->key, tmp->key) >= 0)
 			{
-				tmp->next, tmp->snext = cur->next;
+				tmp->next = cur->next;
 				tmp->sprev = cur;
 				cur->next->sprev = tmp;
 				cur->next = tmp;
@@ -90,8 +90,8 @@ shash_node_t *add_node_sorted1(shash_node_t **head, shash_node_t *tmp)
 }
 
 /**
-* add_node_sorted2 - adds nodes in a sorted order in a linkedlist of a hashtable
-* specifically adjusting sprev and snext pointers
+* add_node_sorted2 - adds nodes in a sorted order in a linkedlist of a
+* hashtable's index specifically adjusting sprev and snext pointers
 * @head: pointer to head of the list
 * @tmp: pointer to new node to be added
 * Return: pointer to new node
@@ -99,34 +99,50 @@ shash_node_t *add_node_sorted1(shash_node_t **head, shash_node_t *tmp)
 shash_node_t *add_node_sorted2(shash_node_t **head, shash_node_t *tmp)
 {
 	shash_node_t *cur;
-	/* head's key less/eqaul to tmp key*/
-	if (strcmp((*head)->key, tmp->key) >= 0)
+
+	if (!(*head)->snext)
 	{
-	        tmp->snext = *head;
-		if (*head)
-			(*head)->sprev = tmp;
-		*head = tmp;
- 		return (tmp);
-	}
-	/* add in between */
-	cur = *head;
-	while (cur->snext)
-	{
-		/* if cur is smaller than tmp add in between */
-		if (strcmp(cur->key, tmp->key) > 0 &&
-		    strcmp(cur->snext->key, tmp->key) <= 0)
+		if (strcmp((*head)->key, tmp->key) < 0)
 		{
-			tmp->sprev = cur;
-			tmp->snext = cur->snext;
-			cur->snext->sprev = tmp;
-			cur->snext = tmp;
-			return (tmp);
+			(*head)->snext = tmp;
+			tmp->sprev = *head;
 		}
-		cur = cur->snext;
+		else
+		{
+			tmp->snext = *head;
+			(*head)->sprev = tmp;
+			*head = tmp;
+		}
 	}
-	/* add last */
-	cur->snext = tmp;
-	tmp->sprev = cur;
+	else
+	{
+		/* add in between */
+		cur = *head;
+		while (cur->snext)
+		{
+			if (strcmp(cur->key, tmp->key) >= 0)
+			{
+				tmp->snext = cur;
+				tmp->sprev = cur->sprev;
+				cur->sprev->snext = tmp;
+				cur->sprev = tmp;
+				break;
+			}
+			else if (strcmp(cur->key, tmp->key) < 0 &&
+				 strcmp(cur->snext->key, tmp->key) >= 0)
+			{
+				tmp->snext = cur->snext;
+				tmp->sprev = cur;
+				cur->snext->sprev = tmp;
+				cur->snext = tmp;
+				break;
+			}
+			cur = cur->snext;
+		}
+		/* add last */
+		cur->snext = tmp;
+		tmp->sprev = cur;
+	}
 	return (tmp);
 }
 
