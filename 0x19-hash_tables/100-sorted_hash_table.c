@@ -29,15 +29,64 @@ shash_table_t *shash_table_create(unsigned long int size)
 	return (ht);
 }
 
-/* may use strcmp */
-unsigned long int strSum(char *value)
+/**
+* add_node_sorted1 - adds nodes in a sorted order in a linkedlist of a hashtable
+* specifically adjusting sprev and next pointers
+* @head: pointer to head of the list
+* @tmp: pointer to new node to be added
+* Return: pointer to new node
+**/
+shash_node_t *add_node_sorted1(shash_node_t **head, shash_node_t *tmp)
 {
-	unsigned long int i, sum;
+	shash_node_t *cur;
 
-	sum = 0;
-	for (i = 0; value[i]; i++)
-		sum += value[i];
-	return sum;
+	/* add firsts */
+	if (!*head)
+		*head = tmp;
+	else if (!(*head)->next)
+	{
+		if (strcmp((*head)->key, tmp->key) < 0)
+		{
+			(*head)->next = tmp;
+			tmp->sprev = *head;
+		}
+		else
+		{
+			tmp->next = *head;
+			(*head)->sprev = tmp;
+			*head = tmp;
+		}
+	}
+	else
+	{
+		/* add in between */
+		cur = *head;
+		while (cur->next)
+		{
+			if (strcmp(cur->key, tmp->key) >= 0)
+			{
+				tmp->next = cur;
+				tmp->sprev = cur->sprev;
+				cur->sprev->next = tmp;
+				cur->sprev = tmp;
+				break;
+			}
+			else if (strcmp(cur->key, tmp->key) < 0 &&
+			    strcmp(cur->next->key, tmp->key) >= 0)
+			{
+				tmp->next, tmp->snext = cur->next;
+				tmp->sprev = cur;
+				cur->next->sprev = tmp;
+				cur->next = tmp;
+				break;
+			}
+			cur = cur->next;
+		}
+		/* add last */
+		cur->next = tmp;
+		tmp->sprev = cur;
+	}
+	return (tmp);
 }
 
 /**
@@ -50,8 +99,8 @@ unsigned long int strSum(char *value)
 shash_node_t *add_node_sorted2(shash_node_t **head, shash_node_t *tmp)
 {
 	shash_node_t *cur;
-	/* list is empty or head's key less/eqaul to tmp key*/
-	if (!*head || strcmp((*head)->key, tmp->key) <= 0)
+	/* head's key less/eqaul to tmp key*/
+	if (strcmp((*head)->key, tmp->key) >= 0)
 	{
 	        tmp->snext = *head;
 		if (*head)
@@ -64,8 +113,8 @@ shash_node_t *add_node_sorted2(shash_node_t **head, shash_node_t *tmp)
 	while (cur->snext)
 	{
 		/* if cur is smaller than tmp add in between */
-		if (strcmp(cur->key, tmp->key) < 0 &&
-		    strcmp(cur->snext->key, tmp->key) >= 0)
+		if (strcmp(cur->key, tmp->key) > 0 &&
+		    strcmp(cur->snext->key, tmp->key) <= 0)
 		{
 			tmp->sprev = cur;
 			tmp->snext = cur->snext;
@@ -124,7 +173,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 }
 
 /**
-* - shash_table_get - retrieves a value associated with a key
+* shash_table_get - retrieves a value associated with a key
 * @ht: hash table to find key into
 * @key: key to be searched
 * Return: key's value or NULL
@@ -170,7 +219,10 @@ void shash_table_print(const shash_table_t *ht)
 			tmp = cur;
 			while (tmp)
 			{
-				printf("'%s': '%s', ", tmp->key, tmp->value);
+				if (!cur->next && !tmp->snext)
+					printf("'%s': '%s'", tmp->key, tmp->value);
+				else
+					printf("'%s': '%s', ", tmp->key, tmp->value);
 				tmp = tmp->snext;
 			}
 			cur = cur->next;
