@@ -83,7 +83,6 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	if (!ht || !key || *key == '\0' || !value)
 		return (0);
-
 	index = key_index((const unsigned char *)key, ht->size);
 	if (ht->array[index])
 	{
@@ -117,8 +116,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	}
 	tmp->sprev = tmp->snext = NULL;
 	add_node_sorted1(&ht->shead, &ht->stail, tmp);
-	tmp->next = ht->array[index];
-	ht->array[index] = tmp;
+	tmp->next = ht->array[index], ht->array[index] = tmp;
 	return (1);
 }
 
@@ -208,28 +206,11 @@ void shash_table_print_rev(const shash_table_t *ht)
 void shash_table_delete(shash_table_t *ht)
 {
 	shash_node_t *cur, *tmp;
-	long unsigned int i;
 
 	if (!ht)
 		return;
-	for (i = 0; i < ht->size; i++)
-	{
-		if (ht->array[i])
-		{
-			cur = ht->array[i];
-			while (cur)
-			{
-				tmp = cur;
-				cur = cur->next;
-				free(tmp->key);
-				free(tmp->value);
-				free(tmp);
-				tmp = NULL;
-			}
-		}
-	}
 
-/*	cur = ht->shead;
+	cur = ht->shead;
 	while (cur)
 	{
 		tmp = cur;
@@ -238,7 +219,7 @@ void shash_table_delete(shash_table_t *ht)
 		free(tmp->value);
 		free(tmp);
 		tmp = NULL;
-		} */
+	}
 	free(ht->array);
 	free(ht);
 	ht = NULL;
