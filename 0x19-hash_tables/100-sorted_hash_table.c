@@ -208,11 +208,28 @@ void shash_table_print_rev(const shash_table_t *ht)
 void shash_table_delete(shash_table_t *ht)
 {
 	shash_node_t *cur, *tmp;
+	long unsigned int i;
 
 	if (!ht)
 		return;
+	for (i = 0; i < ht->size; i++)
+	{
+		if (ht->array[i])
+		{
+			cur = ht->array[i];
+			while (cur)
+			{
+				tmp = cur;
+				cur = cur->next;
+				free(tmp->key);
+				free(tmp->value);
+				free(tmp);
+				tmp = NULL;
+			}
+		}
+	}
 
-	cur = ht->shead;
+/*	cur = ht->shead;
 	while (cur)
 	{
 		tmp = cur;
@@ -221,7 +238,7 @@ void shash_table_delete(shash_table_t *ht)
 		free(tmp->value);
 		free(tmp);
 		tmp = NULL;
-	}
+		} */
 	free(ht->array);
 	free(ht);
 	ht = NULL;
