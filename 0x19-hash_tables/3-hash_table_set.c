@@ -16,7 +16,6 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	if (!ht || !key || *key == '\0' || !value)
 		return (0);
 	index = key_index((const unsigned char *)key, ht->size);
-	/* check if the key already exits */
 	if (ht->array[index])
 	{
 		cur = ht->array[index];
@@ -27,7 +26,11 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 				free(cur->value);
 				cur->value = (char *)strdup(value);
 				if (cur->value == NULL)
-					free(cur->key); free(cur); return (0);
+				{
+					free(cur->key);
+					free(cur);
+					return (0);
+				}
 				return (1);
 			}
 			cur = cur->next;
@@ -38,7 +41,10 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	tmp->key = (char *)strdup(key);
 	if (tmp->key == NULL)
-		free(tmp); return (0);
+	{
+		free(tmp);
+		return (0);
+	}
 	tmp->value = (char *)strdup(value);
 	if (tmp->value == NULL)
 	{

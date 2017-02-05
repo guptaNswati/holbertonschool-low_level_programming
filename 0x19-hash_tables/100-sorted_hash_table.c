@@ -15,7 +15,7 @@ shash_table_t *shash_table_create(unsigned long int size)
 	ht = malloc(sizeof(shash_table_t));
 	if (ht == NULL)
 		return (NULL);
-	ht->array = malloc(sizeof(shash_node_t) * size);
+	ht->array = malloc(sizeof(shash_node_t *) * size);
 	if (ht->array == NULL)
 	{
 		free(ht);
@@ -47,28 +47,19 @@ shash_node_t *add_node_sorted1(shash_node_t **head, shash_node_t **tail,
 		*head = tmp, *tail = tmp;
 		return (tmp);
 	}
-	if (!(*head)->next)
+	if (strcmp((*head)->key, tmp->key) > 0)
 	{
-		if (strcmp((*head)->key, tmp->key) < 0)
-			(*head)->next = tmp, tmp->sprev = *head, *tail = tmp;
-		else
-			tmp->next = *head, (*head)->sprev = tmp, *head = tmp;
+		tmp->next = *head, (*head)->sprev = tmp, *head = tmp;
 		return (tmp);
 	}
 	cur = *head;
 	while (cur->next)
 	{
-		if (strcmp(cur->key, tmp->key) >= 0)
+		if (strcmp(cur->key, tmp->key) < 0 &&
+		    strcmp(cur->next->key, tmp->key) >= 0)
 		{
-			tmp->next = cur, tmp->sprev = cur->sprev;
-			cur->sprev->next = tmp, cur->sprev = tmp;
-			return (tmp);
-		}
-		else if (strcmp(cur->key, tmp->key) < 0 &&
-			 strcmp(cur->next->key, tmp->key) >= 0)
-		{
-			tmp->next = cur->next, tmp->sprev = cur;
-			cur->next->sprev = tmp, cur->next = tmp;
+			tmp->next = cur->next, cur->next->sprev = tmp;
+			cur->next = tmp, tmp->sprev = cur;
 			return (tmp);
 		}
 		cur = cur->next;
@@ -151,7 +142,11 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 				free(cur->value);
 				cur->value = (char *)strdup(value);
 				if (cur->value == NULL)
-					free(cur->key); free(cur); return (0);
+				{
+					free(cur->key);
+					free(cur);
+					return (0);
+				}
 				return (1);
 			}
 			cur = cur->snext;
@@ -162,10 +157,17 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		return (0);
 	tmp->key = (char *)strdup(key);
 	if (tmp->key == NULL)
-		free(tmp); return (0);
+	{
+		free(tmp);
+		return (0);
+	}
 	tmp->value = (char *)strdup(value);
 	if (tmp->value == NULL)
-		free(tmp->key); free(tmp); return (0);
+	{
+		free(tmp->key);
+		free(tmp);
+		return (0);
+	}
 	tmp->sprev = tmp->next = tmp->snext = NULL;
 	add_node_sorted1(&ht->shead, &ht->stail, tmp);
 	add_node_sorted2(&ht->array[index], tmp);
@@ -183,7 +185,7 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	unsigned long int indx;
 	shash_node_t *tmp;
 
-	if (ht && key)
+	if (ht)
 	{
 		indx = key_index((const unsigned char *)key, ht->size);
 		if (ht->array[indx])
@@ -198,32 +200,6 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 		}
 	}
 	return (NULL);
-}
-
-/**
-* shash_table_print_rev - print the hash table keys/values in reverse order
-* using the sorted linked list
-* @ht: pointer to hash table
-* Return: nothing
-**/
-void shash_table_print_rev(const shash_table_t *ht)
-{
-	shash_node_t *cur;
-
-	if (ht)
-	{
-		cur = ht->stail;
-		printf("{");
-		while (cur)
-		{
-			if (!cur->sprev)
-				printf("'%s': '%s'", cur->key, cur->value);
-			else
-				printf("'%s': '%s', ", cur->key, cur->value);
-			cur = cur->sprev;
-		}
-		printf("}\n");
-	}
 }
 
 /**
@@ -246,6 +222,31 @@ void shash_table_print(const shash_table_t *ht)
 			else
 				printf("'%s': '%s', ", cur->key, cur->value);
 			cur = cur->next;
+		}
+		printf("}\n");
+	}
+}
+/**
+* shash_table_print_rev - print the hash table keys/values in reverse order
+* using the sorted linked list
+* @ht: pointer to hash table
+* Return: nothing
+**/
+void shash_table_print_rev(const shash_table_t *ht)
+{
+	shash_node_t *cur;
+
+	if (ht)
+	{
+		cur = ht->stail;
+		printf("{");
+		while (cur)
+		{
+			if (!cur->sprev)
+				printf("'%s': '%s'", cur->key, cur->value);
+			else
+				printf("'%s': '%s', ", cur->key, cur->value);
+			cur = cur->sprev;
 		}
 		printf("}\n");
 	}
