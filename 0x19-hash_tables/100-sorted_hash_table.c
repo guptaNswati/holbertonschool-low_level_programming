@@ -49,72 +49,25 @@ shash_node_t *add_node_sorted1(shash_node_t **head, shash_node_t **tail,
 	}
 	if (strcmp((*head)->key, tmp->key) > 0)
 	{
-		tmp->next = *head, (*head)->sprev = tmp, *head = tmp;
+		tmp->snext = *head, (*head)->sprev = tmp, *head = tmp;
 		return (tmp);
 	}
 	cur = *head;
-	while (cur->next)
+	while (cur->snext)
 	{
 		if (strcmp(cur->key, tmp->key) < 0 &&
-		    strcmp(cur->next->key, tmp->key) >= 0)
+		    strcmp(cur->snext->key, tmp->key) >= 0)
 		{
-			tmp->next = cur->next, cur->next->sprev = tmp;
-			cur->next = tmp, tmp->sprev = cur;
+			tmp->snext = cur->snext, cur->snext->sprev = tmp;
+			cur->snext = tmp, tmp->sprev = cur;
 			return (tmp);
 		}
-		cur = cur->next;
+		cur = cur->snext;
 	}
-	cur->next = tmp, tmp->sprev = cur, *tail = tmp;
+	cur->snext = tmp, tmp->sprev = cur, *tail = tmp;
 	return (tmp);
 }
 
-/**
-* add_node_sorted2 - adds nodes in a sorted order in a linkedlist of a
-* hashtable's index specifically adjusting sprev and snext pointers
-* @head: pointer to head of the list
-* @tmp: pointer to new node to be added
-* Return: pointer to new node
-**/
-shash_node_t *add_node_sorted2(shash_node_t **head, shash_node_t *tmp)
-{
-	shash_node_t *cur;
-
-	if (!*head)
-		*head = tmp;
-	else if (!(*head)->snext)
-	{
-		if (strcmp((*head)->key, tmp->key) < 0)
-			(*head)->snext = tmp, tmp->sprev = *head;
-		else
-		{
-			tmp->snext = *head, (*head)->sprev = tmp;
-			*head = tmp;
-		}
-	}
-	else
-	{
-		cur = *head;
-		while (cur->snext)
-		{
-			if (strcmp(cur->key, tmp->key) >= 0)
-			{
-				tmp->snext = cur, tmp->sprev = cur->sprev;
-				cur->sprev->snext = tmp, cur->sprev = tmp;
-				break;
-			}
-			else if (strcmp(cur->key, tmp->key) < 0 &&
-				 strcmp(cur->snext->key, tmp->key) >= 0)
-			{
-				tmp->snext = cur->snext, tmp->sprev = cur;
-				cur->snext->sprev = tmp, cur->snext = tmp;
-				break;
-			}
-			cur = cur->snext;
-		}
-		cur->snext = tmp, tmp->sprev = cur;
-	}
-	return (tmp);
-}
 
 /**
 * shash_table_set - insert key/value pair in the sorted list at the right place
@@ -149,7 +102,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 				}
 				return (1);
 			}
-			cur = cur->snext;
+			cur = cur->next;
 		}
 	}
 	tmp = malloc(sizeof(shash_node_t));
@@ -168,9 +121,10 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		free(tmp);
 		return (0);
 	}
-	tmp->sprev = tmp->next = tmp->snext = NULL;
+	tmp->sprev = tmp->snext = NULL;
 	add_node_sorted1(&ht->shead, &ht->stail, tmp);
-	add_node_sorted2(&ht->array[index], tmp);
+	tmp->next = ht->array[index];
+	ht->array[index] = tmp;
 	return (1);
 }
 
@@ -195,7 +149,7 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 			{
 				if (strcmp(tmp->key, (char *)key) == 0)
 					return (tmp->value);
-				tmp = tmp->snext;
+				tmp = tmp->next;
 			}
 		}
 	}
@@ -217,11 +171,11 @@ void shash_table_print(const shash_table_t *ht)
 		printf("{");
 		while (cur)
 		{
-			if (!cur->next)
+			if (!cur->snext)
 				printf("'%s': '%s'", cur->key, cur->value);
 			else
 				printf("'%s': '%s', ", cur->key, cur->value);
-			cur = cur->next;
+			cur = cur->snext;
 		}
 		printf("}\n");
 	}
@@ -268,7 +222,7 @@ void shash_table_delete(shash_table_t *ht)
 	while (cur)
 	{
 		tmp = cur;
-		cur = cur->next;
+		cur = cur->snext;
 		free(tmp->key);
 		free(tmp->value);
 		free(tmp);
