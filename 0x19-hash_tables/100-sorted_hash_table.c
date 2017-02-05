@@ -94,12 +94,6 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 			{
 				free(cur->value);
 				cur->value = (char *)strdup(value);
-				if (cur->value == NULL)
-				{
-					free(cur->key);
-					free(cur);
-					return (0);
-				}
 				return (1);
 			}
 			cur = cur->next;
