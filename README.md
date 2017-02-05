@@ -1,9 +1,9 @@
 # Low Level C Programming
 
-This repository contains projects for training in the low-level track at [Holberton School](https://holbertonschool.com). Each folder contains projects in C from beginners to advance level. 
+This repository contains projects for training in the low-level track at [Holberton School](https://holbertonschool.com). All projects are in C and are designed to learn C from a beginners level to the advanced level. 
 
 ## Styling and Specifications
-All C programs are complied with gcc 4.8 on Ubuntu 14.04 LTS. They comply with [schools formatting checker](https://github.com/holbertonschool/Betty), based on [Linux Kernel coding style] to facilitate good coding style. All programs were written from the Bash, using Emacs. In most of the exercises, standard library functions were not used, excepts``printf``, ``malloc``, ``free`` and  ``exit`` and was required to write the necessary/helper functions. 
+All C programs are complied with gcc 4.8 on Ubuntu 14.04 LTS. They comply with [schools formatting checker](https://github.com/holbertonschool/Betty), based on [Linux Kernel coding style]. All programs were written from the Bash, using Emacs. In most of the exercises, standard library functions were not used, excepts``printf``, ``malloc``, ``free`` and  ``exit`` and was required to write the necessary/helper functions. 
 
 ### Compilation
 All programs must compile with gcc, using with the flags below:
@@ -19,4 +19,4 @@ Each directory is named after a concept and contains ordered exercises from mand
 ## Author
 **Swati Gupta**
 I have coded all of these exercises during my software engineering training at [Holberton School](https://holbertonschool.com) and are part of low-level-track curriculum.
-* [Linkedin](www.linkedin.com/in/swatig15)
+* [Linkedin](https://www.linkedin.com/in/swatig15)
