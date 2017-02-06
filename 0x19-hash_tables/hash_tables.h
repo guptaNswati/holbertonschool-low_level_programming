@@ -83,6 +83,15 @@ typedef struct shash_table_s
 
 
 shash_table_t *shash_table_create(unsigned long int size);
+
+/**
+* add_node_sorted1 - add nodes in a sorted order in a linkedlist of a hashtable
+* specifically adjusting sprev and next pointers
+* @head: pointer to head of the list
+* @tail: pointer to tail of the list
+* @tmp: pointer to new node to be added
+* Return: pointer to new node
+**/
 shash_node_t *add_node_sorted1(shash_node_t **head, shash_node_t **tail,
 			       shash_node_t *tmp);
 int shash_table_set(shash_table_t *ht, const char *key, const char *value);
