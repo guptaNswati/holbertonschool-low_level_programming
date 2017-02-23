@@ -29,6 +29,7 @@ int main(void)
     shash_table_set(ht, "joyful", "18");
     shash_table_print(ht);
     shash_table_print_rev(ht);
+    printf("[value] %d\n",shash_table_get(ht, "joyful"));
 
 /*    shash_table_set(ht, "y", "0");
     shash_table_print(ht);
