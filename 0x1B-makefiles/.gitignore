@@ -1,6 +1,7 @@
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~
+*.o
 a.out
 \#*\#
 /.emacs.desktop
