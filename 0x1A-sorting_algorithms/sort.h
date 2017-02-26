@@ -30,6 +30,7 @@ void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
 void shell_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
+void heap_sort(int *array, size_t size);
 
 /* helper functions */
 size_t size_of_list(listint_t *list);
