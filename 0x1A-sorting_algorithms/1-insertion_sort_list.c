@@ -3,7 +3,7 @@
 /**
 * insertion_sort_list - sorts a doubly linked list of integers
 * in ascending order using the Insertion sort algorithm
-* @list - pointer to the given doubly linked list
+* @list: pointer to the given doubly linked list
 * Return: returns nothing
 */
 void insertion_sort_list(listint_t **list)
@@ -14,11 +14,9 @@ void insertion_sort_list(listint_t **list)
 
 	if (list == NULL || *list == NULL)
 		return;
-
 	size = size_of_list(*list);
 	if (size < 2)
 		return;
-
 	for (i = 1; i < size; ++i)
 	{
 		cur =  *list;
@@ -42,7 +40,6 @@ void insertion_sort_list(listint_t **list)
 
 				if (pre->next != NULL)
 					pre->next->prev = pre;
-
 				pre = cur->prev;
 				print_list(*list);
 			}
@@ -52,10 +49,9 @@ void insertion_sort_list(listint_t **list)
 	}
 }
 
-
 /**
 * size_of_list - returns the size of the given linked list
-* @list - given linked list
+* @list: given linked list
 * Return: returns the size of the given list
 */
 size_t size_of_list(listint_t *list)
