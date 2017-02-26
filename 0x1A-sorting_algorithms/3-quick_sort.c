@@ -40,10 +40,13 @@ int hoarePartition(int *array, int start, int end, size_t size)
 			j--;
 		while (array[j] > pivot);
 
-		if (i >= j)
-			return (j);
-		swap(&array[i], &array[j]);
-		print_array(array, size);
+		if (i < j)
+		{
+			swap(&array[i], &array[j]);
+			print_array(array, size);
+		}
+		else
+			return (i);
 	}
 }
 
@@ -62,8 +65,8 @@ void quick_sort_helper(int *array, int start, int end, size_t size)
 	if (start < end)
 	{
 		partition = hoarePartition(array, start, end, size);
-		quick_sort_helper(array, start, partition, size);
-		quick_sort_helper(array, partition + 1, end, size);
+		quick_sort_helper(array, start, partition - 1, size);
+		quick_sort_helper(array, partition, end, size);
 	}
 }
 

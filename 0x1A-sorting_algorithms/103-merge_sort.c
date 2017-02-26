@@ -33,7 +33,7 @@ void merging(int *array, int *aux, int start, int mid, int end)
 	printf("[left]: ");
 	print_sorted(array, start, mid);
 	printf("[right]: ");
-	print_sorted(array, mid + 1, end);
+	print_sorted(array, mid, end);
 
 	for (i = start; i < end; i++)
 		aux[i] = array[i];
