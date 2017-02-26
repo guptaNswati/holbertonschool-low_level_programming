@@ -11,7 +11,7 @@ void print_sorted(int *array, int start, int end)
 {
 	int i;
 
-	for (i = start; i < end; i++)
+	for (i = start; i < end - 1; i++)
 		printf("%d, ", array[i]);
 	printf("%d\n", array[i]);
 }
@@ -35,15 +35,15 @@ void merging(int *array, int *aux, int start, int mid, int end)
 	printf("[right]: ");
 	print_sorted(array, mid + 1, end);
 
-	for (i = start; i <= end; i++)
+	for (i = start; i < end; i++)
 		aux[i] = array[i];
 	j = start;
-	k = mid + 1;
-	for (i = start; i <= end; i++)
+	k = mid;
+	for (i = start; i < end; i++)
 	{
-		if (j > mid)
+		if (j >= mid)
 			array[i] = aux[k++];
-		else if (k > end)
+		else if (k >= end)
 			array[i] = aux[j++];
 		else if (aux[k] < aux[j])
 			array[i] = aux[k++];
@@ -66,11 +66,11 @@ void merge_sort_helper(int *array, int *aux, int start, int end)
 {
 	int mid;
 
-	if (end <= start)
+	if (end - 1 <= start)
 		return;
 	mid = start + (end - start) / 2;
 	merge_sort_helper(array, aux, start, mid);
-	merge_sort_helper(array, aux, mid + 1, end);
+	merge_sort_helper(array, aux, mid, end);
 	merging(array, aux, start, mid, end);
 }
 
@@ -91,6 +91,6 @@ void merge_sort(int *array, size_t size)
 	aux = malloc(sizeof(int) * size);
 	if (aux == NULL)
 		return;
-	merge_sort_helper(array, aux, 0, size - 1);
+	merge_sort_helper(array, aux, 0, size);
 	free(aux);
 }

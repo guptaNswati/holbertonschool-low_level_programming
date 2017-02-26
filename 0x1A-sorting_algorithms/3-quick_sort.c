@@ -27,7 +27,7 @@ int hoarePartition(int *array, int start, int end, size_t size)
 {
 	int pivot, i, j;
 
-	pivot = array[start];
+	pivot = array[end];
 	i = start - 1;
 	j = end + 1;
 	while (1)
