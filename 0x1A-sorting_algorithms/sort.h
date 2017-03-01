@@ -45,5 +45,5 @@ void quick_sort_helper(int *array, int start, int end, size_t size);
 void merge_sort_helper(int *array, int *aux, int start, int end);
 void merging(int *array, int *aux, int start, int mid, int end);
 void heapify(int *array, size_t n, size_t i);
-
+void swap_list(listint_t *tmp, listint_t **list);
 #endif
