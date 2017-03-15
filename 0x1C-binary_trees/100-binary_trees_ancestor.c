@@ -30,24 +30,9 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 	int diff;
 	const binary_tree_t *tmp;
 
-/*	if (depth(first) > depth(second))
-	{
-		while (depth(first) != depth(second))
-			first = first->parent;
-	}
-	else
- 	{
-		while (depth(second) != depth(first))
-			second = second->parent;
-	}
-	while (first && second)
-	{
-		if (first->n == second->n)
-			return ((binary_tree_t *)first);
-		first = first->parent;
-		second = second->parent;
-		} */
+	/* compare the depths of both nodes */
 	diff = depth(first) - depth(second);
+	/* swap the deeper node with least deep node*/
 	if (diff < 0)
 	{
 		tmp = second;
@@ -55,8 +40,10 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		first = tmp;
 		diff *= -1;
 	}
+	/* bring it at same level as the other node */
 	while (diff--)
 		first = first->parent;
+	/* check if they have same parent */
 	while (first && second)
 	{
 		if (first->n == second->n)
