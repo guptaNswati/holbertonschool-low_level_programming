@@ -50,8 +50,6 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 
 	height = count_height(tree);
 	total_nodes = count_nodes(tree);
-	printf("[result] %d\n", total_nodes);
-	printf("[level] %d\n", height);
 	/* perfect tree will have 2^level+1 - 1 nodes*/
 	if (total_nodes == pow(2, height) - 1)
 		return (1);
