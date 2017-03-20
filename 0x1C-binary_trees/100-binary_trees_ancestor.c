@@ -15,7 +15,7 @@ int depth(const binary_tree_t *node)
 		++depth;
 		tmp = tmp->parent;
 	}
-	return depth;
+	return (depth);
 }
 /**
 * binary_trees_ancestor - finds the lowest common ancestor of two nodes

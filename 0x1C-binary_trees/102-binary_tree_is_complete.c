@@ -26,5 +26,5 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	if (!tree)
 		return (0);
-	return check_node_index(binary_tree_size(tree), 0, tree);
+	return (check_node_index(binary_tree_size(tree), 0, tree));
 }

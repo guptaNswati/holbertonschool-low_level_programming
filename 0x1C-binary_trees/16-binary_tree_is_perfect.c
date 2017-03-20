@@ -4,7 +4,7 @@
 /**
 * max - compares two ints to return the maximum of two
 * @left: first number
-* @righy: second number
+* @right: second number
 * Return: max of two
 **/
 int max(int left, int right)
