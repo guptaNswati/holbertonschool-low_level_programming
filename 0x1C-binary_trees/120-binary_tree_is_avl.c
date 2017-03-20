@@ -23,7 +23,8 @@ int find_height(const binary_tree_t *tree)
 {
 	if (!tree)
 		return (0);
-	return (1 + find_max(find_height(tree->left), find_height(tree->right)));
+	return (1 + find_max(find_height(tree->left),
+			     find_height(tree->right)));
 }
 
 /**
@@ -33,19 +34,18 @@ int find_height(const binary_tree_t *tree)
 **/
 int is_balanced(const binary_tree_t *tree)
 {
-	int result;
-
 	if (!tree)
 		return (1);
-	result = find_height(tree->left) - find_height(tree->right);
-	if (result >= -1 && result <= 1)
-		return (1);
+	if (abs(find_height(tree->left) - find_height(tree->right)) > 1)
+		return (0);
 	return (is_balanced(tree->left) && is_balanced(tree->right));
 }
 
 /**
-* isbst - check if a given tree is valid binary search tree or not
+* is_bst - check if a given tree is valid binary search tree or not
 * @tree: pointer root node of the tree to check
+* @min: lower limit of node value
+* @max: upper limit of node value
 * Return: 1 if bst, 0 otherwise
 **/
 int is_bst(const binary_tree_t *tree, int min, int max)
@@ -65,17 +65,7 @@ int is_bst(const binary_tree_t *tree, int min, int max)
 **/
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-	int result;
-
-	if (tree)
-	{
-		if (is_bst(tree, INT_MIN, INT_MAX) && is_balanced(tree))
-			return (1);
-/*		printf("[height of left-tree] %d\n", find_height(tree->left));
-		printf("[height of rigth-tree] %d\n", find_height(tree->right));
-		result = find_height(tree->left) - find_height(tree->right);
-		printf("is bst %d\n", isbst(tree, INT_MIN, INT_MAX));
-		printf("result %d\n", result); */
-	}
+	if (tree && is_bst(tree, INT_MIN, INT_MAX) && is_balanced(tree))
+		return (1);
 	return (0);
 }
