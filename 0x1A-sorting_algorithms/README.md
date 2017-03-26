@@ -1,20 +1,20 @@
      * Directory: 0x1A-sorting_algorithms
 
  0. Bubble sort 
-   Write a function that sorts an array of integers in ascending order using the
-   Write in the file 0-O, the big O notations of the time complexity of the Bubb
+   Write a function that sorts an array of integers in ascending order.
+   Write in the file 0-O, the big O notations of the time complexity of the Bubble sort
      * File: 0-bubble_sort.c, 0-O
 1. Insertion sort 
-   Write a function that sorts a doubly linked list of integers in ascending ord
-   Write in the file 1-O, the big O notations of the time complexity of the Inse
+   Write a function that sorts a doubly linked list of integers in ascending order.
+   Write in the file 1-O, the big O notations of the time complexity of the Insertion sort
      * File: 1-insertion_sort_list.c, 1-O
 2. Selection sort 
-   Write a function that sorts an array of integers in ascending order using the
-   Write in the file 2-O, the big O notations of the time complexity of the Sele
+   Write a function that sorts an array of integers in ascending order.
+   Write in the file 2-O, the big O notations of the time complexity of the Selection sort
      * File: 2-selection_sort.c, 2-O
 3. Quick sort 
-   Write a function that sorts an array of integers in ascending order using the
-   Write in the file 3-O, the big O notations of the time complexity of the Quic
+   Write a function that sorts an array of integers in ascending order.
+   Write in the file 3-O, the big O notations of the time complexity of the Quick sort
      * File: 3-quick_sort.c, 3-O
 4. Big O #0 
      * File: 4-O
@@ -53,31 +53,31 @@
 21. Big O #Hash tables 
      * File: 21-O
 22. Shell sort #
-   Write a function that sorts an array of integers in ascending order using the
+   Write a function that sorts an array of integers in ascending order
      * File: 100-shell_sort.c
 23. Cocktail shaker sort #
-   Write a function that sorts a doubly linked list of integers in ascending ord
-   Write in the file 101-O, the big O notations of the time complexity of the Co
+   Write a function that sorts a doubly linked list of integers in ascending order
+   Write in the file 101-O, the big O notations of the time complexity of the Cocktail sort
      * File: 101-cocktail_sort_list.c, 101-O
 24. Counting sort #
-   Write a function that sorts an array of integers in ascending order using the
-   Write in the file 102-O, the big O notations of the time complexity of the Co
+   Write a function that sorts an array of integers in ascending order
+   Write in the file 102-O, the big O notations of the time complexity of the Counting sort
      * File: 102-counting_sort.c, 102-O
 25. Merge sort #
-   Write a function that sorts an array of integers in ascending order using the
-   Write in the file 103-O, the big O notations of the time complexity of the Me
+   Write a function that sorts an array of integers in ascending order
+   Write in the file 103-O, the big O notations of the time complexity of the Merge sort
      * File: 103-merge_sort.c, 103-O
 26. Heap sort #
-   Write a function that sorts an array of integers in ascending order using the
-   Write in the file 104-O, the big O notations of the time complexity of the He
+   Write a function that sorts an array of integers in ascending order
+   Write in the file 104-O, the big O notations of the time complexity of the Heap sort
      * File: 104-heap_sort.c, 104-O
 27. Radix sort #
-   Write a function that sorts an array of integers in ascending order using the
-   Write in the file 105-O, the big O notations of the time complexity of the LS
+   Write a function that sorts an array of integers in ascending order
+   Write in the file 105-O, the big O notations of the time complexity of the LS Radix sort
      * File: 105-radix_sort.c, 105-O
 28. Bitonic sort #
-   Write a function that sorts an array of integers in ascending order using the
-   Write in the file 106-O, the big O notations of the time complexity of the Bi
+   Write a function that sorts an array of integers in ascending order
+   Write in the file 106-O, the big O notations of the time complexity of the Bitonic sort
      * File: 106-bitonic_sort.c, 106-O
 29. Dealer #
    Write a function that sorts a deck of card.
