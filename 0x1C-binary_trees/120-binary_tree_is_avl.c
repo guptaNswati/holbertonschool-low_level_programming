@@ -23,6 +23,8 @@ int find_height(const binary_tree_t *tree)
 {
 	if (!tree)
 		return (0);
+	if (!tree->left && !tree->right)
+		return (0);
 	return (1 + find_max(find_height(tree->left),
 			     find_height(tree->right)));
 }
