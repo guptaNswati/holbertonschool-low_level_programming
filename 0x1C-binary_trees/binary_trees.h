@@ -51,7 +51,16 @@ typedef struct list_of_list
 	struct list_of_list *next;
 } list_l;
 
-
+/**
+* queue - struct for level order traversal
+* @node: pointer to binary_tree_t node
+* @next: pointer to next queue element
+**/
+typedef struct queue
+{
+	binary_tree_t *node;
+	struct queue *next;
+} queue;
 
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
