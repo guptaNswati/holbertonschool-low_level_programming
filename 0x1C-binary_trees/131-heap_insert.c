@@ -74,12 +74,12 @@ binary_tree_t *remove_front(queue **head)
 
 
 /**
-* heapify - restores the max heap property of max binary heap tree,
+* heapify_up - restores the max heap property of max binary heap tree,
 * by percolate up
 * @new_node: pointer to new node
-* Return: nothing
+* Return: pointer to new root after restoring heap property
 **/
-heap_t *heapify(heap_t *new_node)
+heap_t *heapify_up(heap_t *new_node)
 {
 	int tmp;
 	heap_t *cur = new_node;
@@ -134,5 +134,5 @@ heap_t *heap_insert(heap_t **root, int value)
 		tmp->left = new_node;
 	else
 		tmp->right = new_node;
-	return (heapify(new_node));
+	return (heapify_up(new_node));
 }
