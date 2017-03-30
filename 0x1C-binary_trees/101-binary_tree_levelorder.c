@@ -136,6 +136,8 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 	list_l *walker;
 	node_l *cur, *tmp;
 
+	if (!tree || !func)
+		return;
 	level_order_traversal(tree, &head_l, 1);
 	while (head_l)
 	{
