@@ -2,20 +2,22 @@
 
 /**
 * swap - swaps two numbers
-* @num1 - first number
-* @num2 - second number
+* @num1: first number
+* @num2: second number
 * Return: nothing
 **/
 void swap(int *num1, int *num2)
 {
 	int tmp;
+
 	tmp = *num1;
 	*num1 = *num2;
 	*num2 = tmp;
 }
 
+
 /**
-* free_queue - frees a queue holding level order nodes of binary tree
+* freeing_queue - frees a queue holding level order nodes of binary tree
 * @head: double pointer to head of queue
 * Return: nothing
 **/
@@ -36,7 +38,7 @@ void freeing_queue(queue **head)
 }
 
 /**
-* add_in_end - adds a new node at the end of the queue
+* adding_in_end - adds a new node at the end of the queue
 * @head: double pointer to head of queue
 * @node: pointer to binary tree node for adding to queue
 * Return: pointer to new node of queue, or NULL
@@ -68,7 +70,7 @@ queue *adding_in_end(queue **head, binary_tree_t *node)
 }
 
 /**
-* remove_front - removes first node of queue
+* removing_front - removes first node of queue
 * @head: double pointer to head of queue
 * Return: first node
 **/
@@ -96,7 +98,7 @@ heap_t *heapify_down(heap_t *new_node)
 {
 	heap_t *cur = new_node;
 
-	while(new_node)
+	while (new_node)
 	{
 		if (new_node->left && new_node->right)
 		{
@@ -125,12 +127,20 @@ heap_t *heapify_down(heap_t *new_node)
 	return (cur);
 }
 
+/**
+* heap_extract - extracts the root node of a Max Binary Heap
+* root node is freed and replaced with last node
+* @root: a double pointer to the root node of heap
+* Return: the value stored in the root node or 0 if fails
+**/
 int heap_extract(heap_t **root)
 {
 	binary_tree_t *cur;
 	int tmp;
 	queue *l_queue = NULL;
 
+	if (!root)
+		return (0);
 	if (!*root)
 		return (0);
 	tmp = (*root)->n;
@@ -152,5 +162,5 @@ int heap_extract(heap_t **root)
 	free(cur);
 	freeing_queue(&l_queue);
 	heapify_down(*root);
-	return(tmp);
+	return (tmp);
 }
