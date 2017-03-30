@@ -1,5 +1,18 @@
 #include "binary_trees.h"
 
+/**
+* get_max - returns max of two numbers
+* @left: number 1
+* @right: number 2
+* Return: the max
+**/
+int get_max(int left, int right)
+{
+	if (left > right)
+		return (left);
+	return (right);
+}
+
 
 /**
 * get_height - calculates height of root
@@ -8,19 +21,9 @@
 **/
 int get_height(const binary_tree_t *tree)
 {
-	int left, right;
-
 	if (!tree)
 		return (0);
-	if (!tree->left && !tree->right)
-		return (0);
-	left = get_height(tree->left);
-	right = get_height(tree->right);
-	if (left > right)
-		return (left + 1);
-	else
-		return (right + 1);
-
+	return (1 + get_max(get_height(tree->left), get_height(tree->right)));
 }
 
 
@@ -31,5 +34,7 @@ int get_height(const binary_tree_t *tree)
 **/
 int binary_tree_balance(const binary_tree_t *tree)
 {
+	if (!tree)
+		return (0);
 	return (get_height(tree->left) - get_height(tree->right));
 }
