@@ -23,7 +23,10 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 	tmp->right = NULL;
 
 	if (!parent->right)
+	{
 		parent->right = tmp;
+		tmp->parent = parent;
+	}
 	else
 	{
 		cur = parent->right;
