@@ -133,7 +133,8 @@ void level_order_traversal(const binary_tree_t *tree, list_l **head_l,
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
 	list_l *head_l = NULL;
-	node_l *cur;
+	list_l *walker;
+	node_l *cur, *tmp;
 
 	level_order_traversal(tree, &head_l, 1);
 	while (head_l)
@@ -142,8 +143,12 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 		while (cur)
 		{
 			func(cur->n);
+			tmp = cur;
 			cur = cur->next;
+			free(tmp);
 		}
+		walker = head_l;
 		head_l = head_l->next;
+		free(walker);
 	}
 }
