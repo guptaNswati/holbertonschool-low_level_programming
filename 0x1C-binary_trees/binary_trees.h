@@ -119,6 +119,7 @@ void level_order_traversal(const binary_tree_t *tree, list_l **head_l,
 			   int level);
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 
+size_t tree_size(const binary_tree_t *tree);
 int check_node_index(size_t size, size_t index, const binary_tree_t *tree);
 int binary_tree_is_complete(const binary_tree_t *tree);
 

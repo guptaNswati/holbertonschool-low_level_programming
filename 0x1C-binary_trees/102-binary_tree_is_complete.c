@@ -1,6 +1,18 @@
 #include "binary_trees.h"
 
 /**
+* tree_size - calculates size of a given tree
+* @tree: pointer to root of tree
+* Return: size of tree
+**/
+size_t tree_size(const binary_tree_t *tree)
+{
+	if (!tree)
+		return (0);
+	return (1 + tree_size(tree->left) + tree_size(tree->right));
+}
+
+/**
 * check_node_index - checks the node at a given index
 * @size: total number of nodes in the tree
 * @index: current node index
@@ -26,5 +38,5 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	if (!tree)
 		return (0);
-	return (check_node_index(binary_tree_size(tree), 0, tree));
+	return (check_node_index(tree_size(tree), 0, tree));
 }
