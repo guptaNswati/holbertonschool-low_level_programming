@@ -9,36 +9,33 @@
 bst_t *insert_bst_helper(bst_t **tree, bst_t *new_node)
 {
 	if (!*tree)
-	{
 		*tree = new_node;
-		return (new_node);
-	}
-	if ((*tree)->n == new_node->n)
+	else if ((*tree)->n == new_node->n)
 	{
 		free(new_node);
 		new_node = NULL;
-		return (new_node);
 	}
-	if (new_node->n < (*tree)->n)
+	else if (new_node->n < (*tree)->n)
 	{
 		if (!(*tree)->left)
 		{
 			(*tree)->left = new_node;
 			new_node->parent = *tree;
-			return (new_node);
 		}
-		return (insert_bst_helper(&(*tree)->left, new_node));
+		else
+			return (insert_bst_helper(&(*tree)->left, new_node));
 	}
-	if (new_node->n > (*tree)->n)
+	else if (new_node->n > (*tree)->n)
 	{
 		if (!(*tree)->right)
 		{
 			(*tree)->right = new_node;
 			new_node->parent = *tree;
-			return (new_node);
 		}
-		return (insert_bst_helper(&(*tree)->right, new_node));
+		else
+			return (insert_bst_helper(&(*tree)->right, new_node));
 	}
+	return (new_node);
 }
 
 /**
