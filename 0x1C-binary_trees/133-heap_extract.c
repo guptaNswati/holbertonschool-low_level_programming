@@ -141,7 +141,7 @@ int heap_extract(heap_t **root)
 
 	if (!root)
 		return (0);
-	if (!*root)
+	if (!(*root))
 		return (0);
 	tmp = (*root)->n;
 	adding_in_end(&l_queue, *root);
