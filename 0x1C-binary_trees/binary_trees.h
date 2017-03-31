@@ -162,12 +162,11 @@ heap_t *heap_insert(heap_t **root, int value);
 heap_t *array_to_heap(int *array, size_t size);
 
 void swap(int *num1, int *num2);
-void freeing_queue(queue **head);
-void freeing_queue(queue **head);
 binary_tree_t *removing_front(queue **head);
 heap_t *heapify_down(heap_t *new_node);
 int heap_extract(heap_t **root);
 
+size_t count_heap(heap_t *heap);
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
 
 

@@ -15,28 +15,6 @@ void swap(int *num1, int *num2)
 	*num2 = tmp;
 }
 
-
-/**
-* freeing_queue - frees a queue holding level order nodes of binary tree
-* @head: double pointer to head of queue
-* Return: nothing
-**/
-void freeing_queue(queue **head)
-{
-	queue *tmp, *cur;
-
-	if (!*head)
-		return;
-	cur = *head;
-	while (cur)
-	{
-		tmp = cur;
-		cur = cur->next;
-		free(tmp);
-	}
-	*head = NULL;
-}
-
 /**
 * adding_in_end - adds a new node at the end of the queue
 * @head: double pointer to head of queue
@@ -52,7 +30,13 @@ queue *adding_in_end(queue **head, binary_tree_t *node)
 	tmp = malloc(sizeof(queue));
 	if (!tmp)
 	{
-		freeing_queue(head);
+		while (*head)
+		{
+			cur = *head;
+			*head = (*head)->next;
+			free(cur);
+		}
+		head = NULL;
 		return (NULL);
 	}
 	tmp->node = node;
@@ -161,7 +145,6 @@ int heap_extract(heap_t **root)
 	}
 	free(cur);
 	cur = NULL;
-	freeing_queue(&l_queue);
 	heapify_down(*root);
 	return (tmp);
 }
