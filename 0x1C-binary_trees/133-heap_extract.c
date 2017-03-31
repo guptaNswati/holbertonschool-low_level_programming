@@ -127,7 +127,10 @@ int heap_extract(heap_t **root)
 		return (0);
 	if (!(*root))
 		return (0);
+
 	tmp = (*root)->n;
+
+	/* create a list of nodes with level order traversal */
 	adding_in_end(&l_queue, *root);
 	while (l_queue)
 	{
@@ -135,16 +138,25 @@ int heap_extract(heap_t **root)
 		adding_in_end(&l_queue, cur->left);
 		adding_in_end(&l_queue, cur->right);
 	}
-	(*root)->n = cur->n;
-	if (cur->parent)
+	/* if root is the node to be deleted */
+	if (*root == cur)
 	{
-		if (cur == cur->parent->left)
-			cur->parent->left = NULL;
-		else
-			cur->parent->right = NULL;
+		free(*root); *root = NULL;
+		root = NULL;
 	}
-	free(cur);
-	cur = NULL;
-	heapify_down(*root);
+	/* swap with root node value with last nodde */
+	else
+	{
+		(*root)->n = cur->n;
+		if (cur->parent)
+		{
+			if (cur == cur->parent->left)
+				cur->parent->left = NULL;
+			else
+				cur->parent->right = NULL;
+		}
+		free(cur); cur = NULL;
+		heapify_down(*root);
+	}
 	return (tmp);
 }
