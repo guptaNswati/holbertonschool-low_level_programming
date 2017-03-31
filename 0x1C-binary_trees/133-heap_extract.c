@@ -160,6 +160,7 @@ int heap_extract(heap_t **root)
 			cur->parent->right = NULL;
 	}
 	free(cur);
+	cur = NULL;
 	freeing_queue(&l_queue);
 	heapify_down(*root);
 	return (tmp);
