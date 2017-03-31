@@ -22,22 +22,15 @@ int main(void)
 	binary_tree_print(tree);
 
 	tree = bst_remove(tree, 79);
-	printf("[new tree]  %d\n", tree->n);
 	printf("Removed 79...\n");
 	binary_tree_print(tree);
 
 	tree = bst_remove(tree, 21);
-	printf("[new tree]  %d\n", tree->n);
 	printf("Removed 21...\n");
 	binary_tree_print(tree);
 
 	tree = bst_remove(tree, 68);
-	printf("[new tree]  %d\n", tree->n);
 	printf("Removed 68...\n");
-	binary_tree_print(tree);
-	tree = bst_remove(tree, 95);
-	printf("[new tree]  %d\n", tree->n);
-        printf("Removed 95...\n");
 	binary_tree_print(tree);
 	binary_tree_delete(tree);
 	return (0);

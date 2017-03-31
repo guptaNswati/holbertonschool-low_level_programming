@@ -133,7 +133,9 @@ bst_t *bst_insert(bst_t **tree, int value);
 bst_t *array_to_bst(int *array, size_t size);
 bst_t *bst_search(const bst_t *tree, int value);
 
+void change_parent(bst_t *parent, bst_t *node, bst_t *to_rmv);
 int find_min(bst_t *root);
+bst_t *search_bst(bst_t *root, int value);
 bst_t *bst_remove(bst_t *root, int value);
 
 int find_max(size_t left, size_t right);
