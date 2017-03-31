@@ -84,27 +84,24 @@ heap_t *heapify_down(heap_t *new_node)
 
 	while (new_node)
 	{
-		if (new_node->left && new_node->right)
+		/* either can have two nodes or left */
+		if (new_node->left)
 		{
-			if (new_node->left->n > new_node->right->n &&
-			    new_node->left->n > new_node->n)
-			{
-				swap(&new_node->left->n, &new_node->n);
-				cur = new_node->left;
-			}
-			else
+			/* if right node */
+			if ((new_node->right) &&
+			    (new_node->right->n > new_node->left->n) &&
+			    (new_node->right->n > new_node->n))
 			{
 				swap(&new_node->right->n, &new_node->n);
 				cur = new_node->right;
 				new_node = new_node->right;
 				continue;
 			}
-		}
-		/* either can have two nodes or left */
-		else if (new_node->left && new_node->left->n > new_node->n)
-		{
-			swap(&new_node->left->n, &new_node->n);
-			cur = new_node->left;
+			else if (new_node->left->n > new_node->n)
+			{
+				swap(&new_node->left->n, &new_node->n);
+				cur = new_node->left;
+			}
 		}
 		new_node = new_node->left;
 	}

@@ -30,7 +30,7 @@ int *heap_to_sorted_array(heap_t *heap, size_t *size)
 	arr = malloc(sizeof(int) * (*size));
 	if (!arr)
 		return (NULL);
-	for (i = 0; i < *size; i++)
+	for (i = 0; i < (*size); i++)
 		arr[i] = heap_extract(&heap);
 	return (arr);
 }
