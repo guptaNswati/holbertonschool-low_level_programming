@@ -132,10 +132,11 @@ int binary_tree_is_bst(const binary_tree_t *tree);
 bst_t *bst_insert(bst_t **tree, int value);
 bst_t *array_to_bst(int *array, size_t size);
 bst_t *bst_search(const bst_t *tree, int value);
+
+int find_min(bst_t *root);
 bst_t *bst_remove(bst_t *root, int value);
 
 int find_max(size_t left, size_t right);
-int is_balanced(const binary_tree_t *tree);
 int is_balanced(const binary_tree_t *tree);
 int is_bst(const binary_tree_t *tree, int min, int max);
 int binary_tree_is_avl(const binary_tree_t *tree);
@@ -145,10 +146,26 @@ avl_t *array_to_avl(int *array, size_t size);
 avl_t *avl_remove(avl_t *root, int value);
 avl_t *sorted_array_to_avl(int *array, size_t size);
 
+size_t size_of_bt(const binary_tree_t *tree);
+int is_complete(size_t size, size_t index, const binary_tree_t *tree);
+int is_heap(const binary_tree_t *tree);
 int binary_tree_is_heap(const binary_tree_t *tree);
+
+void free_queue(queue **head);
+queue *add_in_end(queue **head, binary_tree_t *node);
+binary_tree_t *remove_front(queue **head);
+heap_t *heapify_up(heap_t *new_node);
 heap_t *heap_insert(heap_t **root, int value);
+
 heap_t *array_to_heap(int *array, size_t size);
+
+void swap(int *num1, int *num2);
+void freeing_queue(queue **head);
+void freeing_queue(queue **head);
+binary_tree_t *removing_front(queue **head);
+heap_t *heapify_down(heap_t *new_node);
 int heap_extract(heap_t **root);
+
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
 
 
