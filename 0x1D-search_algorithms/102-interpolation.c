@@ -16,21 +16,25 @@ int interpolation_search(int *array, size_t size, int value)
 		return (-1);
 	start = 0;
 	end = size - 1;
-	while (start <= end && array[start] <= value && value <= array[end])
+	while (start <= end) /* array[start] <= value && value <= array[end]) */
 	{
 		partition = start + (((double)(end - start) /
 				      (array[end] - array[start])) *
 				     (value - array[start]));
-
+		if (partition > size)
+		{
+			printf("Value checked array[%lu] is out of range\n",
+			       partition);
+			return (-1);
+		}
 		printf("Value checked array[%lu] = [%d]\n",
 		       partition, array[partition]);
 		if (array[partition] == value)
 			return (partition);
 		if (value < array[partition])
-			end = partition - 1;
+			end = partition;
 		else
 			start = partition + 1;
 	}
-	printf("Value checked array[%lu] is out of range\n", partition);
 	return (-1);
 }
