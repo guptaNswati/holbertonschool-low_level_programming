@@ -8,6 +8,8 @@ int linear_search(int *array, size_t size, int value);
 int binary_search(int *array, size_t size, int value);
 int jump_search(int *array, size_t size, int value);
 int interpolation_search(int *array, size_t size, int value);
+
+int do_binary_search(int *array, size_t start, size_t end, int value);
 int exponential_search(int *array, size_t size, int value);
 
 int binary_helper(int *array, size_t start, size_t end, int value);
@@ -30,6 +32,8 @@ typedef struct listint_s
 	struct listint_s *next;
 } listint_t;
 
+void print_list_range(size_t start, size_t end);
+void print_list_elements(size_t index, int n);
 listint_t *jump_list(listint_t *list, size_t size, int value);
 void print_list(const listint_t *list);
 void free_list(listint_t *list);
@@ -54,6 +58,8 @@ typedef struct skiplist_s
 	struct skiplist_s *express;
 } skiplist_t;
 
+void print_range(size_t start, size_t end);
+void print_elements(size_t index, int n);
 skiplist_t *linear_skip(skiplist_t *list, int value);
 void init_express(skiplist_t *list, size_t size);
 skiplist_t *create_skiplist(int *array, size_t size);

@@ -47,5 +47,5 @@ int advanced_binary(int *array, size_t size, int value)
 {
 	if (!array || size == 0)
 		return (-1);
-	return binary_helper(array, 0, size - 1, value);
+	return (binary_helper(array, 0, size - 1, value));
 }
