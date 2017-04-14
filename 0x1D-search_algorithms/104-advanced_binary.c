@@ -13,18 +13,20 @@ int binary_helper(int *array, size_t start, size_t end, int value)
 {
 	size_t mid, i;
 
-	if (start > end)
-		return (-1);
-	printf("Searching in array: ");
-	for (i = start; i < end; i++)
-		printf("%d, ", array[i]);
-	printf("%d\n", array[i]);
-	mid = (start + end) / 2;
-	if (array[mid] == value)
-		return (mid);
-	if (array[mid] > value)
-		return (binary_helper(array, start, mid, value));
-	return (binary_helper(array, mid + 1, end, value));
+	if (start <= end)
+	{
+		printf("Searching in array: ");
+		for (i = start; i < end; i++)
+			printf("%d, ", array[i]);
+		printf("%d\n", array[i]);
+		mid = (start + end) / 2;
+		if (array[mid] == value && array[mid - 1] != value)
+			return (mid);
+		if (array[mid] >= value)
+			return (binary_helper(array, start, mid, value));
+		return (binary_helper(array, mid + 1, end, value));
+	}
+	return (-1);
 }
 
 /**
