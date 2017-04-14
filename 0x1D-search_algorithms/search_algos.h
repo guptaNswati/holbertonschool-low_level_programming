@@ -9,6 +9,8 @@ int binary_search(int *array, size_t size, int value);
 int jump_search(int *array, size_t size, int value);
 int interpolation_search(int *array, size_t size, int value);
 int exponential_search(int *array, size_t size, int value);
+
+int binary_helper(int *array, size_t start, size_t end, int value);
 int advanced_binary(int *array, size_t size, int value);
 
 /**
@@ -52,7 +54,11 @@ typedef struct skiplist_s
 	struct skiplist_s *express;
 } skiplist_t;
 
-/* skiplist_t *jump_list(skiplist_t *list, int value); */
+skiplist_t *linear_skip(skiplist_t *list, int value);
+void init_express(skiplist_t *list, size_t size);
+skiplist_t *create_skiplist(int *array, size_t size);
+void free_skiplist(skiplist_t *list);
+void print_skiplist(const skiplist_t *list);
 
 
 #endif
