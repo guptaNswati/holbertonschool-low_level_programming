@@ -10,8 +10,8 @@ int main(void)
 {
 	int r;
 
-	r = is_prime_number(1);
-	printf("1 %d\n", r);
+	r = is_prime_number(15);
+	printf("15 %d\n", r);
 	r = is_prime_number(2);
 	printf("2 %d\n", r);
 	r = is_prime_number(3);

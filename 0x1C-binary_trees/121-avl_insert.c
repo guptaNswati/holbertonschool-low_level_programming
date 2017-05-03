@@ -48,21 +48,21 @@ avl_t *avl_insert(avl_t **tree, int value)
 		if (bal_factor > 1)
 		{
 			if (value < parent->left->n)/* left-left case */
-				binary_tree_rotate_right(parent);
+				parent = binary_tree_rotate_right(parent);
 			else if (value > parent->left->n)/* left-right case */
 			{
 				parent->left = binary_tree_rotate_left(parent->left);
-				binary_tree_rotate_right(parent);
+				parent = binary_tree_rotate_right(parent);
 			}
 		}
 		if (bal_factor < -1)
 		{
-			if (value > parent->right->n)/* left-right case */
-				binary_tree_rotate_left(parent);
-			else if (value < parent->right->n)/* left-right case */
+			if (value > parent->right->n)/* right-right case */
+				parent = binary_tree_rotate_left(parent);
+			else if (value < parent->right->n)/* right-left case */
 			{
 				parent->right = binary_tree_rotate_right(parent->right);
-				binary_tree_rotate_left(parent);
+				parent = binary_tree_rotate_left(parent);
 			}
 		}
 		parent = parent->parent;
